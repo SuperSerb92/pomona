@@ -1,0 +1,8 @@
+C:\Users\Filip\Desktop\Pomona\DBModel\bin\Debug\netstandard2.0\DBModel.deps.json
+C:\Users\Filip\Desktop\Pomona\DBModel\bin\Debug\netstandard2.0\DBModel.dll
+C:\Users\Filip\Desktop\Pomona\DBModel\bin\Debug\netstandard2.0\DBModel.pdb
+C:\Users\Filip\Desktop\Pomona\DBModel\obj\Debug\netstandard2.0\DBModel.csprojAssemblyReference.cache
+C:\Users\Filip\Desktop\Pomona\DBModel\obj\Debug\netstandard2.0\DBModel.AssemblyInfoInputs.cache
+C:\Users\Filip\Desktop\Pomona\DBModel\obj\Debug\netstandard2.0\DBModel.AssemblyInfo.cs
+C:\Users\Filip\Desktop\Pomona\DBModel\obj\Debug\netstandard2.0\DBModel.dll
+C:\Users\Filip\Desktop\Pomona\DBModel\obj\Debug\netstandard2.0\DBModel.pdb

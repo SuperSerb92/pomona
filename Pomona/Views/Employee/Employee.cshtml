@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+ 
+@using (Html.BeginForm())
+{
+    @(Html.DevExtreme().DataGrid<Pomona.Models.Employee>()
+                                          .ID("employeeGrid")
+                                          .ShowBorders(true)
+                                           .ElementAttr("overflow", "auto")
+                                          .ShowColumnHeaders(true)
+                                         // .AllowColumnResizing(true)
+                                          .ColumnMinWidth(50)
+                                          .ColumnResizingMode(ColumnResizingMode.Widget)
+                                          .DataSource(d => d.Mvc().Controller("Employee")
+                                          .LoadAction("GetEmployees")
+                                          .InsertAction("InsertEmployee")
+                                          .UpdateAction("UpdateEmployee")
+                                          .DeleteAction("DeleteEmployee")
+                                          .Key("EmployeeID"))
+                                          .Columns(columns =>
+                                          {
+                                              columns.AddFor(u => u.Name).Option("required", true);
+                                              columns.AddFor(u => u.Surname);
+                                              columns.AddFor(u => u.PhoneNumber);
+                                              columns.AddFor(u => u.Recomendation);
+                                          })
+                                          .Editing(editing =>
+                                          {
+                                              editing.Mode(GridEditMode.Row);
+                                              editing.AllowAdding(true);
+                                              editing.AllowDeleting(true);
+                                              editing.AllowUpdating(true);
+                                          })
+                                         .Paging(p => p.PageSize(13))
+                                         .FilterRow(f => f.Visible(true))
+                                         .HeaderFilter(f => f.Visible(true))
+                                         .FocusedRowEnabled(true)
+                                         .OnRowInserting("onRowInsertingEmployees")
+                                         .OnRowUpdating("onRowUpdatingEmployees"))
+}

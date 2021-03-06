@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = "/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+    <div class="simulator">
+
+        @{ await Html.RenderPartialAsync("PopupMessage"); }
+
+        @using (Html.BeginForm())
+        {
+            using (Html.DevExtreme().ValidationGroup())
+            {
+                @Html.AntiForgeryToken()
+
+                @(Html.DevExtreme().Form<Pomona.Models.User>()
+               .ID("loginForm")
+               .ShowValidationSummary(true)
+                .OnEditorEnterKey("SubmitLoginForm")
+               .Items(items =>
+               {
+               items.AddGroup()
+               .Caption("Pomona")
+               .Items(groupItems =>
+               {
+               groupItems.AddSimpleFor(m => m.UserName)
+               .Label(t => t.Location(FormLabelLocation.Left)
+               .Text("Korisničko ime"))
+               .ValidationRules(rules => rules.AddRequired()
+               .Message("UserName required"))
+               .Editor(e => e.TextBox()
+               .ElementAttr(new { ID = "loginusername", @class = "focus" }));
+
+               groupItems.AddSimpleFor(m => m.Password)
+               .Label(t => t.Location(FormLabelLocation.Left)
+               .Text("Lozinka"))
+               .ValidationRules(rules => rules.AddRequired()
+               .Message("Pasword required"))
+               .Editor(e => e.TextBox().Mode(TextBoxMode.Password)
+               .ElementAttr(new { ID = "loginpassword" }));
+               });
+
+               items.AddButton()
+               .HorizontalAlignment(HorizontalAlignment.Left)
+               .ButtonOptions(b => b.Text("Uloguj se")
+               .ID("loginButton")
+             //  .Type(ButtonType.Success)
+               .OnClick("OnClickbtnLogin")
+               );
+               items.AddButton()
+               .HorizontalAlignment(HorizontalAlignment.Left)
+               .ButtonOptions(b => b.Text("Kreiraj nalog")
+               .ID("CreateAccountButton")
+             //  .Type(ButtonType.Success)
+               .OnClick("OnClickCreateAccount")
+               );
+               }).FormData(Model))
+            }
+        }
+
+        @(Html.DevExtreme().Popup().ID("popupFormRegistration")
+                  .ShowCloseButton(true)
+                  .DragEnabled(true)
+                  .CloseOnOutsideClick(false)
+                  .ElementAttr("class", "popup")
+                  .OnContentReady("onContentReadyRegistration")
+                //  .OnHiding("onHidingAttribute")
+                  .Position(pos => pos
+                      .My(HorizontalAlignment.Center, VerticalAlignment.Center)
+                      .At(HorizontalAlignment.Center, VerticalAlignment.Center)
+                      .Of(new JS("window"))
+                  )
+                  .ResizeEnabled(true)
+                  .ContentTemplate(new TemplateName("popup-templateRegistration"))
+    )
+        @using (Html.DevExtreme().NamedTemplate("popup-templateRegistration"))
+        {
+            @(Html.DevExtreme().ScrollView()
+                    .ID("scrollViewRegistration")
+                    .Width("100%")
+                    .Height("100%")
+                    .Direction(ScrollDirection.Both)
+        )
+
+        }
+
+    </div>

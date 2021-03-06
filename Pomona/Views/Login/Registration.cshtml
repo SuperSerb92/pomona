@@ -1,0 +1,174 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+
+@using (Html.BeginForm())
+{
+    using (Html.DevExtreme().ValidationGroup())
+    {
+        @Html.AntiForgeryToken()
+
+        @(Html.DevExtreme().Form<Pomona.Models.User>().ID("regForm").ColCount(1)
+                        .Items(items =>
+                        {
+                            items.AddGroup()
+                            .ColSpan(1)
+                            .ColCount(1)
+                            .Items(groupItems =>
+                            {
+                                groupItems.AddSimpleFor(m => m.UserName)
+                         .Label(t => t.Location(FormLabelLocation.Left)
+                         .Text("Korisničko ime"))
+                         .ValidationRules(rules => rules.AddRequired()
+                         .Message("UserName obavezno polje"))
+                         .Editor(e => e.TextBox());
+
+
+                                groupItems.AddSimpleFor(m => m.Password)
+                                 .Label(t => t.Location(FormLabelLocation.Left)
+                                 .Text("Lozinka"))
+                                 .ValidationRules(rules => rules.AddRequired()
+                                 .Message("Pasword obavezno polje"))
+                                 .Editor(e => e.TextBox().Mode(TextBoxMode.Password)
+                                 .ElementAttr(new { ID = "loginpassword" }));
+
+
+                                   groupItems.AddSimpleFor(m => m.RepeatedPassword)
+                               .Label(t => t.Location(FormLabelLocation.Left)
+                               .Text("Ponovi lozinku"))
+                               .ValidationRules(rules => rules.AddRequired()
+                               .Message("Pasword obavezno polje"))
+                               .Editor(e => e.TextBox().Mode(TextBoxMode.Password)
+                               .ElementAttr(new { ID = "RepeatedPassword" }));
+
+                                groupItems.AddSimpleFor(m => m.Email)
+                                .Label(t => t.Location(FormLabelLocation.Left)
+                                .Text("E-mail"))
+                                .ValidationRules(rules => rules.AddRequired()
+                                .Message("Email obavezno polje"))
+                                .Editor(e => e.TextBox()
+                                .ElementAttr(new { ID = "Email" }));
+
+                                groupItems.AddSimpleFor(m => m.FarmName)
+                               .Label(t => t.Location(FormLabelLocation.Left)
+                               .Text("Naziv gazdinstva"))
+                               .ValidationRules(rules => rules.AddRequired()
+                               .Message("FarmName obavezno polje"))
+                               .Editor(e => e.TextBox());
+
+                                groupItems.AddSimpleFor(m => m.FarmNo)
+                               .Label(t => t.Location(FormLabelLocation.Left)
+                               .Text("Broj gazdinstva"))
+                               .ValidationRules(rules => rules.AddRequired()
+                               .Message("FarmNo obavezno polje"))
+                               .Editor(e => e.TextBox());
+
+                            });
+
+                            items.AddGroup()
+                        .ColSpan(2)
+                        .ColCount(2)
+                        .Items(groupItems =>
+                        {
+                            groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Left)
+                                                  .ButtonOptions(x => x.ID("AddEditVolumeOk").Type(ButtonType.Success)
+                                                  .OnClick("OnRegistration")
+                                                  .Text("Registruj se"));
+
+                            groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Right)
+                                                  .ButtonOptions(x => x.ID("AddEditVolumeCancel").Type(ButtonType.Danger)
+                                                  .OnClick("onCancelRegistration")
+                                                  .Text("Odustani"));
+                        });
+
+
+                        }).FormData(Model)
+                )
+
+    }
+
+
+}
+
+
+@*using (Html.DevExtreme().ValidationGroup())
+        {
+          //  @Html.AntiForgeryToken()
+
+            @(Html.DevExtreme().Form<Pomona.Models.User>().ID("djokara").ColCount(1)
+             .Items(items =>
+             {
+                 items.AddGroup()
+                 .ColSpan(1)
+                 .ColCount(1)
+                 .Items(groupItems =>
+                 {
+                     groupItems.AddSimpleFor(m => m.UserName)
+                 .Label(t => t.Location(FormLabelLocation.Left)
+                 .Text("Korisničko ime"))
+                 .ValidationRules(rules => rules.AddRequired()
+                 .Message("UserName obavezno polje"))
+                 .Editor(e => e.TextBox());
+
+                     groupItems.AddSimpleFor(m => m.Password)
+                 .Label(t => t.Location(FormLabelLocation.Left)
+                 .Text("Lozinka"))
+                 .ValidationRules(rules => rules.AddRequired()
+                 .Message("Pasword obavezno polje"))
+                 .Editor(e => e.TextBox().Mode(TextBoxMode.Password)
+                 .ElementAttr(new { ID = "loginpassword" }));
+
+                     groupItems.AddSimpleFor(m => m.RepeatedPassword)
+                     .Label(t => t.Location(FormLabelLocation.Left)
+                     .Text("Ponovi lozinku"))
+                     .ValidationRules(rules => rules.AddRequired()
+                     .Message("Pasword obavezno polje"))
+                     .Editor(e => e.TextBox().Mode(TextBoxMode.Password)
+                     .ElementAttr(new { ID = "RepeatedPassword" }));
+
+                     groupItems.AddSimpleFor(m => m.Email)
+                     .Label(t => t.Location(FormLabelLocation.Left)
+                     .Text("E-mail"))
+                     .ValidationRules(rules => rules.AddRequired()
+                     .Message("Email obavezno polje"))
+                     .Editor(e => e.TextBox()
+                     .ElementAttr(new { ID = "Email" }));
+
+                     groupItems.AddSimpleFor(m => m.FarmName)
+                    .Label(t => t.Location(FormLabelLocation.Left)
+                    .Text("Naziv gazdinstva"))
+                    .ValidationRules(rules => rules.AddRequired()
+                    .Message("FarmName obavezno polje"))
+                    .Editor(e => e.TextBox());
+
+                     groupItems.AddSimpleFor(m => m.FarmNo)
+                    .Label(t => t.Location(FormLabelLocation.Left)
+                    .Text("Broj gazdinstva"))
+                    .ValidationRules(rules => rules.AddRequired()
+                    .Message("FarmNo obavezno polje"))
+                    .Editor(e => e.TextBox());
+
+                 });
+                 items.AddGroup()
+                 .ColSpan(2)
+                 .ColCount(2)
+                 .Items(groupItems =>
+                 {
+                     groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Left)
+                                           .ButtonOptions(x => x.ID("AddEditVolumeOk").Type(ButtonType.Success)
+                                           .OnClick("OnRegistration")
+                                           .Text("Registruj se"));
+
+                     groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Right)
+                                           .ButtonOptions(x => x.ID("AddEditVolumeCancel").Type(ButtonType.Danger)
+                                           .OnClick("onCancelRegistration")
+                                           .Text("Odustani"));
+                 });
+
+             }).FormData(Model)
+        )
+        }
+    }*@
+

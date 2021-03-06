@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pomona</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    @* Uncomment to use the HtmlEditor control *@
+    @* <script src="https://unpkg.com/devextreme-quill/dist/dx-quill.min.js"></script> *@
+
+    <link rel="stylesheet" href="~/css/vendor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Site.css" />
+    <script src="~/js/vendor.js" asp-append-version="true"></script>
+    <script src="~/js/TreeViewPomona/TreeViewPomona.js"></script>
+    <script src="~/js/Common.js"></script>
+    <script src="~/js/Employee/Employee.js"></script>
+</head>
+
+<body class="dx-viewport">
+    <div id="app-side-nav-outer-toolbar">
+        <div class="layout-header">
+            @(Html.DevExtreme().Toolbar()
+                .Items(items => {
+                    items.Add()
+                        .Widget(w => w
+                            .Button()
+                            .Icon("menu")
+                            .OnClick("Pomona.onMenuButtonClick")
+                        )
+                        .Location(ToolbarItemLocation.Before)
+                        .CssClass("menu-button");
+                    items.Add()
+                        .Html("<div>Pomona</div>")
+                        .Location(ToolbarItemLocation.Before)
+                        .CssClass("header-title");
+                })
+            )
+        </div>
+        <div class="layout-body layout-body-hidden">
+            @(Html.DevExtreme().Drawer()
+                .ID("layout-drawer")
+                .Position(DrawerPosition.Left)
+                .Opened(new JS("Pomona.restoreDrawerOpened()"))
+                .Content(@<text>
+                    <div id="layout-drawer-scrollview" class="with-footer">
+                           <div class="content"  id="renderbody">
+                                    @RenderBody()
+                                </div>
+                        <div class="content-block">
+                            <div class="content-footer">
+                                <div id="footer">
+                                    Copyright (c) 2000-2020 Developer Express Inc.
+                                    <br />
+                                    All trademarks or registered trademarks are property of their respective owners.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </text>)
+                .Template(new TemplateName("navigation-menu"))
+            )
+        </div>
+    </div>
+    @using (Html.DevExtreme().NamedTemplate("navigation-menu"))
+    {
+        <div class="menu-container dx-swatch-additional">
+            @await Html.PartialAsync("~/Views/TreeViewPomona/TreeViewPomona.cshtml")
+        </div>
+    }
+    @(Html.DevExtreme().Popup().ID("popupForm")
+                //.Height("auto")
+                //.Width("auto")
+                //     .Height(800)
+                //.Width(900)
+                .ShowCloseButton(true)
+                .DragEnabled(true)
+                .CloseOnOutsideClick(false)
+                .ElementAttr("class", "popup")
+                .OnContentReady("onContentReady")
+                .OnHiding("onHiding")
+                .OnResizeEnd("adjustSize")
+                .Position(pos => pos
+                    .My(HorizontalAlignment.Center, VerticalAlignment.Center)
+                    .At(HorizontalAlignment.Center, VerticalAlignment.Center)
+                    .Of(new JS("window"))
+                )
+                .ResizeEnabled(true)
+    .ContentTemplate(
+       new TemplateName("popup-template"))
+    )
+    @using (Html.DevExtreme().NamedTemplate("popup-template"))
+    {
+        @(Html.DevExtreme().ScrollView()
+            .ID("scrollView")
+            .Width("100%")
+            .Height("100%")
+            .Direction(ScrollDirection.Both)
+        )
+    }
+
+    <script>
+
+        var partialViewDataGlobal;
+        var mainControl;
+
+        function OpenPopup(urlPath, data, width, height, text, control) {
+            $.ajax({
+                url: virtualDirectory + urlPath,
+                type: 'POST',
+                data: data,
+                success: function (partialViewData) {
+                    console.log('1:' + partialViewData.success);
+                    if (partialViewData.success == undefined) {
+                        partialViewDataGlobal = partialViewData;
+                        var popup = $("#popupForm").dxPopup('instance');
+                        popup.option("title", text);
+                        popup.option("width", width);
+                        popup.option("height", height);
+
+                        popup.option("contentTemplate", null);
+                        popup.option("contentTemplate", $("#popup-template"));
+
+                        mainControl = control;
+                        popup.show();
+                    }
+                    else {
+                        console.log('2:' + partialViewData.result);
+                        showInfo(partialViewData.result, "");
+                    }
+                },
+            });
+        }
+
+        function onContentReady(e) {
+            var contentElement = $('#scrollView').dxScrollView('instance').content();
+            contentElement.html(partialViewDataGlobal);
+        }
+
+        function onHiding(e) {
+            switch (mainControl) {
+                default:
+                    var popup = $("#popupForm").dxPopup('instance');
+                    popup.hide();
+                    break;
+            }
+
+            mainControl = null;
+        }
+
+        $(document).ready(function () {
+            $('.modal').on('show.bs.modal', function (event) {
+                var idx = $('.modal:visible').length;
+                $(this).css('z-index', 1040 + (10 * idx));
+            });
+            $('.modal').on('shown.bs.modal', function (event) {
+                var idx = ($('.modal:visible').length) - 1; // raise backdrop after animation.
+                $('.modal-backdrop').not('.stacked').css('z-index', 1039 + (10 * idx));
+                $('.modal-backdrop').not('.stacked').addClass('stacked');
+            });
+        });
+
+        var Pomona = (function () {
+
+            var DRAWER_OPENED_KEY = "Pomona-drawer-opened";
+
+            var breakpoints = {
+                xSmallMedia: window.matchMedia("(max-width: 599.99px)"),
+                smallMedia: window.matchMedia("(min-width: 600px) and (max-width: 959.99px)"),
+                mediumMedia: window.matchMedia("(min-width: 960px) and (max-width: 1279.99px)"),
+                largeMedia: window.matchMedia("(min-width: 1280px)")
+            };
+
+            function getDrawer() {
+                return $("#layout-drawer").dxDrawer("instance");
+            }
+
+            function restoreDrawerOpened() {
+                var isLarge = breakpoints.largeMedia.matches;
+                if (!isLarge)
+                    return false;
+
+                var state = sessionStorage.getItem(DRAWER_OPENED_KEY);
+                if (state === null)
+                    return isLarge;
+
+                return state === "true";
+            }
+
+            function saveDrawerOpened() {
+                sessionStorage.setItem(DRAWER_OPENED_KEY, getDrawer().option("opened"));
+            }
+
+            function updateDrawer() {
+                var isXSmall = breakpoints.xSmallMedia.matches,
+                    isLarge = breakpoints.largeMedia.matches;
+
+                getDrawer().option({
+                    //openedStateMode: isLarge ? "shrink" : "overlap",
+                    revealMode: isXSmall ? "slide" : "expand",
+                    //  minSize: isXSmall ? 0 : 60,
+                    // shading: !isLarge,
+                });
+                if (isXSmall && getDrawer().option("opened")) { onMenuButtonClick(); }
+            }
+
+            function init() {
+                $("#layout-drawer-scrollview").dxScrollView({ direction: "vertical" });
+
+                $.each(breakpoints, function (_, size) {
+                    size.addListener(function (e) {
+                        if (e.matches)
+                            updateDrawer();
+                    });
+                });
+
+                updateDrawer();
+
+                $('.layout-body').removeClass('layout-body-hidden');
+            }
+
+            function navigate(url, delay) {
+                if (url)
+                    setTimeout(function () { location.href = url }, delay);
+            }
+
+            function onMenuButtonClick() {
+                getDrawer().toggle();
+                saveDrawerOpened();
+            }
+
+            function onTreeViewItemClick(e) {
+                var drawer = getDrawer();
+                var savedOpened = restoreDrawerOpened();
+                var actualOpened = drawer.option("opened");
+
+                if (!actualOpened) {
+                    drawer.show();
+                } else {
+                    var willHide = !savedOpened || !breakpoints.largeMedia.matches;
+                    var willNavigate = !e.itemData.selected;
+
+                    if (willHide)
+                        drawer.hide();
+
+                    if (willNavigate)
+                        navigate(e.itemData.path, willHide ? 400 : 0);
+                }
+            }
+
+            return {
+                init: init,
+                restoreDrawerOpened: restoreDrawerOpened,
+                onMenuButtonClick: onMenuButtonClick,
+                onTreeViewItemClick: onTreeViewItemClick
+            };
+        })();
+
+        document.addEventListener("DOMContentLoaded", function documentReady() {
+            this.removeEventListener("DOMContentLoaded", documentReady);
+            Pomona.init();
+        });
+    </script>
+</body>
+
+</html>
