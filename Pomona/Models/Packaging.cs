@@ -9,7 +9,7 @@ namespace Pomona.Models
     {
         public int IdPackaging { get; set; }
         public string PackagingType { get; set; }
-        public decimal Tara { get; set; }
+        public int Tara { get; set; }
 
     }
 }

@@ -11,6 +11,7 @@ namespace Session
     {
         private static IHttpContextAccessor _httpContextAccessor;
         private static IMemoryCache _memoryCache;
+    
         private static ISession _session => _httpContextAccessor.HttpContext.Session;
 
         public static void Configure(IHttpContextAccessor httpContextAccessor, IMemoryCache memoryCache)

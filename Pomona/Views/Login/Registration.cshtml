@@ -18,6 +18,22 @@
                             .ColCount(1)
                             .Items(groupItems =>
                             {
+                                groupItems.AddSimpleFor(m => m.FirstName)
+                        .Label(t => t.Location(FormLabelLocation.Left)
+                        .Text("Ime"))
+                        .ValidationRules(rules => rules.AddRequired()
+                        .Message("Ime obavezno polje"))
+                        .Editor(e => e.TextBox());
+
+
+                                groupItems.AddSimpleFor(m => m.LastName)
+                            .Label(t => t.Location(FormLabelLocation.Left)
+                            .Text("Prezime"))
+                            .ValidationRules(rules => rules.AddRequired()
+                            .Message("Prezime obavezno polje"))
+                            .Editor(e => e.TextBox());
+
+
                                 groupItems.AddSimpleFor(m => m.UserName)
                          .Label(t => t.Location(FormLabelLocation.Left)
                          .Text("Korisničko ime"))
@@ -25,23 +41,21 @@
                          .Message("UserName obavezno polje"))
                          .Editor(e => e.TextBox());
 
-
                                 groupItems.AddSimpleFor(m => m.Password)
                                  .Label(t => t.Location(FormLabelLocation.Left)
                                  .Text("Lozinka"))
                                  .ValidationRules(rules => rules.AddRequired()
                                  .Message("Pasword obavezno polje"))
-                                 .Editor(e => e.TextBox().Mode(TextBoxMode.Password)
+                                 .Editor(e => e.TextBox().Mode(TextBoxMode.Password).Width(560)
                                  .ElementAttr(new { ID = "loginpassword" }));
 
-
-                                   groupItems.AddSimpleFor(m => m.RepeatedPassword)
-                               .Label(t => t.Location(FormLabelLocation.Left)
-                               .Text("Ponovi lozinku"))
-                               .ValidationRules(rules => rules.AddRequired()
-                               .Message("Pasword obavezno polje"))
-                               .Editor(e => e.TextBox().Mode(TextBoxMode.Password)
-                               .ElementAttr(new { ID = "RepeatedPassword" }));
+                                groupItems.AddSimpleFor(m => m.RepeatedPassword)
+                            .Label(t => t.Location(FormLabelLocation.Left)
+                            .Text("Ponovi lozinku"))
+                            .ValidationRules(rules => rules.AddRequired()
+                            .Message("Pasword obavezno polje"))
+                            .Editor(e => e.TextBox().Mode(TextBoxMode.Password)
+                            .ElementAttr(new { ID = "RepeatedPassword" }));
 
                                 groupItems.AddSimpleFor(m => m.Email)
                                 .Label(t => t.Location(FormLabelLocation.Left)
@@ -64,6 +78,20 @@
                                .ValidationRules(rules => rules.AddRequired()
                                .Message("FarmNo obavezno polje"))
                                .Editor(e => e.TextBox());
+
+                                groupItems.AddSimpleFor(m => m.IdGroup)
+                                            .ColSpan(1)
+                                            .Editor(e => e.SelectBox().ID("IdGroupSelectBox")
+                                                  .Width("560px")
+                                                  .Placeholder("")
+                                                  .SearchEnabled(true)
+                                                  .DataSource(d => d.Mvc().Controller("Login").LoadAction("GetGroups").Key("IdGroup"))
+                                                  .DisplayExpr("GroupName")
+                                                  .ValueExpr("IdGroup"))
+                                                  .Label(t => t.Text("Grupa").Location(FormLabelLocation.Left))
+                                                  .ValidationRules(rules => rules.AddRequired()
+                                                  .Message("Morate izabrati grupu"));
+
 
                             });
 

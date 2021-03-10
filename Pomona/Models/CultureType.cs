@@ -9,5 +9,6 @@ namespace Pomona.Models
     {
         public int IdCultureType { get; set; }
         public string CultureTypeName { get; set; }
+        public Culture Culture { get; set; }
     }
 }

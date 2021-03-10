@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DBModel
+namespace DBModel.DataAccess
 {
-   public static class SessionData
+   public interface IProfile
     {
     }
 }

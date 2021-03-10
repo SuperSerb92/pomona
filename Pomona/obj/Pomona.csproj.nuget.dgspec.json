@@ -123,6 +123,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
             "BuildBundlerMinifier": {
               "target": "Package",
               "version": "[2.9.406, )"

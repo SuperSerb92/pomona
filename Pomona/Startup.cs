@@ -11,6 +11,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pomona.SignalRChat.Hubs;
 
 namespace Pomona
 {
@@ -26,12 +27,6 @@ namespace Pomona
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            //todo: jovana - ovo vise nije podrzano u core 3 (SerializerSettings) 
-            //services
-            //    .AddMvc()
-            //    .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-
             services.AddDbContext<DbModelContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("Pomona"));
             });
@@ -48,13 +43,13 @@ namespace Pomona
             services.AddDistributedMemoryCache();
 
             services.AddSignalR();
-            //services.AddSession();
+            services.AddSession();
             //services.AddSession(o => o.Cookie.IsEssential = true);
 
             services
                 .AddMemoryCache()
                 .AddSession(s => {
-                    //s.Cookie.Name = "MetaDesigner";
+                    s.Cookie.Name = "Pomona";
                     s.Cookie.IsEssential = true;
                     s.Cookie.HttpOnly = true;
                 });
@@ -108,30 +103,18 @@ namespace Pomona
             app.UseMvc(routes =>
             {
                 string guid = Guid.NewGuid().ToString();
-                //routes.MapRoute(
-                //    name: "GuidRoute",
-                //    template: "{controller=Login}/{action=Login}/{guid=" + guid + "}/{id?}");
-
-                //routes.MapRoute(
-                //    name: "default",
-                //    template: "{guid=test}/{controller=Login}/{action=Login}/{id=" + Guid.NewGuid().ToString() + "}");
-
+                
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Login}/{action=Login}/{guid=" + guid + "}/{id?}");
             });
 
-
-            /////////////
             app.UseRouting();
+
             app.UseEndpoints(endpoints =>
-            {
-               // endpoints.MapHub<ChatHub>("/chathub");
-                //endpoints.MapControllerRoute(
-                //    "admin", "{guid:exists}/{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapControllerRoute(
-                //    "default", "{controller=Login}/{action=Login}/{id?}");
-            });
+            {            
+                endpoints.MapHub<ChatHub>("/chathub");
+            });          
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.

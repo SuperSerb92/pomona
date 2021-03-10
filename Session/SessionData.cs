@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Session
 {
-   public static class SessionData
+   public  class SessionData
     {
-        public static int UserId { get; set; }
-        public static string Username{ get; set; }
+        public  int UserID { get; set; }
+        public  string UserName { get; set; }
+        public  string SessionID { get; set; }
     }
 }

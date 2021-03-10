@@ -20,9 +20,12 @@
     <script src="~/js/TreeViewPomona/TreeViewPomona.js"></script>
     <script src="~/js/Common.js"></script>
     <script src="~/js/Employee/Employee.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/communication.js"></script>
 </head>
 
-<body class="dx-viewport">
+<body class="dx-viewport"  oncopy="return false;" onpaste="return false;" oncut="return false;">
     <div id="app-side-nav-outer-toolbar">
         <div class="layout-header">
             @(Html.DevExtreme().Toolbar()

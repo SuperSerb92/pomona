@@ -8,17 +8,17 @@ namespace Pomona.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string guid)
         {
+           // bool isValid = Guid.TryParse(guid, out output);
+
             return View();
         }
 
-        public IActionResult About() {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() {
+        public IActionResult Error()
+        {
             return View();
         }
     }

@@ -1,4 +1,5 @@
-﻿using DevExtreme.AspNet.Data;
+﻿using DBModel.DataAccess;
+using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -13,34 +14,32 @@ namespace Pomona.Controllers
 {
     public class EmployeeController : Controller
     {
-
-        private List<Employee> employees
+        readonly DbModelContext db;
+        private List<DBModel.Models.Employee> employees
         {
             get
             {
                 return (Session.AppContext.MemoryCache.Get("EmployeeList_" + Session.AppContext.Id) == null)
-                    ? null : ( List<Employee>)(Session.AppContext.MemoryCache.Get("EmployeeList_" + Session.AppContext.Id));
+                    ? null : (List<DBModel.Models.Employee>)(Session.AppContext.MemoryCache.Get("EmployeeList_" + Session.AppContext.Id));
             }
             set
             {
                 Session.AppContext.MemoryCache.Set("EmployeeList_" + Session.AppContext.Id, value);
             }
         }
-        public EmployeeController()
+        public EmployeeController(DBModel.DataAccess.DbModelContext db)
         {
-            
+            this.db = db;
         }
         public IActionResult Employee()
         {
-            //todo database get all employees from db
-            // employees =  
-            employees = new List<Employee>();
+            employees = db.Employees.ToList();
             return View();
         }
 
         [HttpGet]
         public object GetEmployees(DataSourceLoadOptions loadOptions)
-        {           
+        {
             return DataSourceLoader.Load(employees, loadOptions);
         }
 
@@ -48,11 +47,16 @@ namespace Pomona.Controllers
         [HttpPost]
         public IActionResult InsertEmployee(string values)
         {
-            var employee = new Employee();
+            //todo: proveri employee id da li se promeni posle inserta u db
+
+            var employee = new DBModel.Models.Employee();
             JsonConvert.PopulateObject(values, employee);
-            employee.EmployeeID = (employees.Count == 0 ? 1 : employees.Max(x => x.EmployeeID) + 1);
-            employees.Insert(0, employee);
-            //todo database insert 
+            //employee.EmployeeID = (employees.Count == 0 ? 1 : employees.Max(x => x.EmployeeID) + 1);
+            //employees.Insert(0, employee);
+            
+            employees.Add(employee);
+            db.Add(employee);
+            db.SaveChanges();
             return Ok();
         }
 
@@ -61,46 +65,49 @@ namespace Pomona.Controllers
         {
             var employee = employees.FirstOrDefault(a => a.EmployeeID == key);
             JsonConvert.PopulateObject(values, employee);
-            //todo database update 
+
+            db.Update(employee);
+            db.SaveChanges();
             return Ok();
         }
 
         [HttpDelete]
         public void DeleteEmployee(int key)
         {
-            var employee = employees.FirstOrDefault(a =>a.EmployeeID == key);
-            //todo database delete
+            var employee = employees.FirstOrDefault(a => a.EmployeeID == key);
+            db.Remove(employee);
+            db.SaveChanges();
             employees.Remove(employee);
-          
+
         }
         [HttpGet]
         public JsonResult GetEmployeesContextMenuItems()
         {
             List<ContextMenuItem> dcContextMenuItems = new List<ContextMenuItem>();
-         
-                ContextMenuItem dcContextMenuItem = new ContextMenuItem();
-                dcContextMenuItem.ID = 1;
-                dcContextMenuItem.Name = "!P! Novi";
-                dcContextMenuItem.BeginGroup = false;
-                dcContextMenuItems.Add(dcContextMenuItem);
 
-                dcContextMenuItem = new ContextMenuItem();
-                dcContextMenuItem.ID = 1;
-                dcContextMenuItem.Name = "!P! Novi";
-                dcContextMenuItem.BeginGroup = false;
-                dcContextMenuItems.Add(dcContextMenuItem);
+            ContextMenuItem dcContextMenuItem = new ContextMenuItem();
+            dcContextMenuItem.ID = 1;
+            dcContextMenuItem.Name = "!P! Novi";
+            dcContextMenuItem.BeginGroup = false;
+            dcContextMenuItems.Add(dcContextMenuItem);
 
-                dcContextMenuItem = new ContextMenuItem();
-                dcContextMenuItem.ID = 1;
-                dcContextMenuItem.Name = "!P! Novi";
-                dcContextMenuItem.BeginGroup = false;
-                dcContextMenuItems.Add(dcContextMenuItem);
+            dcContextMenuItem = new ContextMenuItem();
+            dcContextMenuItem.ID = 1;
+            dcContextMenuItem.Name = "!P! Novi";
+            dcContextMenuItem.BeginGroup = false;
+            dcContextMenuItems.Add(dcContextMenuItem);
 
-           
-                return Json(new { success = false, result = dcContextMenuItems });
-            }
-           
-        
+            dcContextMenuItem = new ContextMenuItem();
+            dcContextMenuItem.ID = 1;
+            dcContextMenuItem.Name = "!P! Novi";
+            dcContextMenuItem.BeginGroup = false;
+            dcContextMenuItems.Add(dcContextMenuItem);
+
+
+            return Json(new { success = false, result = dcContextMenuItems });
+        }
+
+
     }
 }
 

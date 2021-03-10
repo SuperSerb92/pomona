@@ -10,16 +10,19 @@ function OnClickbtnLogin(e) {
 
         var theForm = $("#loginForm").dxForm("instance");
         var formData = theForm.option("formData");
+        
         $.ajax({
             url: virtualDirectory + '/Login/Login',
             type: 'POST',
-            data: formData,
+            data: {
+                user: formData,
+            },
             success: function (data) {
                 if (data.success) {
-                    location.href = virtualDirectory + '/Home/Index';
+                    location.href = virtualDirectory + '/Home/Index?guid=' + data.result;
                 }
                 else {
-                    showInfo(data.message, "Login");
+                    showInfo(data.result, "Login");
                     $('#loginButton').dxButton('instance').option('disabled', false);
                 }
             },
@@ -30,33 +33,32 @@ function OnClickbtnLogin(e) {
 var partialViewDataGlobalReg;
 
 function OnClickCreateAccount(e) {
-    openRegPopup("/Login/Registration", 670, 500, "Registracija");
+    openRegPopup("/Login/Registration", 670, 670, "Registracija");
 }
 
-function openRegPopup(urlPath, width, height, text) {
-    $.ajax({
-        url: virtualDirectory + urlPath,
-        type: 'POST',
-        async: false,
-        success: function (partialViewData) {
-            if (partialViewData.success == undefined) {
-                partialViewDataGlobalReg = partialViewData;
-                var popup = $("#popupFormRegistration").dxPopup('instance');
-                popup.option("title", text);
-                popup.option("width", width);
-                popup.option("height", height);
+function openRegPopup(urlPath, width, height, text) {  
+        $.ajax({
+            url: virtualDirectory + urlPath,
+            type: 'POST',
+            async: false,
+            success: function (partialViewData) {
+                if (partialViewData.success == undefined) {
+                    partialViewDataGlobalReg = partialViewData;
+                    var popup = $("#popupFormRegistration").dxPopup('instance');
+                    popup.option("title", text);
+                    popup.option("width", width);
+                    popup.option("height", height);
 
-                popup.option("contentTemplate", null);
-                popup.option("contentTemplate", $("#popup-templateRegistration"));
+                    popup.option("contentTemplate", null);
+                    popup.option("contentTemplate", $("#popup-templateRegistration"));
 
-                popup.show();
-            } else {
-                showInfo(partialViewData.result, "");
-            }
-        },
-    });
+                    popup.show();
+                } else {
+                    showInfo(partialViewData.result, "");
+                }
+            },
+        });    
 }
-
 
 function onContentReadyRegistration(e) {
     var contentElement = $('#scrollViewRegistration').dxScrollView('instance').content();
@@ -64,28 +66,35 @@ function onContentReadyRegistration(e) {
 }
 
 
-function OnRegistration(e) {
-  //  var email = $("#Email").dxTextBox("instance").option("value");
+function OnRegistration(e) {   
+    if (e.validationGroup.validate().isValid) {
+        var theForm = $("#regForm").dxForm("instance");
+        var formData = theForm.option("formData");
 
-    var theForm = $("#regForm").dxForm("instance");
-
-    var formData = theForm.option("formData");
-    $.ajax({
-        url: virtualDirectory + '/Login/CreateAccount',
-        type: 'POST',
-        data: formData,
-        success: function (data) {
-            if (data.success) {
-                location.href = virtualDirectory + '/Home/Index';
-            }
-            else {
-                showInfo(data.message, "Registration");
-            }
-        },
-    });
+        if (formData.Password != formData.RepeatedPassword) {
+            showInfo("Niste dobro ponovili lozinku", "Registracija");
+            return;
+        }
+        else {
+            $.ajax({
+                url: virtualDirectory + '/Login/CreateAccount',
+                type: 'POST',
+                data: formData,
+                success: function (data) {
+                    if (data.success) {
+                        showInfo("Uspešno ste se registrovali", "Registracija");
+                        $("#popupFormRegistration").dxPopup('instance').hide();
+                    }
+                    else {
+                        showInfo(data.result, "Registracija");
+                    }
+                },
+            });
+        }
+    }
 }
 function onCancelRegistration(e) {
-
+    $("#popupFormRegistration").dxPopup('instance').hide();
 }
 
 function showInfo(data, title) {

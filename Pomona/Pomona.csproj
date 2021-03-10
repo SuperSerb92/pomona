@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.7.1" />
     <PackageReference Include="DevExtreme.AspNet.Core" Version="20.2.5" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
@@ -19,7 +20,6 @@
 
     <ItemGroup>
       <Folder Include="Files\" />
-      <Folder Include="Services\" />
     </ItemGroup>
 
     <ItemGroup>
