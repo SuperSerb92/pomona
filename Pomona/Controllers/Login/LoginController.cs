@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using DBModel.DataAccess;
 using DevExtreme.AspNet.Data;
@@ -20,6 +21,7 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
         readonly DbModelContext db;
         public string username;
         public string password;
+
 
         public LoginController(DBModel.DataAccess.DbModelContext db)
         {
@@ -64,19 +66,33 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
                 {
                     return Json(new { success = false, result = "Ne postoji korisnik sa unetim podacima" });
                 }
+                else if (login.IndLogged == 1)
+                {
+                    return Json(new { success = false, result = "Uneti korisnik je već ulogovan" });
+                }
                 else
                 {
-                    //Session.CurrentSession.CurrentSessionData = new Session.SessionData();
-                    //Session.CurrentSession.CurrentSessionData.UserID = login.UserID;
-                    //Session.CurrentSession.CurrentSessionData.UserName = login.UserName;
-                    //Session.CurrentSession.CurrentSessionData.SessionID = Session.AppContext.Id;
+                   // byte[] bytes = Encoding.UTF8.GetBytes(login.UserName);
+                    
+                    LoginUser(login.UserID);
 
-                    return Json(new { success = true, result = Session.AppContext.Id });
+                    return Json(new { success = true, result = Session.AppContext.Id });  ;
                 }
             }
             catch (Exception ex)
             {
                 return Json(new { success = false, result = ex.Message });
+            }
+        }
+
+        private void LoginUser(int userID)
+        {
+            var user = db.Users.Where(x => x.UserID == userID).FirstOrDefault();
+            if (user != null)
+            {
+                user.IndLogged = 1;
+                db.Update(user);
+                db.SaveChanges();
             }
         }
 
@@ -99,6 +115,7 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
                     dbUser.FarmName = user.FarmName;
                     dbUser.FarmNo = user.FarmNo;
                     dbUser.Email = user.Email;
+                    dbUser.IndLogged = 0;
                     db.Add(dbUser);
                     db.SaveChanges();
 

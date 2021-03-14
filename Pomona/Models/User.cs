@@ -28,6 +28,7 @@ namespace Pomona.Models
         public string FarmNo { get; set; }       
         public int IdGroup { get; set; }
 
+        public int IndLogged { get; set; }
 
     }
 }

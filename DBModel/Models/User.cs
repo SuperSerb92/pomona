@@ -16,6 +16,7 @@ namespace DBModel.Models
         public string FarmName { get; set; }
         public string FarmNo { get; set; }
         public int IdGroup { get; set; }
+        public int IndLogged { get; set; }
 
     }
 }

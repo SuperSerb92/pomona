@@ -19,7 +19,7 @@ function OnClickbtnLogin(e) {
             },
             success: function (data) {
                 if (data.success) {
-                    location.href = virtualDirectory + '/Home/Index?guid=' + data.result;
+                    location.href = virtualDirectory + '/Home/Index?autentification=' + data.result;
                 }
                 else {
                     showInfo(data.result, "Login");
