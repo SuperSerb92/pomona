@@ -60,11 +60,15 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
         {
             try
             {
-                var login = db.Users.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefault();
+                var login = db.Users.Where(x => x.UserName == user.UserName).FirstOrDefault();
 
                 if (login == null)
                 {
-                    return Json(new { success = false, result = "Ne postoji korisnik sa unetim podacima" });
+                    return Json(new { success = false, result = "Ne postoji korisnik sa unetim korisničkim imenom" });
+                }
+                else if (login.Password != user.Password)
+                {
+                    return Json(new { success = false, result = "Neispravna lozinka" });
                 }
                 else if (login.IndLogged == 1)
                 {
@@ -72,11 +76,9 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
                 }
                 else
                 {
-                   // byte[] bytes = Encoding.UTF8.GetBytes(login.UserName);
-                    
-                    LoginUser(login.UserID);
-
-                    return Json(new { success = true, result = Session.AppContext.Id });  ;
+                    // byte[] bytes = Encoding.UTF8.GetBytes(login.UserName);
+                    //  LoginUser(login.UserID);
+                    return Json(new { success = true, result = Session.AppContext.sessionID, user = login.UserID }); ;
                 }
             }
             catch (Exception ex)
@@ -85,42 +87,49 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
             }
         }
 
-        private void LoginUser(int userID)
-        {
-            var user = db.Users.Where(x => x.UserID == userID).FirstOrDefault();
-            if (user != null)
-            {
-                user.IndLogged = 1;
-                db.Update(user);
-                db.SaveChanges();
-            }
-        }
+        //private void LoginUser(int userID)
+        //{
+        //    var user = db.Users.Where(x => x.UserID == userID).FirstOrDefault();
+        //    if (user != null)
+        //    {
+        //        user.IndLogged = 1;
+        //        db.Update(user);
+        //        db.SaveChanges();
+        //    }
+        //}
 
         [HttpPost]
         public JsonResult CreateAccount(User user)
         {
+
+
             try
             {
-                if (Duplicate(user.UserName))
+                if (db.Users.Count() > 0)
                 {
-                    return Json(new { success = false, result = "Već postoji registrovan korisnik sa unetim korisničkim imenom" });
+                    if (Duplicate(user.UserName, 1))
+                    {
+                        return Json(new { success = false, result = "Već postoji registrovan korisnik sa unetim korisničkim imenom" });
+                    }
+                    if (Duplicate(user.Email, 2))
+                    {
+                        return Json(new { success = false, result = "Već postoji registrovan korisnik sa unetom e-mail adresom" });
+                    }
                 }
-                else
-                {
-                    //todo :uros mapiranje 
-                    DBModel.Models.User dbUser = new DBModel.Models.User();
-                    dbUser.UserName = user.UserName;
-                    dbUser.Password = user.Password;
-                    dbUser.RepeatedPassword = user.RepeatedPassword;
-                    dbUser.FarmName = user.FarmName;
-                    dbUser.FarmNo = user.FarmNo;
-                    dbUser.Email = user.Email;
-                    dbUser.IndLogged = 0;
-                    db.Add(dbUser);
-                    db.SaveChanges();
 
-                    return Json(new { success = true });
-                }
+                //todo :uros mapiranje 
+                DBModel.Models.User dbUser = new DBModel.Models.User();
+                dbUser.UserName = user.UserName;
+                dbUser.Password = user.Password;
+                dbUser.RepeatedPassword = user.RepeatedPassword;
+                dbUser.FarmName = user.FarmName;
+                dbUser.FarmNo = user.FarmNo;
+                dbUser.Email = user.Email;
+                dbUser.IndLogged = 0;
+                db.Add(dbUser);
+                db.SaveChanges();
+
+                return Json(new { success = true });           
             }
             catch (Exception ex)
             {
@@ -128,9 +137,21 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
             }
         }
 
-        private bool Duplicate(string username)
+        private bool Duplicate(string value, int indParameter)
         {
-            return db.Users.Any(x => x.UserName.ToUpper().Trim() == username.ToUpper().Trim());
+            bool isDuplicate = false;
+            switch (indParameter)
+            {
+                case 1://username
+                    isDuplicate = db.Users.Any(x => x.UserName.ToUpper().Trim() == value.ToUpper().Trim());
+                    break;
+                case 2://email
+                    isDuplicate = db.Users.Any(x => x.Email.ToUpper().Trim() == value.ToUpper().Trim());
+                    break;
+                default:
+                    break;
+            }
+            return isDuplicate;
         }
 
 

@@ -46,12 +46,11 @@ namespace Pomona.Controllers
 
         [HttpPost]
         public IActionResult InsertEmployee(string values)
-        {
-            //todo: proveri employee id da li se promeni posle inserta u db
-
+        {          
             var employee = new DBModel.Models.Employee();
-            JsonConvert.PopulateObject(values, employee);
-            //employee.EmployeeID = (employees.Count == 0 ? 1 : employees.Max(x => x.EmployeeID) + 1);
+            JsonConvert.PopulateObject(values, employee);           
+
+            //todo: pitaj coku jel hocemo insert u prvi red  ili poslednji ovo ispod je insert na prvo mesto
             //employees.Insert(0, employee);
             
             employees.Add(employee);
@@ -74,6 +73,8 @@ namespace Pomona.Controllers
         [HttpDelete]
         public void DeleteEmployee(int key)
         {
+            //todo: kad je spusten kljuc ne sme se brisati?
+            
             var employee = employees.FirstOrDefault(a => a.EmployeeID == key);
             db.Remove(employee);
             db.SaveChanges();

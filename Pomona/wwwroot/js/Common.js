@@ -172,10 +172,24 @@ var url = window.location.href.split('/');
 
 //todo:
 if (url != undefined && url != null)
-    virtualDirectory = "http://localhost:57607/"; 
+    virtualDirectory = url[0] + "//" + url[2] + "/" + url[3];
+   
 
 if (virtualDirectory.slice(-1) == "/") 
-    virtualDirectory = virtualDirectory.slice(0, -1) ;
+    virtualDirectory = virtualDirectory.slice(0, -1);
+
+if (virtualDirectory.slice(-1) == "#")
+    virtualDirectory = virtualDirectory.slice(0, -1);
+
+
+let searchParams = new URLSearchParams((new URL(window.location.href)).search);
+var autentification = searchParams.get("autentification");
+var token = searchParams.get("token");
+console.log(searchParams);
+
+function onLogoutClick(e) {    
+    window.location.href = "/Pomona/Login/Login";
+}
 
 
 var partialViewDataGlobalCommon;

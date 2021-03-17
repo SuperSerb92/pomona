@@ -43,7 +43,13 @@ namespace Pomona
             services.AddDistributedMemoryCache();
 
             services.AddSignalR();
-            services.AddSession();
+           // services.AddSession();
+
+            services.AddSession(opt =>
+            {
+                opt.Cookie.IsEssential = true;
+            });
+
             //services.AddSession(o => o.Cookie.IsEssential = true);
 
             services
@@ -92,7 +98,6 @@ namespace Pomona
 
             app.UseStaticFiles();
             app.UseSession();
-
           
           Session.AppContext.Configure(app.ApplicationServices
                       .GetRequiredService<IHttpContextAccessor>(), app.ApplicationServices

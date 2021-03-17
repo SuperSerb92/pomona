@@ -11,7 +11,9 @@ namespace Session
     {
         private static IHttpContextAccessor _httpContextAccessor;
         private static IMemoryCache _memoryCache;
-    
+        private static int userID;
+
+
         private static ISession _session => _httpContextAccessor.HttpContext.Session;
 
         public static void Configure(IHttpContextAccessor httpContextAccessor, IMemoryCache memoryCache)
@@ -28,12 +30,33 @@ namespace Session
         {
             get
             {
+              
                 var routes = _httpContextAccessor.HttpContext.GetRouteData();
                 var val = routes?.Values["guid"]?.ToString() as string;
 
                 return val;
             }
         }
+        public static string sessionID
+        {
+            get
+            {
+                return _session.Id;
+            }
+        }
+
+        public static int UserID
+        {
+            get
+            {
+                return userID;
+            }
+            set
+            {
+                userID = value;
+            }
+        }
+
 
     }
 }

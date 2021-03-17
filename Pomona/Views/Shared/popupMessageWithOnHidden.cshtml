@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@(Html.DevExtreme().Popup()
+.ID("popup-message-hidden")
+.ElementAttr("class", "popup")
+.Width(500)
+//.Height(250)
+//.Width("auto")
+.Height("auto")
+
+.ShowTitle(true)
+.Title("Information")
+.Visible(false)
+.DragEnabled(true)
+.OnHidden("OnHiddenPopupMessage")
+.CloseOnOutsideClick(false)
+.Position(pos => pos
+.My(HorizontalAlignment.Center, VerticalAlignment.Center)
+.At(HorizontalAlignment.Center, VerticalAlignment.Center)
+.Of(new JS("window"))
+  )
+// .OnShowing("setPopupTitle")
+)

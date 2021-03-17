@@ -19,7 +19,8 @@ function OnClickbtnLogin(e) {
             },
             success: function (data) {
                 if (data.success) {
-                    location.href = virtualDirectory + '/Home/Index?autentification=' + data.result;
+                    console.log(data);
+                    location.href = virtualDirectory + '/Home/Index?autentification=' + data.result + '&token=' + data.user;
                 }
                 else {
                     showInfo(data.result, "Login");
@@ -33,7 +34,7 @@ function OnClickbtnLogin(e) {
 var partialViewDataGlobalReg;
 
 function OnClickCreateAccount(e) {
-    openRegPopup("/Login/Registration", 670, 670, "Registracija");
+    openRegPopup("/Login/Registration", 670, 650, "Registracija");
 }
 
 function openRegPopup(urlPath, width, height, text) {  
@@ -50,11 +51,10 @@ function openRegPopup(urlPath, width, height, text) {
                     popup.option("height", height);
 
                     popup.option("contentTemplate", null);
-                    popup.option("contentTemplate", $("#popup-templateRegistration"));
-
+                    popup.option("contentTemplate", $("#popup-templateRegistration"));                  
                     popup.show();
                 } else {
-                    showInfo(partialViewData.result, "");
+                    showInfo(partialViewData.result, "Registracija");
                 }
             },
         });    
@@ -62,7 +62,7 @@ function openRegPopup(urlPath, width, height, text) {
 
 function onContentReadyRegistration(e) {
     var contentElement = $('#scrollViewRegistration').dxScrollView('instance').content();
-    contentElement.html(partialViewDataGlobalReg);
+    contentElement.html(partialViewDataGlobalReg);  
 }
 
 
@@ -72,7 +72,7 @@ function OnRegistration(e) {
         var formData = theForm.option("formData");
 
         if (formData.Password != formData.RepeatedPassword) {
-            showInfo("Niste dobro ponovili lozinku", "Registracija");
+            showInfo("Neispravna ponovljena lozinka", "Registracija");
             return;
         }
         else {
@@ -82,8 +82,9 @@ function OnRegistration(e) {
                 data: formData,
                 success: function (data) {
                     if (data.success) {
-                        showInfo("Uspešno ste se registrovali", "Registracija");
-                        $("#popupFormRegistration").dxPopup('instance').hide();
+                        showInfoWithHidden("Uspešno ste se registrovali", "Registracija");
+                    
+                     //   $("#popupFormRegistration").dxPopup('instance').hide();
                     }
                     else {
                         showInfo(data.result, "Registracija");
@@ -97,6 +98,25 @@ function onCancelRegistration(e) {
     $("#popupFormRegistration").dxPopup('instance').hide();
 }
 
+
+function showInfoWithHidden(data, title) {
+    var ins = $("#popup-message-hidden").dxPopup('instance');
+
+    ins.option("contentTemplate", null);
+    ins.option('contentTemplate', function (contentElement) {
+        contentElement.append(data);
+    })
+    ins.option("title", title);
+    ins.show();
+}
+
+function OnHiddenPopupMessage(e) {
+    $("#regForm").dxForm("instance").option("formData", null);
+}
+
+
+
+
 function showInfo(data, title) {
     var ins = $("#popup-message").dxPopup('instance');
 
@@ -107,7 +127,9 @@ function showInfo(data, title) {
     ins.option("title", title);
     ins.show();
 }
-
+function onShownpopupFormRegistration(e) {
+    $("#FirstName").dxTextBox('instance').focus();  
+}
 function SubmitLoginForm(e) {
     document.getElementById("loginButton").click();
 }

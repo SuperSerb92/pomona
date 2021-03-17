@@ -42,6 +42,16 @@
                         .Html("<div>Pomona</div>")
                         .Location(ToolbarItemLocation.Before)
                         .CssClass("header-title");
+
+                    items.Add()
+                     .Widget(w => w
+                         .Button()
+                         .Icon("key")
+                         .Hint("Logout")
+                         .OnClick("onLogoutClick")
+                     )
+                     .Location(ToolbarItemLocation.After)
+                     .CssClass("menu-button");                    
                 })
             )
         </div>
@@ -108,6 +118,12 @@
     }
 
     <script>
+
+
+        //function onLogoutClick(e) {
+        //    console.log(virtualDirectory + "/Pomona/Login/Login");
+        //    window.location.href =   "/Pomona/Login/Login";
+        //}
 
         var partialViewDataGlobal;
         var mainControl;

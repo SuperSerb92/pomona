@@ -1,7 +1,9 @@
 ﻿@{
     Layout = null;
 }
- 
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+
 @using (Html.BeginForm())
 {
     @(Html.DevExtreme().DataGrid<Pomona.Models.Employee>()
@@ -20,10 +22,10 @@
                                           .Key("EmployeeID"))
                                           .Columns(columns =>
                                           {
-                                              columns.AddFor(u => u.Name).Option("required", true);
-                                              columns.AddFor(u => u.Surname);
-                                              columns.AddFor(u => u.PhoneNumber);
-                                              columns.AddFor(u => u.Recomendation);
+                                              columns.AddFor(u => u.Name).Option("required", true).Caption("Ime");
+                                              columns.AddFor(u => u.Surname).Caption("Prezime");
+                                              columns.AddFor(u => u.PhoneNumber).Caption("Broj telefona");
+                                              columns.AddFor(u => u.Recomendation).Caption("Preporuka");
                                           })
                                           .Editing(editing =>
                                           {
@@ -37,5 +39,7 @@
                                          .HeaderFilter(f => f.Visible(true))
                                          .FocusedRowEnabled(true)
                                          .OnRowInserting("onRowInsertingEmployees")
-                                         .OnRowUpdating("onRowUpdatingEmployees"))
+                                         .OnRowUpdating("onRowUpdatingEmployees")
+                                        // .OnEditorPreparing("onEmployeesGridEditorPreparing")
+                                         )
 }
