@@ -115,3 +115,7 @@ C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\web.config
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Shared\popupMessageWithOnHidden.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\BarCodeGenerator\BarCodeGenerator.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\ControlorEmployees\ControlorEmployees.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Buyer\Buyer.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\CultureType\CultureType.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Culture\Culture.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Plot\Plot.cshtml.g.cs

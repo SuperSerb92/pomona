@@ -4,7 +4,7 @@
 
 @{
 
-    var selectedData = ViewData["selectedData"] as List<Pomona.Models.Employee>;
+    var selectedData = ViewData["selectedData"]  as List<Pomona.Models.Employee>;
     //var selectedSwPtData = ViewData["selectedSwPtData"] as Osa.Unidocs.Modules.Global.BusinessEntities.FileFormatPermissions;
 }
 
@@ -15,7 +15,7 @@
     using (Html.DevExtreme().ValidationGroup())
     {
         @(Html.DevExtreme().Form<Pomona.Models.ControlorEmployeesRelation>()
-                     .ID("ControlorEmployeesRelationForm")
+                .ID("ControlorEmployeesRelationForm")
                 .ColCount(2)
                 .Items(items =>
                 items.AddGroup()
@@ -45,7 +45,7 @@
                                       .ID("ControlorEmployeesGrid")
                                       .ShowBorders(true)
                                       .ElementAttr("overflow", "auto")
-                                      .Height("450px")
+                                      .Height("550px")
                                       .Scrolling(scrolling => scrolling.Mode(GridScrollingMode.Infinite))
                                       .ShowColumnHeaders(true)
                                       .AllowColumnResizing(true)
@@ -71,9 +71,24 @@
                                 </text>);
 
 
+                    items.AddGroup()
+                     .ColSpan(2)
+                     .ColCount(2)
+                    .Items(groupItems =>
+                    {
+                        groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Center)
+                                              .ButtonOptions(x => x.ID("saveRelations")//.Type(ButtonType.Success)
+                                             // .OnClick("OnRegistration")
+                                              .Text("Snimi"));
+
+                        //groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Right)
+                        //                      .ButtonOptions(x => x.ID("AddEditVolumeCancel").Type(ButtonType.Danger)
+                        //                      .OnClick("onCancelRegistration")
+                        //                      .Text("Odustani"));
+                    });
 
 
-})).FormData(Model))
+                })).FormData(Model))
 
 
 

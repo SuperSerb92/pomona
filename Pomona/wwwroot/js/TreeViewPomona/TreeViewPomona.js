@@ -18,6 +18,9 @@ function TreeViewPomonaItemClick(e) {
             case 3:
                 OpenPopup("/ControlorEmployees/ControlorEmployees", "", 750, 850,  e.node.text);
                 break;
+            case 4:
+                Redirect("/Buyer/Buyer",  e.node.text);
+                break;
             case 9:
                 OpenPopup("/BarCodeGenerator/BarCodeGenerator","", 500,500, e.node.text, "");
                 break;

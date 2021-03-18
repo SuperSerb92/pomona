@@ -26,6 +26,12 @@
     <script src="~/js/Login/Login.js"></script>
     <script src="~/js/BarCode/BarCode.js"></script>
     <script src="~/js/Employee/ControlorEmployees.js"></script>
+    <script src="~/js/Buyer/Buyer.js"></script>
+    <script src="~/js/Plot/Plot.js"></script>
+    <script src="~/js/Culture/Culture.js"></script>
+    <script src="~/js/CultureType/CultureType.js"></script>
+
+
 </head>
 
 <body class="dx-viewport"  oncopy="return false;" onpaste="return false;" oncut="return false;">
@@ -106,7 +112,7 @@
                     .At(HorizontalAlignment.Center, VerticalAlignment.Center)
                     .Of(new JS("window"))
                 )
-                .ResizeEnabled(true)
+                .ResizeEnabled(false)
     .ContentTemplate(
        new TemplateName("popup-template"))
     )
@@ -144,7 +150,7 @@
                         popup.option("title", text);
                         popup.option("width", width);
                         popup.option("height", height);
-
+                     
                         popup.option("contentTemplate", null);
                         popup.option("contentTemplate", $("#popup-template"));
 

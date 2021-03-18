@@ -72,7 +72,14 @@ namespace Pomona.Controllers
             //                            on l1.EmployeeID equals l2.EmployeeID
             //                           select new { l1 };
 
-            ViewData["selectedData"] = db.Employees.ToList().Where(x => x.EmployeeID == 3).FirstOrDefault();
+            Employee emp = new Employee();
+            emp.EmployeeID = 3;
+            emp.Name = "jokan";
+            emp.Surname = "zokan";
+            emp.PhoneNumber = "342342";
+            emp.Recomendation = "uki";
+
+            ViewData["selectedData"] =  db.Employees.ToList().Where(x => x.EmployeeID == 3).FirstOrDefault();
 
             var  loggedUser = allUsers.Where(x => x.UserID == Session.AppContext.UserID).FirstOrDefault();
 
