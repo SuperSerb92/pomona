@@ -2,6 +2,7 @@
     if (jQuery.isEmptyObject(e.data) || /^\s*$/.test(JSON.parse(JSON.stringify(e.data)).Name) || e.data.Name == undefined) {
         showInfo("Morate uneti ime radnika", "Radnici");
         e.cancel = true;
+        return;
     }  
     if (jQuery.isEmptyObject(e.data) || /^\s*$/.test(JSON.parse(JSON.stringify(e.data)).Surname) || e.data.Surname == undefined) {
         showInfo("Morate uneti prezime radnika", "Radnici");
@@ -10,12 +11,32 @@
 } 
 
 function onRowUpdatingEmployees(e) {
-   // todo : validacija za prazno ime prezime
-    if (jQuery.isEmptyObject(e.newData) || /^\s*$/.test(JSON.parse(JSON.stringify(e.newData)).Name) || e.newData.Name == undefined) {
-        e.cancel = true;
+    if (e.newData.Name != undefined) {
+        if (jQuery.isEmptyObject(e.newData.Name) || /^\s*$/.test(JSON.parse(JSON.stringify(e.newData.Name)))) {
+            showInfo("Morate uneti ime radnika", "Radnici");
+            e.cancel = true;
+            return;
+        }
     }
-    if (jQuery.isEmptyObject(e.newData) || /^\s*$/.test(JSON.parse(JSON.stringify(e.newData)).Surname) || e.newData.Surname == undefined) {
-        e.cancel = true;
-    }  
-
+    if (e.newData.Surname != undefined) {
+        if (jQuery.isEmptyObject(e.newData.Surname) || /^\s*$/.test(JSON.parse(JSON.stringify(e.newData.Surname)))) {
+            showInfo("Morate uneti prezime radnika", "Radnici");
+            e.cancel = true;
+            return;
+        }
+    }
 } 
+
+function OnFocusedRowChangedEmployees(e) {
+    //var editRowIndex = getEmployeeGrid().option("editing.editRowKey");
+    //if (editRowIndex != null) {
+    //    e.component.saveEditData();
+    //}
+}
+
+
+function getEmployeeGrid() {    
+    return $("#employeeGrid").dxDataGrid("instance");
+}
+
+

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Pomona.Models
 {
     public class User
-    {       
+    {    
+        [Key]
         public int UserID { get; set; }
         [MaxLength(200)]
         public string FirstName { get; set; }

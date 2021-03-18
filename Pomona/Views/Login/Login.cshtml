@@ -11,65 +11,53 @@
         using (Html.DevExtreme().ValidationGroup())
         {
             @Html.AntiForgeryToken()
+     @(Html.DevExtreme().Form<Pomona.Models.User>()
+      .ID("loginForm")
+      //  .ShowValidationSummary(true)
+      .OnEditorEnterKey("SubmitLoginForm")
+      .Items(items =>
+      {
+      items.AddGroup()
+      .Caption("Pomona")
+      .Items(groupItems =>
+      {
+          groupItems.AddSimpleFor(m => m.UserName)
+          .Label(t => t.Location(FormLabelLocation.Left)
+          .Text("Korisničko ime"))
+          .ValidationRules(rules => rules.AddRequired()
+          .Message("Morate uneti korisnika"))
+          .Editor(e => e.TextBox().Width(500)
+          .ElementAttr(new { ID = "loginusername", @class = "focus" }));
 
-            @(Html.DevExtreme().Form<Pomona.Models.User>()
-.ID("loginForm")
-//  .ShowValidationSummary(true)
-.OnEditorEnterKey("SubmitLoginForm")
-.Items(items =>
-{
-items.AddGroup()
-.Caption("Pomona")
-.Items(groupItems =>
-{
-    groupItems.AddSimpleFor(m => m.UserName)
-.Label(t => t.Location(FormLabelLocation.Left)
-.Text("Korisničko ime"))
-.ValidationRules(rules => rules.AddRequired()
-.Message("Morate uneti korisnika"))
-.Editor(e => e.TextBox().Width(500)
-.ElementAttr(new { ID = "loginusername", @class = "focus" }));
+          groupItems.AddSimpleFor(m => m.Password)
+          .Label(t => t.Location(FormLabelLocation.Left)
+          .Text("Lozinka"))
+          .ValidationRules(rules => rules.AddRequired()
+          .Message("Morate uneti lozinku"))
+          .Editor(e => e.TextBox().Mode(TextBoxMode.Password).Width(537)
+          .ElementAttr(new { ID = "loginpassword" }));});
 
-    groupItems.AddSimpleFor(m => m.Password)
-.Label(t => t.Location(FormLabelLocation.Left)
-.Text("Lozinka"))
-.ValidationRules(rules => rules.AddRequired()
-.Message("Morate uneti lozinku"))
-.Editor(e => e.TextBox().Mode(TextBoxMode.Password).Width(537)
-.ElementAttr(new { ID = "loginpassword" }));});
+      items.AddButton()
+      .HorizontalAlignment(HorizontalAlignment.Left)
+      .ButtonOptions(b => b.Text("Uloguj se")
+      .ID("loginButton")
+      //  .Type(ButtonType.Success)
+      .OnClick("OnClickbtnLogin")
+      );     
 
-items.AddButton()
-.HorizontalAlignment(HorizontalAlignment.Left)
-.ButtonOptions(b => b.Text("Uloguj se")
-.ID("loginButton")
-//  .Type(ButtonType.Success)
-.OnClick("OnClickbtnLogin")
-);
-
-
-
-//items.AddButton()
-//.HorizontalAlignment(HorizontalAlignment.Left)
-//.ButtonOptions(b => b.Text("vaga")
-//.ID("vaga")
-////  .Type(ButtonType.Success)
-//.OnClick("vaga"));
-
-
-
-items.AddSimple()
-  .Template(@<text>
-        <a id="CreateAccountButton" href="#" onclick="OnClickCreateAccount();">Registracija</a>
-                     </text>);
-
-        //items.AddButton()
-        //.HorizontalAlignment(HorizontalAlignment.Left)
-        //.ButtonOptions(b => b.Text("Kreiraj nalog").StylingMode(ButtonStylingMode.Outlined)
-        //.ID("CreateAccountButton")
-        //.OnClick("OnClickCreateAccount"));
-    }).FormData(Model))
-        }
-    }
+      items.AddSimple()
+      .Template(@<text>
+              <a id="CreateAccountButton" href="#" onclick="OnClickCreateAccount();">Registracija</a>
+                           </text>);
+      
+              //items.AddButton()
+              //.HorizontalAlignment(HorizontalAlignment.Left)
+              //.ButtonOptions(b => b.Text("Kreiraj nalog").StylingMode(ButtonStylingMode.Outlined)
+              //.ID("CreateAccountButton")
+              //.OnClick("OnClickCreateAccount"));
+          }).FormData(Model))
+              }
+          }
 
     @(Html.DevExtreme().Popup().ID("popupFormRegistration")
                   .ShowCloseButton(true)

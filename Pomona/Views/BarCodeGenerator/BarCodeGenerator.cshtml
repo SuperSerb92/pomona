@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+
+@using (Html.BeginForm())
+{
+    @(Html.DevExtreme().Form<Pomona.Models.BarCodeGenerator>()
+                 .ID("BarCodeGeneratorForm")
+                 .ColCount(1)
+                 .Width("500px")
+                 .Items(items =>
+                 {
+                     items.AddGroup()
+                     .ColSpan(1)
+
+                     .ColCount(1)
+                     .Items(groupItems =>
+                     {
+                         groupItems.AddSimpleFor(m => m.EmployeeID)
+                         .ColSpan(1)
+                         .Editor(e => e.SelectBox().ID("EmployeeIDSelectBox")
+                                     .Width("450px")
+                                     .Placeholder("")
+                                     .SearchEnabled(true)
+                                     .DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
+                                     .DisplayExpr("Name")
+                                     .ValueExpr("EmployeeID"))
+                                     .Label(t => t.Text("Radnik").Location(FormLabelLocation.Left))
+                                     .ValidationRules(rules => rules.AddRequired()
+                                     .Message("Morate izabrati radnika"));
+
+                         //groupItems.AddSimpleFor(m => m.IdType)
+                         //            .ColSpan(1)
+                         //            .Editor(e => e.SelectBox().ID("volSelectBox")
+                         //                  .Width("450px")
+                         //                  .Placeholder("")
+                         //                  .SearchEnabled(true)
+                         //                  .DataSource(d => d.Mvc().Controller("Volume").LoadAction("GetVolumeTypes").Key("IdType"))
+                         //                  .DisplayExpr("Name")
+                         //                  .ValueExpr("IdType")
+                         //                  .OnSelectionChanged("OnSelectionChangedVolumeType"))
+                         //                  .Label(t => t.Text(Osa.Unidocs.Shared.ResourceReader.ResourceManager.Proxy.GetValue(23)).Location(FormLabelLocation.Left))
+                         //                  .ValidationRules(rules => rules.AddRequired()
+                         //                  .Message(Osa.Unidocs.Shared.ResourceReader.ResourceManager.Proxy.GetValue(46)));
+
+                         //groupItems.AddSimpleFor(m => m.Alias)
+                         //    .Editor(e => e.TextBox().Width("450px").ID("Alias"))
+                         //    .Label(t => t.Text(Osa.Unidocs.Shared.ResourceReader.ResourceManager.Proxy.GetValue(39)).Location(FormLabelLocation.Left));
+
+                         //groupItems.AddSimpleFor(m => m.Path)
+                         //    .Editor(e => e.TextBox().Width("450px").ID("folderOrPath"))
+                         //    .Label(t => t.Text(Osa.Unidocs.Shared.ResourceReader.ResourceManager.Proxy.GetValue(36)).Location(FormLabelLocation.Left))
+                         //    .ValidationRules(rules => rules.AddRequired()
+                         //    .Message(Osa.Unidocs.Shared.ResourceReader.ResourceManager.Proxy.GetValue(40)));
+                     });
+
+                     items.AddGroup()
+                     .ColSpan(1)
+                     .ColCount(1)
+                     .Items(groupItems =>
+                     {
+                         groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Left)
+                                               .ButtonOptions(x => x.ID("BarCodeOk")
+                                               .OnClick("saveBarCodeClick")
+                                               .Text("Generisi"));
+
+                         //groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Right)
+                         //                      .ButtonOptions(x => x.ID("AddEditVolumeCancel")
+                         //                      .OnClick("cancelVolumeClick")
+                         //                      .Text(Osa.Unidocs.Shared.ResourceReader.ResourceManager.Proxy.GetValue(38)));
+                     });
+
+                 }).FormData(Model))
+
+}

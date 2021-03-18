@@ -125,6 +125,9 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
                 dbUser.FarmName = user.FarmName;
                 dbUser.FarmNo = user.FarmNo;
                 dbUser.Email = user.Email;
+                dbUser.IdGroup = user.IdGroup;
+                dbUser.FirstName = user.FirstName;
+                dbUser.LastName = user.LastName;
                 dbUser.IndLogged = 0;
                 db.Add(dbUser);
                 db.SaveChanges();

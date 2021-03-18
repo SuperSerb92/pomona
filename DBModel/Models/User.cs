@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DBModel.Models
 {
     public class User
     {
+        [Key]
         public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -17,6 +19,8 @@ namespace DBModel.Models
         public string FarmNo { get; set; }
         public int IdGroup { get; set; }
         public int IndLogged { get; set; }
+
+        public string NameSurname { get { return FirstName + " " + LastName; } }
 
     }
 }

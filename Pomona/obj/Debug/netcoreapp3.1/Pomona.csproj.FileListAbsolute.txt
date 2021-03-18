@@ -113,3 +113,5 @@ C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicati
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\web.config
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Shared\popupMessageWithOnHidden.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\BarCodeGenerator\BarCodeGenerator.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\ControlorEmployees\ControlorEmployees.cshtml.g.cs

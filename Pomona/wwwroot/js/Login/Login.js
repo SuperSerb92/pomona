@@ -127,6 +127,8 @@ function showInfo(data, title) {
     ins.option("title", title);
     ins.show();
 }
+
+
 function onShownpopupFormRegistration(e) {
     $("#FirstName").dxTextBox('instance').focus();  
 }

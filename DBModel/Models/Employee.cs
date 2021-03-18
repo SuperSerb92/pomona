@@ -7,6 +7,7 @@ namespace DBModel.Models
 {
   public  class Employee
     {
+        [Key]
         public int EmployeeID { get; set; }
         [MaxLength(50)]
         public string Name { get; set; }

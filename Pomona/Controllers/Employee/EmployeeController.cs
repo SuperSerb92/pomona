@@ -43,12 +43,22 @@ namespace Pomona.Controllers
             return DataSourceLoader.Load(employees, loadOptions);
         }
 
+        [HttpGet]
+        public object GetEmployeesStaticList(DataSourceLoadOptions loadOptions)
+        {
+            employees = db.Employees.ToList();
+
+            return DataSourceLoader.Load(employees, loadOptions);
+        }
+
 
         [HttpPost]
         public IActionResult InsertEmployee(string values)
         {          
             var employee = new DBModel.Models.Employee();
-            JsonConvert.PopulateObject(values, employee);           
+            JsonConvert.PopulateObject(values, employee);  
+            
+
 
             //todo: pitaj coku jel hocemo insert u prvi red  ili poslednji ovo ispod je insert na prvo mesto
             //employees.Insert(0, employee);

@@ -17,5 +17,36 @@ namespace DBModel.DataAccess
         public DbSet<Packaging> Packagings { get; set; }
         public DbSet<Plot> Plots { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ControlorEmployeesRelation> ControlorEmployeesRelations { get; set; }
+
+      
+
+        //public abstract class Party
+        //{
+        //    public Guid Id { get; set; }
+        //}
+
+        //public class Person : Party
+        //{
+        //    public string FirstName { get; set; }
+        //    public string LastName { get; set; }
+        //}
+
+        //public class Company : Party
+        //{
+        //    public string Name { get; set; }
+        //}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ControlorEmployeesRelation>()              
+              .HasKey(p => new { p.UserID, p.EmployeeID });
+        }
+
+
+        //modelBuilder.Entity<Party>()
+        //    .Map<Person>(m => { m.Requires("Type").HasValue("P"); m.ToTable("PartiesTable");})
+        //    .Map<Company>(m => { m.Requires("Type").HasValue("C"); m.ToTable("PartiesTable"); })
+        //    .ToTable("PartiesTable");
     }
 }

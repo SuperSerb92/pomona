@@ -1,0 +1,86 @@
+﻿@{
+    Layout = null;
+}
+
+@{
+
+    var selectedData = ViewData["selectedData"] as List<Pomona.Models.Employee>;
+    //var selectedSwPtData = ViewData["selectedSwPtData"] as Osa.Unidocs.Modules.Global.BusinessEntities.FileFormatPermissions;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+
+@using (Html.BeginForm())
+{
+    using (Html.DevExtreme().ValidationGroup())
+    {
+        @(Html.DevExtreme().Form<Pomona.Models.ControlorEmployeesRelation>()
+                     .ID("ControlorEmployeesRelationForm")
+                .ColCount(2)
+                .Items(items =>
+                items.AddGroup()
+                .ColSpan(2)
+                .Items(groupItems =>
+                {
+
+                    groupItems.AddSimpleFor(m => m.UserID)
+                         .ColSpan(1)
+                         .Editor(e => e.SelectBox().ID("ControlorsSelectBox")
+                                     //.Width("450px")
+                                     .Placeholder("")
+                                     .SearchEnabled(true)
+                                     .DataSource(d => d.Mvc().Controller("ControlorEmployees").LoadAction("GetControlors").Key("UserID"))
+                                     .DisplayExpr("NameSurname")
+                                     .ValueExpr("UserID")
+                                     .OnSelectionChanged("OnSelectionChangedControlor"))
+                                     .Label(t => t.Text("Kontrolori").Location(FormLabelLocation.Left))
+                                     .ValidationRules(rules => rules.AddRequired()
+                                     .Message("Morate izabrati kontrolora"));
+
+
+            groupItems.AddSimple()
+                    .ColSpan(2)
+                    .Template(@<text>
+                                       @(Html.DevExtreme().DataGrid<Pomona.Models.Employee>()
+                                      .ID("ControlorEmployeesGrid")
+                                      .ShowBorders(true)
+                                      .ElementAttr("overflow", "auto")
+                                      .Height("450px")
+                                      .Scrolling(scrolling => scrolling.Mode(GridScrollingMode.Infinite))
+                                      .ShowColumnHeaders(true)
+                                      .AllowColumnResizing(true)
+                                      .ShowColumnHeaders(true)
+                                      .ColumnMinWidth(50)
+                                      .ColumnResizingMode(ColumnResizingMode.Widget)
+                                      .DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
+                                      .Columns(columns =>
+                                      {
+                                          columns.AddFor(u => u.EmployeeID).Visible(false).Width(1);
+                                          columns.AddFor(u => u.Name).Caption("Ime").Width("200px");
+                                          columns.AddFor(u => u.Surname).Caption("Prezime");
+                                      })
+                                     .SelectedRowKeys(@selectedData)
+                                     .Selection(s => s.Mode(SelectionMode.Multiple)
+                                     .ShowCheckBoxesMode(GridSelectionShowCheckBoxesMode.Always).AllowSelectAll(false))
+                                     .FilterRow(f => f.Visible(true))
+                                     .HeaderFilter(f => f.Visible(true))
+                                     .FocusedRowEnabled(true)
+                                    // .OnSelectionChanged("onSelectionChangedSW")
+                                   //  .OnEditorPreparing("onEditorPreparingSW")
+                                            )
+                                </text>);
+
+
+
+
+})).FormData(Model))
+
+
+
+    }
+
+}
+
+
+
+
