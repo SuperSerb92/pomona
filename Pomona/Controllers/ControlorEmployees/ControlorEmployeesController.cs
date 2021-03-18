@@ -92,7 +92,7 @@ namespace Pomona.Controllers
         [HttpPost]
         public JsonResult GetSelectedData(int UserID)
         {
-            string joka = "";
+           
             ViewData["selectedData"] = db.Employees.ToList().Where(x => x.EmployeeID == 3).FirstOrDefault();
             return Json(new { success = true });
         }
