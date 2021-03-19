@@ -58,8 +58,6 @@ namespace Pomona.Controllers
             var employee = new DBModel.Models.Employee();
             JsonConvert.PopulateObject(values, employee);  
             
-
-
             //todo: pitaj coku jel hocemo insert u prvi red  ili poslednji ovo ispod je insert na prvo mesto
             //employees.Insert(0, employee);
             

@@ -3,26 +3,40 @@ var lastComponent = {};
 
 
 function TreeViewPomonaItemClick(e) {
-
+  
     if (!timeout) {
         lastComponent = e.itemData;
         timeout = setTimeout(function () {
             timeout = null;
         }, 300);
-    }
+    }  
+
+    //todo: ako je row u editu 
+    //var datagrid = $("#employeeGrid").dxDataGrid("instance");
+
+    //if (datagrid != null) {
+    //    var editRowIndex = $("#employeeGrid").dxDataGrid("instance").option("editing.editRowKey");
+    //    if (editRowIndex != null) {
+    //        datagrid.saveEditData();
+    //    }
+    //}
+
     else if (e.itemData === lastComponent) {
         switch (e.node.key) {
             case 2:
                 Redirect("/Employee/Employee", e.node.text);
                 break;
             case 3:
-                OpenPopup("/ControlorEmployees/ControlorEmployees", "", 750, 850,  e.node.text);
+              //  OpenPopup("/ControlorEmployees/ControlorEmployees", "", 750, 850,  e.node.text);
                 break;
             case 4:
-                Redirect("/Buyer/Buyer",  e.node.text);
+            //   Redirect("/Buyer/Buyer",  e.node.text);
+                break;
+            case 6:
+             //   Redirect("/Culture/Culture",  e.node.text);
                 break;
             case 9:
-                OpenPopup("/BarCodeGenerator/BarCodeGenerator","", 500,500, e.node.text, "");
+                //OpenPopup("/BarCodeGenerator/BarCodeGenerator","", 500,500, e.node.text, "");
                 break;
         }
     }

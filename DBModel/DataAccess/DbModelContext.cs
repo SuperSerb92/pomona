@@ -18,8 +18,8 @@ namespace DBModel.DataAccess
         public DbSet<Plot> Plots { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ControlorEmployeesRelation> ControlorEmployeesRelations { get; set; }
+        public DbSet<BarCodeGenerator> BarCodeGenerators { get; set; }
 
-      
 
         //public abstract class Party
         //{
@@ -41,6 +41,9 @@ namespace DBModel.DataAccess
         {
             modelBuilder.Entity<ControlorEmployeesRelation>()              
               .HasKey(p => new { p.UserID, p.EmployeeID });
+
+            modelBuilder.Entity<BarCodeGenerator>()
+            .HasKey(p => new { p.EmployeeID, p.PlotId,p.PackagingId,p.Rbr,p.CultureId,p.CultureTypeId,p.DateGenerated });
         }
 
 

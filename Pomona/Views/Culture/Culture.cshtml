@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+
+@using (Html.BeginForm())
+{
+    @(Html.DevExtreme().DataGrid<Pomona.Models.Culture>()
+                                          .ID("cultureGrid")
+                                          .ShowBorders(true)
+                                           .ElementAttr("overflow", "auto")
+                                          .ShowColumnHeaders(true)
+                                          // .AllowColumnResizing(true)
+                                          .ColumnMinWidth(50)
+                                          .ColumnResizingMode(ColumnResizingMode.Widget)
+                                          .DataSource(d => d.Mvc().Controller("Culture")
+                                          .LoadAction("GetCultures")
+                                          .InsertAction("InsertCulture")
+                                          .UpdateAction("UpdateCulture")
+                                          .DeleteAction("DeleteCulture")
+                                          .Key("CultureId"))
+                                          .Columns(columns =>
+                                          {
+                                              columns.AddFor(u => u.CultureName).Option("required", true).Caption("Vrsta voća");
+                                              //columns.AddFor(u => u.Surname).Caption("Prezime");
+                                              //columns.AddFor(u => u.PhoneNumber).Caption("Broj telefona");
+                                              //columns.AddFor(u => u.Recomendation).Caption("Preporuka");
+                                          })
+                                          .Editing(editing =>
+                                          {
+                                              editing.Mode(GridEditMode.Row);
+                                              editing.AllowAdding(true);
+                                              editing.AllowDeleting(true);
+                                              editing.AllowUpdating(true);
+                                          })
+                                         .Paging(p => p.PageSize(13))
+                                         .FilterRow(f => f.Visible(true))
+                                         .HeaderFilter(f => f.Visible(true))
+                                         .FocusedRowEnabled(true)
+                                       //  .OnRowInserting("onRowInsertingCultures")
+                                       //  .OnRowUpdating("onRowUpdatingCultures")
+                                         // .OnFocusedRowChanged("OnFocusedRowChangedCultures")
+                                         // .OnEditorPreparing("onCulturesGridEditorPreparing")
+                                         )
 }
