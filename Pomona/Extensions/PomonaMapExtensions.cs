@@ -18,5 +18,9 @@ namespace Pomona.Extensions
             CreateMap<User, Pomona.Models.User>()
              .ForMember(d => d.UserID, o => o.Ignore());
         }
+
+        //metoda daj mi employee model za view model 
+
+        // za konkretnog  db employee daj mi pomona model konverzija
     }
 }

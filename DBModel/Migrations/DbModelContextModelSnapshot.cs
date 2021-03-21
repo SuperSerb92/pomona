@@ -19,6 +19,48 @@ namespace DBModel.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DBModel.Models.BarCodeGenerator", b =>
+                {
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlotId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PackagingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rbr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CultureId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CultureTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateGenerated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BarCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IndStorn")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmployeeID", "PlotId", "PackagingId", "Rbr", "CultureId", "CultureTypeId", "DateGenerated");
+
+                    b.HasIndex("CultureId");
+
+                    b.HasIndex("CultureTypeId");
+
+                    b.HasIndex("PackagingId");
+
+                    b.HasIndex("PlotId");
+
+                    b.ToTable("BarCodeGenerators");
+                });
+
             modelBuilder.Entity("DBModel.Models.Buyer", b =>
                 {
                     b.Property<int>("BuyerId")
@@ -68,6 +110,8 @@ namespace DBModel.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UserID", "EmployeeID");
+
+                    b.HasIndex("EmployeeID");
 
                     b.ToTable("ControlorEmployeesRelations");
                 });
@@ -232,6 +276,68 @@ namespace DBModel.Migrations
                     b.HasKey("UserID");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DBModel.Models.BarCodeGenerator", b =>
+                {
+                    b.HasOne("DBModel.Models.Culture", "Culture")
+                        .WithMany()
+                        .HasForeignKey("CultureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModel.Models.CultureType", "CultureType")
+                        .WithMany()
+                        .HasForeignKey("CultureTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModel.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModel.Models.Packaging", "Packaging")
+                        .WithMany()
+                        .HasForeignKey("PackagingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModel.Models.Plot", "Plot")
+                        .WithMany()
+                        .HasForeignKey("PlotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Culture");
+
+                    b.Navigation("CultureType");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Packaging");
+
+                    b.Navigation("Plot");
+                });
+
+            modelBuilder.Entity("DBModel.Models.ControlorEmployeesRelation", b =>
+                {
+                    b.HasOne("DBModel.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModel.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DBModel.Models.CultureType", b =>

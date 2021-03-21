@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+
+@using (Html.BeginForm())
+{
+    @(Html.DevExtreme().DataGrid<Pomona.Models.Buyer>()
+                                          .ID("buyerGrid")
+                                          .ShowBorders(true)
+                                           .ElementAttr("overflow", "auto")
+                                          .ShowColumnHeaders(true)
+                                          // .AllowColumnResizing(true)
+                                          .ColumnMinWidth(50)
+                                          .ColumnResizingMode(ColumnResizingMode.Widget)
+                                          .DataSource(d => d.Mvc().Controller("Buyer")
+                                          .LoadAction("GetBuyers")
+                                          .InsertAction("InsertBuyer")
+                                          .UpdateAction("UpdateBuyer")
+                                          .DeleteAction("DeleteBuyer")
+                                          .Key("BuyerId"))
+                                          .Columns(columns =>
+                                          {
+                                              columns.AddFor(u => u.BuyerName).Option("required", true).Caption("naziv");
+                                              columns.AddFor(u => u.Pib).Caption("PIB");
+                                              columns.AddFor(u => u.BuyerPhoneNumber).Caption("Kontakt telefon");
+                                              columns.AddFor(u => u.City).Caption("Mesto");
+                                              columns.AddFor(u => u.Address).Caption("Adresa");
+                                              columns.AddFor(u => u.Email).Caption("E-mail");
+                                          })
+                                          .Editing(editing =>
+                                          {
+                                              editing.Mode(GridEditMode.Row);
+                                              editing.AllowAdding(true);
+                                              editing.AllowDeleting(true);
+                                              editing.AllowUpdating(true);
+                                          })
+                                         .Paging(p => p.PageSize(13))
+                                         .FilterRow(f => f.Visible(true))
+                                         .HeaderFilter(f => f.Visible(true))
+                                         .FocusedRowEnabled(true)
+                                       //  .OnRowInserting("onRowInsertingEmployees")
+                                        // .OnRowUpdating("onRowUpdatingEmployees")
+                                   
+                                         )
+}

@@ -13,10 +13,10 @@ namespace DBModel.Models
         //public Employee Employee { get; set; }
 
         public int UserID { get; set; }
-
+        public User User { get; set; }
 
         public int EmployeeID { get; set; }
-
+        public Employee Employee { get; set; }
 
     }
 }
