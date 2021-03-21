@@ -116,3 +116,7 @@ C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Buyer\B
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\CultureType\CultureType.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Culture\Culture.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Plot\Plot.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.csproj.CoreCompileInputs.cache
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicationPartsAssemblyInfo.cache

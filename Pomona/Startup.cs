@@ -44,7 +44,7 @@ namespace Pomona
 
             services.AddSignalR();
             // services.AddSession();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));//
 
             services.AddSession(opt =>
             {
