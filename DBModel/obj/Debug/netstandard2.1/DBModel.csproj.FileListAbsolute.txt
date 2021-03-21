@@ -7,3 +7,12 @@ C:\Users\Filip\Desktop\Pomona\DBModel\bin\Debug\netstandard2.1\DBModel.pdb
 C:\Users\Filip\Desktop\Pomona\DBModel\obj\Debug\netstandard2.1\DBModel.dll
 C:\Users\Filip\Desktop\Pomona\DBModel\obj\Debug\netstandard2.1\DBModel.pdb
 C:\Users\Filip\Desktop\Pomona\DBModel\obj\Debug\netstandard2.1\DBModel.csprojAssemblyReference.cache
+C:\Users\Uros\Desktop\pomo\DBModel\bin\Debug\netstandard2.1\DBModel.deps.json
+C:\Users\Uros\Desktop\pomo\DBModel\bin\Debug\netstandard2.1\DBModel.dll
+C:\Users\Uros\Desktop\pomo\DBModel\bin\Debug\netstandard2.1\DBModel.pdb
+C:\Users\Uros\Desktop\pomo\DBModel\obj\Debug\netstandard2.1\DBModel.csprojAssemblyReference.cache
+C:\Users\Uros\Desktop\pomo\DBModel\obj\Debug\netstandard2.1\DBModel.AssemblyInfoInputs.cache
+C:\Users\Uros\Desktop\pomo\DBModel\obj\Debug\netstandard2.1\DBModel.AssemblyInfo.cs
+C:\Users\Uros\Desktop\pomo\DBModel\obj\Debug\netstandard2.1\DBModel.csproj.CoreCompileInputs.cache
+C:\Users\Uros\Desktop\pomo\DBModel\obj\Debug\netstandard2.1\DBModel.dll
+C:\Users\Uros\Desktop\pomo\DBModel\obj\Debug\netstandard2.1\DBModel.pdb

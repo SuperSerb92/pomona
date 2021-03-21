@@ -9727,45 +9727,39 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Filip\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Uros\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Filip\\Desktop\\Pomona\\Pomona\\Pomona.csproj",
+      "projectUniqueName": "C:\\Users\\Uros\\Desktop\\pomo\\Pomona\\Pomona.csproj",
       "projectName": "Pomona",
-      "projectPath": "C:\\Users\\Filip\\Desktop\\Pomona\\Pomona\\Pomona.csproj",
-      "packagesPath": "C:\\Users\\Filip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Filip\\Desktop\\Pomona\\Pomona\\obj\\",
+      "projectPath": "C:\\Users\\Uros\\Desktop\\pomo\\Pomona\\Pomona.csproj",
+      "packagesPath": "C:\\Users\\Uros\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Uros\\Desktop\\pomo\\Pomona\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Filip\\Desktop\\Pomona\\NuGet.Config",
-        "C:\\Users\\Filip\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Uros\\Desktop\\pomo\\NuGet.Config",
+        "C:\\Users\\Uros\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Filip\\Desktop\\Pomona\\DBModel\\DBModel.csproj": {
-              "projectPath": "C:\\Users\\Filip\\Desktop\\Pomona\\DBModel\\DBModel.csproj"
+            "C:\\Users\\Uros\\Desktop\\pomo\\DBModel\\DBModel.csproj": {
+              "projectPath": "C:\\Users\\Uros\\Desktop\\pomo\\DBModel\\DBModel.csproj"
             },
-            "C:\\Users\\Filip\\Desktop\\Pomona\\Session\\Session.csproj": {
-              "projectPath": "C:\\Users\\Filip\\Desktop\\Pomona\\Session\\Session.csproj"
+            "C:\\Users\\Uros\\Desktop\\pomo\\Session\\Session.csproj": {
+              "projectPath": "C:\\Users\\Uros\\Desktop\\pomo\\Session\\Session.csproj"
             }
           }
         }
@@ -9778,6 +9772,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "AutoMapper": {
             "target": "Package",
@@ -9832,7 +9827,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
