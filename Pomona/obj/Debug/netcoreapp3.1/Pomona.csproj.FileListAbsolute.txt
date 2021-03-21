@@ -107,9 +107,6 @@ C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\Microsoft.EntityFra
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DBModel.pdb
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Login\Registration.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\libman.json
-C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.csproj.CoreCompileInputs.cache
-C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\web.config
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Shared\popupMessageWithOnHidden.cshtml.g.cs

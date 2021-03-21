@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "GEal+DQju92Y2H/Xd2eRfIcPrw12ZPW89p0g66/Hvm+sMcuxVLXDve+EEWNTPILuTtXIjL7AYL6E9nKZHHngdQ==",
+  "dgSpecHash": "RTX7+z2noTznJh5SMrnS/4jriKWWL1nw0RsHRJzahiD/8Askygc4/fk6QfNeX55I9fYBxMVjPnNjzKaa814AfA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Filip\\Desktop\\Pomona\\Pomona\\Pomona.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Filip\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\Filip\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\Filip\\.nuget\\packages\\buildbundlerminifier\\2.9.406\\buildbundlerminifier.2.9.406.nupkg.sha512",
     "C:\\Users\\Filip\\.nuget\\packages\\devextreme.aspnet.core\\20.2.5\\devextreme.aspnet.core.20.2.5.nupkg.sha512",
     "C:\\Users\\Filip\\.nuget\\packages\\devextreme.aspnet.data\\2.7.1\\devextreme.aspnet.data.2.7.1.nupkg.sha512",

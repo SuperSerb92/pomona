@@ -43,7 +43,8 @@ namespace Pomona
             services.AddDistributedMemoryCache();
 
             services.AddSignalR();
-           // services.AddSession();
+            // services.AddSession();
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddSession(opt =>
             {
