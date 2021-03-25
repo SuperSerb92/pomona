@@ -1,15 +1,16 @@
-﻿using DBModel.Models;
+﻿using DataAccessLayer.EF.Configurations;
+using DBModel.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DBModel.DataAccess
+namespace DataAccessLayer.EF
 {
    public class DbModelContext:DbContext
     {
         public DbModelContext(DbContextOptions options):base(options)  {  }
-        public DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Culture> Cultures { get; set; }
@@ -21,21 +22,7 @@ namespace DBModel.DataAccess
         public DbSet<BarCodeGenerator> BarCodeGenerators { get; set; }
 
 
-        //public abstract class Party
-        //{
-        //    public Guid Id { get; set; }
-        //}
 
-        //public class Person : Party
-        //{
-        //    public string FirstName { get; set; }
-        //    public string LastName { get; set; }
-        //}
-
-        //public class Company : Party
-        //{
-        //    public string Name { get; set; }
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,12 +31,9 @@ namespace DBModel.DataAccess
 
             modelBuilder.Entity<BarCodeGenerator>()
             .HasKey(p => new { p.EmployeeID, p.PlotId,p.PackagingId,p.Rbr,p.CultureId,p.CultureTypeId,p.DateGenerated });
+
+            modelBuilder.ApplyConfiguration(new EmployeeConfig());
         }
 
-
-        //modelBuilder.Entity<Party>()
-        //    .Map<Person>(m => { m.Requires("Type").HasValue("P"); m.ToTable("PartiesTable");})
-        //    .Map<Company>(m => { m.Requires("Type").HasValue("C"); m.ToTable("PartiesTable"); })
-        //    .ToTable("PartiesTable");
     }
 }

@@ -15,12 +15,12 @@ namespace Pomona.Controllers.Culture
     public class CultureController : Controller
     {
         readonly DbModelContext db;
-        private List<DBModel.Models.Culture> cultures
+        private List<Pomona.Models.Culture> cultures
         {
             get
             {
                 return (Session.AppContext.MemoryCache.Get("CultureList_" + Session.AppContext.Id) == null)
-                    ? null : (List<DBModel.Models.Culture>)(Session.AppContext.MemoryCache.Get("CultureList_" + Session.AppContext.Id));
+                    ? null : (List<Pomona.Models.Culture>)(Session.AppContext.MemoryCache.Get("CultureList_" + Session.AppContext.Id));
             }
             set
             {
@@ -33,7 +33,16 @@ namespace Pomona.Controllers.Culture
         }
         public IActionResult Culture()
         {
-            cultures = db.Cultures.ToList();
+            List<DBModel.Models.Culture> dbCultures =   db.Cultures.ToList();
+            cultures = new List<Models.Culture>();
+            //todo uros mapiranje
+            foreach (var item in dbCultures)
+            {
+                Pomona.Models.Culture culture = new Models.Culture();
+                culture.CultureId = item.CultureId;
+                culture.CultureName = item.CultureName;
+                cultures.Add(culture);
+            }
             return View();
         }
 
@@ -46,8 +55,17 @@ namespace Pomona.Controllers.Culture
         [HttpGet]
         public object GetCulturesStaticList(DataSourceLoadOptions loadOptions)
         {
-            cultures = db.Cultures.ToList();
+            List<DBModel.Models.Culture>  dbCultures = db.Cultures.ToList();
+            cultures = new List<Models.Culture>();
+            //todo uros mapiranje
+            foreach (var item in dbCultures)
+            {
+                Pomona.Models.Culture culture = new Models.Culture();               
+                culture.CultureId = item.CultureId;
+                culture.CultureName = item.CultureName;
+                cultures.Add(culture);
 
+            }
             return DataSourceLoader.Load(cultures, loadOptions);
         }
 
@@ -55,7 +73,7 @@ namespace Pomona.Controllers.Culture
         [HttpPost]
         public IActionResult InsertCulture(string values)
         {
-            var culture = new DBModel.Models.Culture();
+            var culture = new Pomona.Models.Culture();
             JsonConvert.PopulateObject(values, culture);
 
             //todo: pitaj coku jel hocemo insert u prvi red  ili poslednji ovo ispod je insert na prvo mesto

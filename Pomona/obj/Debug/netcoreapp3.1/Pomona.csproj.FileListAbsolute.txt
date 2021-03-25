@@ -120,3 +120,4 @@ C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\AutoMapper.Extensio
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.csproj.CoreCompileInputs.cache
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Packaging\Packaging.cshtml.g.cs

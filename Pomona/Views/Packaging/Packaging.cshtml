@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+
+@using (Html.BeginForm())
+{
+    @(Html.DevExtreme().DataGrid<Pomona.Models.Packaging>()
+                                          .ID("packagingGrid")
+                                          .ShowBorders(true)
+                                           .ElementAttr("overflow", "auto")
+                                          .ShowColumnHeaders(true)
+                                          // .AllowColumnResizing(true)
+                                          .ColumnMinWidth(50)
+                                          .ColumnResizingMode(ColumnResizingMode.Widget)
+                                          .DataSource(d => d.Mvc().Controller("Packaging")
+                                          .LoadAction("GetPackagings")
+                                          .InsertAction("InsertPackaging")
+                                          .UpdateAction("UpdatePackaging")
+                                          .DeleteAction("DeletePackaging")
+                                          .Key("PackagingId"))
+                                          .Columns(columns =>
+                                          {
+                                              columns.AddFor(u => u.PackagingType).Option("required", true).Caption("Tip ambalaže");                                         
+                                              columns.AddFor(u => u.Tara).Caption("Tara").Format("#0");
+                                          })
+                                          .Editing(editing =>
+                                          {
+                                              editing.Mode(GridEditMode.Row);
+                                              editing.AllowAdding(true);
+                                              editing.AllowDeleting(true);
+                                              editing.AllowUpdating(true);
+                                          })
+                                         .Paging(p => p.PageSize(13))
+                                         .FilterRow(f => f.Visible(true))
+                                         .HeaderFilter(f => f.Visible(true))
+                                         .FocusedRowEnabled(true)
+                                        .OnRowInserting("onRowInsertingPackaging")
+                                        .OnRowUpdating("onRowUpdatingPackaging")
+                                         // .OnFocusedRowChanged("OnFocusedRowChangedPackagings")
+                                         // .OnEditorPreparing("onPackagingsGridEditorPreparing")
+                                         )
+}

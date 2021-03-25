@@ -30,6 +30,6 @@ namespace Pomona.Models
         public int IdGroup { get; set; }
 
         public int IndLogged { get; set; }
-
+        public string NameSurname { get { return FirstName + " " + LastName; } }
     }
 }

@@ -10,9 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevExtreme NuGet.config", "
 		NuGet.config = NuGet.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBModel", "DBModel\DBModel.csproj", "{69C50F35-07EF-4C16-B74D-25718F0837A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBModel", "DBModel\DBModel.csproj", "{69C50F35-07EF-4C16-B74D-25718F0837A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Session", "Session\Session.csproj", "{03735E44-F687-4D90-A7D1-7DF165C670E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Session", "Session\Session.csproj", "{03735E44-F687-4D90-A7D1-7DF165C670E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{94B36C77-C63A-4340-8C14-BFA26E7ED407}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{03735E44-F687-4D90-A7D1-7DF165C670E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03735E44-F687-4D90-A7D1-7DF165C670E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03735E44-F687-4D90-A7D1-7DF165C670E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94B36C77-C63A-4340-8C14-BFA26E7ED407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94B36C77-C63A-4340-8C14-BFA26E7ED407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94B36C77-C63A-4340-8C14-BFA26E7ED407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94B36C77-C63A-4340-8C14-BFA26E7ED407}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

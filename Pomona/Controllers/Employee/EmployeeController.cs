@@ -1,9 +1,11 @@
-﻿using DBModel.DataAccess;
+﻿using AutoMapper;
+using DBModel.DataAccess;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
+using Pomona.Extensions;
 using Pomona.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace Pomona.Controllers
     public class EmployeeController : Controller
     {
         readonly DbModelContext db;
+        private readonly IMapper mapper;
         private List<DBModel.Models.Employee> employees
         {
             get
@@ -27,13 +30,15 @@ namespace Pomona.Controllers
                 Session.AppContext.MemoryCache.Set("EmployeeList_" + Session.AppContext.Id, value);
             }
         }
-        public EmployeeController(DBModel.DataAccess.DbModelContext db)
+        public EmployeeController(DBModel.DataAccess.DbModelContext db,IMapper mapper)
         {
             this.db = db;
+            this.mapper = mapper;
         }
         public IActionResult Employee()
         {
             employees = db.Employees.ToList();
+            var employeesDto = mapper.Map<IEnumerable<Models.Employee>>(employees);
             return View();
         }
 

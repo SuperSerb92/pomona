@@ -1,34 +1,39 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Uros\\Desktop\\pomo\\Pomona\\Pomona.csproj": {}
+    "C:\\Users\\Filip\\Desktop\\Pomona\\Pomona\\Pomona.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Uros\\Desktop\\pomo\\DBModel\\DBModel.csproj": {
+    "C:\\Users\\Filip\\Desktop\\Pomona\\DBModel\\DBModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Uros\\Desktop\\pomo\\DBModel\\DBModel.csproj",
+        "projectUniqueName": "C:\\Users\\Filip\\Desktop\\Pomona\\DBModel\\DBModel.csproj",
         "projectName": "DBModel",
-        "projectPath": "C:\\Users\\Uros\\Desktop\\pomo\\DBModel\\DBModel.csproj",
-        "packagesPath": "C:\\Users\\Uros\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Uros\\Desktop\\pomo\\DBModel\\obj\\",
+        "projectPath": "C:\\Users\\Filip\\Desktop\\Pomona\\DBModel\\DBModel.csproj",
+        "packagesPath": "C:\\Users\\Filip\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Filip\\Desktop\\Pomona\\DBModel\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Uros\\Desktop\\pomo\\NuGet.Config",
-          "C:\\Users\\Uros\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Filip\\Desktop\\Pomona\\NuGet.Config",
+          "C:\\Users\\Filip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.1": {
-            "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
         },
@@ -40,7 +45,6 @@
       },
       "frameworks": {
         "netstandard2.1": {
-          "targetAlias": "netstandard2.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -66,41 +70,46 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Uros\\Desktop\\pomo\\Pomona\\Pomona.csproj": {
+    "C:\\Users\\Filip\\Desktop\\Pomona\\Pomona\\Pomona.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Uros\\Desktop\\pomo\\Pomona\\Pomona.csproj",
+        "projectUniqueName": "C:\\Users\\Filip\\Desktop\\Pomona\\Pomona\\Pomona.csproj",
         "projectName": "Pomona",
-        "projectPath": "C:\\Users\\Uros\\Desktop\\pomo\\Pomona\\Pomona.csproj",
-        "packagesPath": "C:\\Users\\Uros\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Uros\\Desktop\\pomo\\Pomona\\obj\\",
+        "projectPath": "C:\\Users\\Filip\\Desktop\\Pomona\\Pomona\\Pomona.csproj",
+        "packagesPath": "C:\\Users\\Filip\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Filip\\Desktop\\Pomona\\Pomona\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Uros\\Desktop\\pomo\\NuGet.Config",
-          "C:\\Users\\Uros\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Filip\\Desktop\\Pomona\\NuGet.Config",
+          "C:\\Users\\Filip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Uros\\Desktop\\pomo\\DBModel\\DBModel.csproj": {
-                "projectPath": "C:\\Users\\Uros\\Desktop\\pomo\\DBModel\\DBModel.csproj"
+              "C:\\Users\\Filip\\Desktop\\Pomona\\DBModel\\DBModel.csproj": {
+                "projectPath": "C:\\Users\\Filip\\Desktop\\Pomona\\DBModel\\DBModel.csproj"
               },
-              "C:\\Users\\Uros\\Desktop\\pomo\\Session\\Session.csproj": {
-                "projectPath": "C:\\Users\\Uros\\Desktop\\pomo\\Session\\Session.csproj"
+              "C:\\Users\\Filip\\Desktop\\Pomona\\Session\\Session.csproj": {
+                "projectPath": "C:\\Users\\Filip\\Desktop\\Pomona\\Session\\Session.csproj"
               }
             }
           }
@@ -113,7 +122,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
@@ -172,35 +180,40 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Uros\\Desktop\\pomo\\Session\\Session.csproj": {
+    "C:\\Users\\Filip\\Desktop\\Pomona\\Session\\Session.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Uros\\Desktop\\pomo\\Session\\Session.csproj",
+        "projectUniqueName": "C:\\Users\\Filip\\Desktop\\Pomona\\Session\\Session.csproj",
         "projectName": "Session",
-        "projectPath": "C:\\Users\\Uros\\Desktop\\pomo\\Session\\Session.csproj",
-        "packagesPath": "C:\\Users\\Uros\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Uros\\Desktop\\pomo\\Session\\obj\\",
+        "projectPath": "C:\\Users\\Filip\\Desktop\\Pomona\\Session\\Session.csproj",
+        "packagesPath": "C:\\Users\\Filip\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Filip\\Desktop\\Pomona\\Session\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Uros\\Desktop\\pomo\\NuGet.Config",
-          "C:\\Users\\Uros\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Filip\\Desktop\\Pomona\\NuGet.Config",
+          "C:\\Users\\Filip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
             "projectReferences": {}
           }
         },
@@ -212,7 +225,6 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
           "dependencies": {
             "Microsoft.AspNetCore.Hosting.Abstractions": {
               "target": "Package",
@@ -255,7 +267,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

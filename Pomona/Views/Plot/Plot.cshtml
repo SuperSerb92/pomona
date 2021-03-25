@@ -1,5 +1,44 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+
+@using (Html.BeginForm())
+{
+    @(Html.DevExtreme().DataGrid<Pomona.Models.Plot>()
+                                          .ID("plotGrid")
+                                          .ShowBorders(true)
+                                           .ElementAttr("overflow", "auto")
+                                          .ShowColumnHeaders(true)
+                                          // .AllowColumnResizing(true)
+                                          .ColumnMinWidth(50)
+                                          .ColumnResizingMode(ColumnResizingMode.Widget)
+                                          .DataSource(d => d.Mvc().Controller("Plot")
+                                          .LoadAction("GetPlots")
+                                          .InsertAction("InsertPlot")
+                                          .UpdateAction("UpdatePlot")
+                                          .DeleteAction("DeletePlot")
+                                          .Key("PlotId"))
+                                          .Columns(columns =>
+                                          {
+                                              columns.AddFor(u => u.PlotName).Option("required", true).Caption("Parcela");
+                                              columns.AddFor(u => u.PlotLabel).Caption("Oznaka").MinWidth(600);
+                                          })
+                                          .Editing(editing =>
+                                          {
+                                              editing.Mode(GridEditMode.Row);
+                                              editing.AllowAdding(true);
+                                              editing.AllowDeleting(true);
+                                              editing.AllowUpdating(true);
+                                          })
+                                         .Paging(p => p.PageSize(13))
+                                         .FilterRow(f => f.Visible(true))
+                                         .HeaderFilter(f => f.Visible(true))
+                                         .FocusedRowEnabled(true)
+                                        .OnRowInserting("onRowInsertingPlot")
+                                        .OnRowUpdating("onRowUpdatingPlot")
+                                         // .OnFocusedRowChanged("OnFocusedRowChangedPlots")
+                                         // .OnEditorPreparing("onPlotsGridEditorPreparing")
+                                         )
 }
