@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
       <ProjectReference Include="..\DBModel\DBModel.csproj" />
       <ProjectReference Include="..\Session\Session.csproj" />
     </ItemGroup>
