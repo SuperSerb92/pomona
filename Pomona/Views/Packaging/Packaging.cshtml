@@ -3,7 +3,7 @@
 }
 
 @{ await Html.RenderPartialAsync("PopupMessage"); }
-
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
 @using (Html.BeginForm())
 {
     @(Html.DevExtreme().DataGrid<Pomona.Models.Packaging>()
@@ -22,7 +22,7 @@
                                           .Key("PackagingId"))
                                           .Columns(columns =>
                                           {
-                                              columns.AddFor(u => u.PackagingType).Option("required", true).Caption("Tip ambalaže");                                         
+                                              columns.AddFor(u => u.PackagingType).Option("required", true).Caption("Tip ambalaže");
                                               columns.AddFor(u => u.Tara).Caption("Tara").Format("#0");
                                           })
                                           .Editing(editing =>

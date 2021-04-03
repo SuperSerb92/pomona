@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using DBModel.DataAccess;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using Pomona.Extensions;
+using Pomona.Interfaces;
 using Pomona.Models;
 using System;
 using System.Collections.Generic;
@@ -16,29 +16,33 @@ namespace Pomona.Controllers
 {
     public class EmployeeController : Controller
     {
-        readonly DbModelContext db;
-        private readonly IMapper mapper;
-        private List<DBModel.Models.Employee> employees
+        private readonly IEmployeesService service;
+
+        private static List<Models.Employee> employees
         {
-            get
-            {
-                return (Session.AppContext.MemoryCache.Get("EmployeeList_" + Session.AppContext.Id) == null)
-                    ? null : (List<DBModel.Models.Employee>)(Session.AppContext.MemoryCache.Get("EmployeeList_" + Session.AppContext.Id));
-            }
-            set
-            {
-                Session.AppContext.MemoryCache.Set("EmployeeList_" + Session.AppContext.Id, value);
-            }
+            get; set;
         }
-        public EmployeeController(DBModel.DataAccess.DbModelContext db,IMapper mapper)
+
+        //private List<Models.Employee> employees
+        //{
+        //    get
+        //    {
+        //        return (Session.AppContext.MemoryCache.Get("EmployeeList_" + Session.AppContext.Id) == null)
+        //            ? null : (List<Models.Employee>)(Session.AppContext.MemoryCache.Get("EmployeeList_" + Session.AppContext.Id));
+        //    }
+        //    set
+        //    {
+        //        Session.AppContext.MemoryCache.Set("EmployeeList_" + Session.AppContext.Id, value);
+        //    }
+        //}
+        public EmployeeController(IEmployeesService service)
         {
-            this.db = db;
-            this.mapper = mapper;
+            this.service = service;
         }
         public IActionResult Employee()
         {
-            employees = db.Employees.ToList();
-            var employeesDto = mapper.Map<IEnumerable<Models.Employee>>(employees);
+            employees = service.GetEmployees();
+
             return View();
         }
 
@@ -51,7 +55,7 @@ namespace Pomona.Controllers
         [HttpGet]
         public object GetEmployeesStaticList(DataSourceLoadOptions loadOptions)
         {
-            employees = db.Employees.ToList();
+            employees = service.GetEmployees();
 
             return DataSourceLoader.Load(employees, loadOptions);
         }
@@ -59,16 +63,13 @@ namespace Pomona.Controllers
 
         [HttpPost]
         public IActionResult InsertEmployee(string values)
-        {          
-            var employee = new DBModel.Models.Employee();
-            JsonConvert.PopulateObject(values, employee);  
-            
-            //todo: pitaj coku jel hocemo insert u prvi red  ili poslednji ovo ispod je insert na prvo mesto
-            //employees.Insert(0, employee);
-            
-            employees.Add(employee);
-            db.Add(employee);
-            db.SaveChanges();
+        {
+            var employee = new Models.Employee();
+            JsonConvert.PopulateObject(values, employee);
+            service.AddEmployee(employee);
+            service.SaveChanges();
+            RefreshSources();
+
             return Ok();
         }
 
@@ -76,24 +77,37 @@ namespace Pomona.Controllers
         public IActionResult UpdateEmployee(int key, string values)
         {
             var employee = employees.FirstOrDefault(a => a.EmployeeID == key);
-            JsonConvert.PopulateObject(values, employee);
+            if (employee != null)
+            {
+                JsonConvert.PopulateObject(values, employee);
+                service.UpdateEmployee(employee);
+                service.SaveChanges();
+            }
 
-            db.Update(employee);
-            db.SaveChanges();
+            RefreshSources();
+
             return Ok();
         }
 
         [HttpDelete]
         public void DeleteEmployee(int key)
         {
-            //todo: kad je spusten kljuc ne sme se brisati?
-            
             var employee = employees.FirstOrDefault(a => a.EmployeeID == key);
-            db.Remove(employee);
-            db.SaveChanges();
-            employees.Remove(employee);
-
+            if (employee != null)
+            {
+                service.DeleteEmployee(employee);
+                employees.Remove(employee);
+                service.SaveChanges();
+            }
         }
+
+
+
+        private void RefreshSources()
+        {
+            employees = service.GetEmployees();
+        }
+
         [HttpGet]
         public JsonResult GetEmployeesContextMenuItems()
         {
@@ -121,7 +135,7 @@ namespace Pomona.Controllers
             return Json(new { success = false, result = dcContextMenuItems });
         }
 
-
+        //zasto imamo kes memoriju? 
     }
 }
 

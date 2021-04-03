@@ -1,5 +1,4 @@
-﻿using DBModel.DataAccess;
-using DevExtreme.AspNet.Data;
+﻿using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -14,7 +13,7 @@ namespace Pomona.Controllers.Packaging
 {
     public class PackagingController : Controller
     {
-        readonly DbModelContext db;
+        
         private List<DBModel.Models.Packaging> packagings
         {
             get
@@ -27,13 +26,13 @@ namespace Pomona.Controllers.Packaging
                 Session.AppContext.MemoryCache.Set("PackagingList_" + Session.AppContext.Id, value);
             }
         }
-        public PackagingController(DBModel.DataAccess.DbModelContext db)
+        public PackagingController()
         {
-            this.db = db;
+         
         }
         public IActionResult Packaging()
         {
-            packagings = db.Packagings.ToList();
+          //  packagings = db.Packagings.ToList();
             return View();
         }
 
@@ -46,7 +45,7 @@ namespace Pomona.Controllers.Packaging
         [HttpGet]
         public object GetPackagingsStaticList(DataSourceLoadOptions loadOptions)
         {
-            packagings = db.Packagings.ToList();
+          //  packagings = db.Packagings.ToList();
 
             return DataSourceLoader.Load(packagings, loadOptions);
         }
@@ -62,8 +61,8 @@ namespace Pomona.Controllers.Packaging
             //packagings.Insert(0, packaging);
 
             packagings.Add(packaging);
-            db.Add(packaging);
-            db.SaveChanges();
+          //  db.Add(packaging);
+          //  db.SaveChanges();
             return Ok();
         }
 
@@ -73,8 +72,8 @@ namespace Pomona.Controllers.Packaging
             var packaging = packagings.FirstOrDefault(a => a.PackagingId == key);
             JsonConvert.PopulateObject(values, packaging);
 
-            db.Update(packaging);
-            db.SaveChanges();
+           // db.Update(packaging);
+           // db.SaveChanges();
             return Ok();
         }
 
@@ -84,8 +83,8 @@ namespace Pomona.Controllers.Packaging
             //todo: kad je spusten kljuc ne sme se brisati?
 
             var packaging = packagings.FirstOrDefault(a => a.PackagingId == key);
-            db.Remove(packaging);
-            db.SaveChanges();
+         //   db.Remove(packaging);
+         //   db.SaveChanges();
             packagings.Remove(packaging);
 
         }

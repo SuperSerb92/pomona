@@ -30,4 +30,37 @@ function onRowUpdatingPlot(e) {
 }
 
 
+function onToolbarPreparingPlot(e) {
+    const addRowitem = e.toolbarOptions.items.find(item => item.name === 'addRowButton');
+    addRowitem.options.onClick = function () {
+        if (!e.component.option('editing.editRowKey')) {
+            e.component.addRow();
+        }
+        else {
+            showInfo("Morate sačuvati red u izmeni", "Radnici");
+        }
+    }
+}
+
+
+var plotForDelete;
+function onPrepareDeletePlot(e) {
+    plotForDelete = e.row.rowIndex;
+    ShowPopupYesNo("Da li ste sigurni da želite da obrišete parcelu?", "PrepareDeletePlot", "Parcela");
+}
+
+function OnDeletePlot() {
+    getPlotGrid().deleteRow(plotForDelete);
+}
+
+
+function PlotCountPerPage(e) {
+    return "Broj redova:  " + getPlotGrid().getVisibleRows().length;
+}
+
+
+
+function getPlotGrid() {
+    return $("#plotGrid").dxDataGrid("instance");
+}
 

@@ -7,7 +7,7 @@ namespace Pomona.Models
 {
     public class Buyer
     {
-        public int IdBuyer { get; set; }
+        public int BuyerId { get; set; }
         public string BuyerName { get; set; }
         public string Pib { get; set; }
         public string Jmbf { get; set; }

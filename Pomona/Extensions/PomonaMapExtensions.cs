@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using DBModel.DataAccess;
 using DBModel.Models;
 using System;
 using System.Collections.Generic;
@@ -12,51 +11,38 @@ namespace Pomona.Extensions
     {
        
         public PomonaMapProfile( )
-        {          
-
-            CreateMap<Employee, Pomona.Models.Employee>()
-             .ForMember(d => d.EmployeeID, o => o.Ignore());
-
-            CreateMap<User, Pomona.Models.User>()
-             .ForMember(d => d.UserID, o => o.Ignore());
-        }
-        //metoda daj mi employee model za view model 
-        //public  List<Pomona.Models.Employee> ToEmployeeDto(this List<DBModel.Models.Employee> employees)
-        //{
-        //    var records = new List<Pomona.Models.Employee>();
-
-        //    foreach (var employee in employees)
-        //    {
-        //        var record = _mapper.Map<Models.Employee>(employee);
-
-        //        records.Add(record);
-        //    }
-
-        //    return records;
-        //}
-        // za konkretnog  db employee daj mi pomona model konverzija
-    }
-    public  class ObjectCustomMappings
-    {
-         private  readonly IMapper _mapper;
-        public ObjectCustomMappings(IMapper mapper)
         {
-            _mapper = mapper;
+
+            ConfigureMappings();
         }
-        public List<Pomona.Models.Employee> ToEmployeeDto( List<DBModel.Models.Employee> employees)
+
+        /// <summary>
+        /// Creates a mapping between source (Domain) and destination (ViewModel)
+        /// </summary>
+        private void ConfigureMappings()
         {
-            var records = new List<Pomona.Models.Employee>();
+            CreateMap<Employee, Pomona.Models.Employee>();
+            CreateMap<User, Pomona.Models.User>();
+            CreateMap<Buyer, Pomona.Models.Buyer>();
+            CreateMap<Group, Pomona.Models.Group>();
+            CreateMap<ControlorEmployeesRelation, Pomona.Models.ControlorEmployeesRelation>();
+            CreateMap<BarCodeGenerator, Pomona.Models.BarCodeGenerator>();
+            CreateMap<Plot, Pomona.Models.Plot>();
+            CreateMap<Packaging, Pomona.Models.Packaging>();
+            CreateMap<Culture, Pomona.Models.Culture>();
+            CreateMap<CultureType, Pomona.Models.CultureType>();
 
-            foreach (var employee in employees)
-            {
-                var record = _mapper.Map<Models.Employee>(employee);
-
-                records.Add(record);
-            }
-
-            return records;
+            CreateMap<Pomona.Models.Employee,Employee> ();
+            CreateMap<Pomona.Models.Group, Group>();
+            CreateMap<Pomona.Models.User,User> ();
+            CreateMap<Pomona.Models.Plot, Plot>();
+            CreateMap<Pomona.Models.Buyer,Buyer>();
+            CreateMap<Pomona.Models.Packaging, Packaging>();
+            CreateMap<Pomona.Models.ControlorEmployeesRelation, ControlorEmployeesRelation>();
+            CreateMap<Pomona.Models.Culture, Culture>();
+            CreateMap<Pomona.Models.CultureType, CultureType>();
+            CreateMap<Pomona.Models.BarCodeGenerator, BarCodeGenerator>();
         }
-
-
     }
+   
 }

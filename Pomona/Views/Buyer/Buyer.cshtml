@@ -3,6 +3,7 @@
 }
 
 @{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
 
 @using (Html.BeginForm())
 {
@@ -22,26 +23,57 @@
                                           .Key("BuyerId"))
                                           .Columns(columns =>
                                           {
-                                              columns.AddFor(u => u.BuyerName).Option("required", true).Caption("naziv");
+                                              columns.AddFor(u => u.BuyerName).Option("required", true).Caption("Naziv");
                                               columns.AddFor(u => u.Pib).Caption("PIB");
                                               columns.AddFor(u => u.BuyerPhoneNumber).Caption("Kontakt telefon");
                                               columns.AddFor(u => u.City).Caption("Mesto");
                                               columns.AddFor(u => u.Address).Caption("Adresa");
                                               columns.AddFor(u => u.Email).Caption("E-mail");
+                                              columns.Add()
+                                            .Type(GridCommandColumnType.Buttons)
+                                            .Width(120)
+                                            .Buttons(b =>
+                                            {
+                                                b.Add().Name(GridColumnButtonName.Edit);
+
+                                                b.Add()
+                                                 .Hint("delete")
+                                                 .Icon("trash")
+                                                 .OnClick("onPrepareDeleteBuyer");
+                                            });
                                           })
                                           .Editing(editing =>
                                           {
                                               editing.Mode(GridEditMode.Row);
                                               editing.AllowAdding(true);
-                                              editing.AllowDeleting(true);
+                                              editing.ConfirmDelete(false);
+                                              //  editing.AllowDeleting(true);
                                               editing.AllowUpdating(true);
                                           })
-                                         .Paging(p => p.PageSize(13))
+                                       .Paging(p => p.PageSize(10))
+                                        .Pager(pager =>
+                                        {
+                                            pager.ShowPageSizeSelector(true);
+                                            pager.AllowedPageSizes(new[] { 10, 50, 100 });                                      
+                                            //pager.ShowInfo(true);
+                                            //pager.InfoText("Strana {0}. Ukupno: {1} ({2} items)");
+                                        })
+                                        .Summary(s => s
+                                        .TotalItems(totalItems =>
+                                        {
+                                            totalItems.Add()
+                                                   .Column("BuyerName")
+                                                   .Name("BuyerSummary")
+                                                   .SummaryType(SummaryType.Sum).DisplayFormat("Broj redova: " + ": {0}")
+                                                   .CustomizeText("BuyerCountPerPage");                                      
+                                        })
+                                        )
                                          .FilterRow(f => f.Visible(true))
                                          .HeaderFilter(f => f.Visible(true))
                                          .FocusedRowEnabled(true)
                                          .OnRowInserting("onRowInsertingBuyers")
                                          .OnRowUpdating("onRowUpdatingBuyers")
-                                   
+                                         .OnToolbarPreparing("onToolbarPreparingBuyers")
+
                                          )
 }

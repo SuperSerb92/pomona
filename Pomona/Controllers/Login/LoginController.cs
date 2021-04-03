@@ -5,12 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using DBModel.DataAccess;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Pomona.Interfaces;
 using Pomona.Models;
 using Pomona.Services;
 
@@ -18,14 +18,17 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
 {
     public class LoginController : Controller
     {
-        readonly DbModelContext db;
+        private readonly ILoginService service;
+        private readonly IGroupService groupService;
+        //inicijalizuje se group service
         public string username;
         public string password;
 
 
-        public LoginController(DBModel.DataAccess.DbModelContext db)
+        public LoginController(ILoginService service,IGroupService groupService)
         {
-            this.db = db;
+            this.service = service;
+            this.groupService = groupService;
         }
         public IActionResult Login()
         {
@@ -41,16 +44,9 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
         public object GetGroups(DataSourceLoadOptions loadOptions)
         {
             //todo: uros mapping ovo bi trebalo iz baze da se cita
-            Group group = new Group();
-            List<Group> list = new List<Group>();
-            group.IdGroup = 1;
-            group.GroupName = "Vlasnik";
-            list.Add(group);
-
-            group = new Group();
-            group.IdGroup = 2;
-            group.GroupName = "Kontrolor";
-            list.Add(group);
+       
+            List<Group> list = groupService.GetGroups();
+            
 
             return DataSourceLoader.Load(list, loadOptions);
         }
@@ -60,7 +56,7 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
         {
             try
             {
-                var login = db.Users.Where(x => x.UserName == user.UserName).FirstOrDefault();
+                var login = service.GetUsers().Where(x => x.UserName == user.UserName).FirstOrDefault();
 
                 if (login == null)
                 {
@@ -105,7 +101,7 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
 
             try
             {
-                if (db.Users.Count() > 0)
+                if (service.GetUsers().Count() > 0)
                 {
                     if (Duplicate(user.UserName, 1))
                     {
@@ -118,19 +114,9 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
                 }
 
                 //todo :uros mapiranje 
-                DBModel.Models.User dbUser = new DBModel.Models.User();
-                dbUser.UserName = user.UserName;
-                dbUser.Password = user.Password;
-                dbUser.RepeatedPassword = user.RepeatedPassword;
-                dbUser.FarmName = user.FarmName;
-                dbUser.FarmNo = user.FarmNo;
-                dbUser.Email = user.Email;
-                dbUser.IdGroup = user.IdGroup;
-                dbUser.FirstName = user.FirstName;
-                dbUser.LastName = user.LastName;
-                dbUser.IndLogged = 0;
-                db.Add(dbUser);
-                db.SaveChanges();
+                service.AddUser(user);
+                service.SaveChanges();
+             
 
                 return Json(new { success = true });           
             }
@@ -146,10 +132,10 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
             switch (indParameter)
             {
                 case 1://username
-                    isDuplicate = db.Users.Any(x => x.UserName.ToUpper().Trim() == value.ToUpper().Trim());
+                    isDuplicate = service.GetUsers().Any(x => x.UserName.ToUpper().Trim() == value.ToUpper().Trim());
                     break;
                 case 2://email
-                    isDuplicate = db.Users.Any(x => x.Email.ToUpper().Trim() == value.ToUpper().Trim());
+                    isDuplicate = service.GetUsers().Any(x => x.Email.ToUpper().Trim() == value.ToUpper().Trim());
                     break;
                 default:
                     break;

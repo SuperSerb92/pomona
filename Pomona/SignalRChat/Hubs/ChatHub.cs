@@ -1,4 +1,4 @@
-﻿using DBModel.DataAccess;
+﻿using DBModel;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Memory;
 using System;
@@ -26,7 +26,7 @@ namespace Pomona.SignalRChat.Hubs
         //    }
         //}
 
-        public ChatHub(DBModel.DataAccess.DbModelContext db)
+        public ChatHub(DBModel.DbModelContext db)
         {
             this.db = db;
         }

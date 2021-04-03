@@ -27,11 +27,34 @@ function onRowUpdatingEmployees(e) {
     }
 } 
 
-function OnFocusedRowChangedEmployees(e) {
-    //var editRowIndex = getEmployeeGrid().option("editing.editRowKey");
-    //if (editRowIndex != null) {
-    //    e.component.saveEditData();
-    //}
+//function onKeyDownEmployees(e) {
+//    if (e.event.key === "+") {
+//        console.log("Ctrl + N was pressed");
+//        getEmployeeGrid().addRow();
+//    }
+//}
+
+function onToolbarPreparingEmployees(e) {
+    const addRowitem = e.toolbarOptions.items.find(item => item.name === 'addRowButton');
+    addRowitem.options.onClick = function () {
+        if (!e.component.option('editing.editRowKey')) {
+            e.component.addRow();
+        }
+        else {
+            showInfo("Morate sačuvati red u izmeni", "Radnici");
+        }
+    }
+}
+
+//var totalPageCount = $("#treeListContainer").dxTreeList("instance").pageCount();
+var employeeForDelete;
+function onPrepareDeleteEmployee(e) {
+    employeeForDelete = e.row.rowIndex;
+    ShowPopupYesNo("Da li ste sigurni da želite da obrišete radnika?", "PrepareDeleteEmployee", "Radnici");
+}
+
+function OnDeleteEmployee() {
+    getEmployeeGrid().deleteRow(employeeForDelete);
 }
 
 
@@ -40,3 +63,6 @@ function getEmployeeGrid() {
 }
 
 
+function EmployeeCountPerPage(e) {
+    return "Broj redova:  " + getEmployeeGrid().getVisibleRows().length;
+}

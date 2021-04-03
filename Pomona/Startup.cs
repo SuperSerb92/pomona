@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DBModel.DataAccess;
+using DataAccessLayer.EF;
+using DataAccessLayer.EF.Repositories;
+using DBModel.Interfaces;
+using DBModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +14,10 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pomona.Interfaces;
+using Pomona.Services;
 using Pomona.SignalRChat.Hubs;
+using Pomona.Extensions;
 
 namespace Pomona
 {
@@ -44,8 +50,8 @@ namespace Pomona
 
             services.AddSignalR();
             // services.AddSession();
-            services.AddAutoMapper(typeof(Startup));//
-
+            services.AddAutoMapper(typeof(Startup));
+           
             services.AddSession(opt =>
             {
                 opt.Cookie.IsEssential = true;
@@ -65,6 +71,36 @@ namespace Pomona
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddMvc(option => option.EnableEndpointRouting = false);
+
+            services.AddScoped<IEmployeeRepostitory, EmployeeRepository>();
+            services.AddScoped<IEmployeesService, EmployeeService>();
+
+            services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<ILoginService, LoginService>();
+
+            services.AddScoped<IBuyerRepository, BuyerRepository>();
+            services.AddScoped<IBuyerService, BuyerService>();
+
+            services.AddScoped<IPackagingRepository, PackagingRepository>();
+
+            services.AddScoped<IPlotRepository, PlotRepository>();
+            services.AddScoped<IPlotService, PlotService>();
+
+            services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IGroupService, GroupService>();
+
+            services.AddScoped<ICultureRepository, CultureRepository>();
+            services.AddScoped<ICultureService, CultureService>();
+
+            services.AddScoped<ICultureTypeRepository, CultureTypeRepository>();
+            services.AddScoped<ICultureTypeService, CultureTypeService>();
+
+            services.AddScoped<IBarCodeGeneratorRepository, BarCodeGeneratorRepository>();
+
+            services.AddScoped<IControlorEmployeesRelationRepository, ControlorEmployeesRelationRepository>();
+            services.AddScoped<IControlorEmployeesService, ControlorEmployeesRelationService>();
+
+
             //services.AddMvc();
 
             services.AddMvc().AddJsonOptions(o =>

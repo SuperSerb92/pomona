@@ -7,7 +7,7 @@ namespace Pomona.Models
 {
     public class Packaging
     {
-        public int IdPackaging { get; set; }
+        public int PackagingId { get; set; }
         public string PackagingType { get; set; }
         public int Tara { get; set; }
 

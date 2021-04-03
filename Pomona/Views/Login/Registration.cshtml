@@ -87,9 +87,9 @@
                                                   .Width("560px")
                                                   .Placeholder("")
                                                   .SearchEnabled(true)
-                                                  .DataSource(d => d.Mvc().Controller("Login").LoadAction("GetGroups").Key("IdGroup"))
+                                                  .DataSource(d => d.Mvc().Controller("Login").LoadAction("GetGroups").Key("Id"))
                                                   .DisplayExpr("GroupName")
-                                                  .ValueExpr("IdGroup"))
+                                                  .ValueExpr("Id"))
                                                   .Label(t => t.Text("Korisnik").Location(FormLabelLocation.Left))
                                                   .ValidationRules(rules => rules.AddRequired()
                                                   .Message("Morate izabrati grupu"));

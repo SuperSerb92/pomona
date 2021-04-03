@@ -1,19 +1,23 @@
 ﻿function OnSelectionChangedControlor(e) {
+  
     $.ajax({
         url: virtualDirectory + '/ControlorEmployees/GetSelectedData?UserId=' + e.component.option("value"),
         type: 'GET',
         async: false,
         success: function (data) {
             if (data.success) {
+                var dataGrid = $("#ControlorEmployeesGrid").dxDataGrid("instance");
+                dataGrid.clearSelection();
+                dataGrid.option("focusedRowIndex", -1);
                 if (data.result) {
-                    var dataGrid = $("#ControlorEmployeesGrid").dxDataGrid("instance");
+                  
                     var keys = dataGrid.getSelectedRowKeys();
                     dataGrid.deselectRows(keys);
 
                     var list = [];
                     if (data.result.length > 0) {
                         for (var i = 0; i < data.result.length; i++) {
-                            list.push(data.result[i].EmployeeID);
+                            list.push(data.result[i]);
                         }
                         dataGrid.selectRows(list, false);
                     }
@@ -66,6 +70,9 @@ function onSelectionChangedCE(e) {
     //            e.component.deselectRows(key);
     //    });
     //});
+
+
+
 }
 
 

@@ -8,6 +8,7 @@
 }
 
 @{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
 
 @using (Html.BeginForm())
 {
@@ -29,12 +30,12 @@
                                      .SearchEnabled(true)
                                      .DataSource(d => d.Mvc().Controller("ControlorEmployees").LoadAction("GetControlors").Key("UserID"))
                                      .DisplayExpr("NameSurname")
-                                     .ValueExpr("UserID")                             
+                                     .ValueExpr("UserID")
                                      .OnSelectionChanged("OnSelectionChangedControlor"))
                                      .Label(t => t.Text("Kontrolori").Location(FormLabelLocation.Left))
                                      .ValidationRules(rules => rules.AddRequired()
                                      .Message("Morate izabrati kontrolora"));
-     
+
 
                       groupItems.AddSimple()
                     .ColSpan(2)
@@ -50,7 +51,7 @@
                                       .ShowColumnHeaders(true)
                                       .ColumnMinWidth(50)
                                       .ColumnResizingMode(ColumnResizingMode.Widget)
-                                      .DataSource(d => d.Mvc().Controller("ControlorEmployees").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
+                                      .DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
                                       .Columns(columns =>
                                       {
                                           columns.AddFor(u => u.EmployeeID).Visible(false).Width(1);
@@ -62,13 +63,11 @@
                                      .ShowCheckBoxesMode(GridSelectionShowCheckBoxesMode.Always).AllowSelectAll(false))
                                      .FilterRow(f => f.Visible(true))
                                      .HeaderFilter(f => f.Visible(true))
-                                     .FocusedRowEnabled(true)                                 
+                                     .FocusedRowEnabled(true)
                                      .OnEditorPreparing("onEditorPreparingCE")
                                      .OnSelectionChanged("onSelectionChangedCE")
                                             )
                                 </text>);
-
-
 
                     items.AddGroup()
                      .ColSpan(2)
@@ -79,14 +78,9 @@
                                               .ButtonOptions(x => x.ID("saveRelations")//.Type(ButtonType.Success)
                                               .OnClick("onSaveControlorEmployeeRelations")
                                               .Text("Snimi"));
-                       
+
                     });
-
-
                 })).FormData(Model))
-
-
-
     }
 
 }

@@ -3,44 +3,80 @@
 }
 
 @{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
 
 @using (Html.BeginForm())
 {
-    @(Html.DevExtreme().DataGrid<Pomona.Models.Employee>()
-                                          .ID("employeeGrid")
-                                          .ShowBorders(true)
-                                           .ElementAttr("overflow", "auto")
-                                          .ShowColumnHeaders(true)
-                                          // .AllowColumnResizing(true)
-                                          .ColumnMinWidth(50)
-                                          .ColumnResizingMode(ColumnResizingMode.Widget)
-                                          .DataSource(d => d.Mvc().Controller("Employee")
-                                          .LoadAction("GetEmployees")
-                                          .InsertAction("InsertEmployee")
-                                          .UpdateAction("UpdateEmployee")
-                                          .DeleteAction("DeleteEmployee")
-                                          .Key("EmployeeID"))
-                                          .Columns(columns =>
-                                          {
-                                              columns.AddFor(u => u.Name).Option("required", true).Caption("Ime");
-                                              columns.AddFor(u => u.Surname).Caption("Prezime");
-                                              columns.AddFor(u => u.PhoneNumber).Caption("Broj telefona");
-                                              columns.AddFor(u => u.Recomendation).Caption("Preporuka");
-                                          })
-                                          .Editing(editing =>
-                                          {
-                                              editing.Mode(GridEditMode.Row);
-                                              editing.AllowAdding(true);
-                                              editing.AllowDeleting(true);
-                                              editing.AllowUpdating(true);
-                                          })
-                                         .Paging(p => p.PageSize(13))
-                                         .FilterRow(f => f.Visible(true))
-                                         .HeaderFilter(f => f.Visible(true))
-                                         .FocusedRowEnabled(true)
-                                         .OnRowInserting("onRowInsertingEmployees")
-                                         .OnRowUpdating("onRowUpdatingEmployees")                                      
-                                         // .OnFocusedRowChanged("OnFocusedRowChangedEmployees")
-                                         // .OnEditorPreparing("onEmployeesGridEditorPreparing")
-                                         )
-}
+
+    @(Html.DevExtreme().DataGrid<Pomona.Models.Employee>
+    ()
+    .ID("employeeGrid")
+    .ShowBorders(true)
+    .ElementAttr("overflow", "auto")
+    .ShowColumnHeaders(true)
+    // .AllowColumnResizing(true)
+    .ColumnMinWidth(50)
+    .ColumnResizingMode(ColumnResizingMode.Widget)
+    .DataSource(d => d.Mvc().Controller("Employee")
+    .LoadAction("GetEmployees")
+    .InsertAction("InsertEmployee")
+    .UpdateAction("UpdateEmployee")
+    .DeleteAction("DeleteEmployee")
+    .Key("EmployeeID"))
+    .Columns(columns =>
+    {
+        columns.AddFor(u => u.Name).Option("required", true).Caption("Ime");
+        columns.AddFor(u => u.Surname).Caption("Prezime");
+        columns.AddFor(u => u.PhoneNumber).Caption("Broj telefona");
+        columns.AddFor(u => u.Recomendation).Caption("Preporuka");
+        columns.Add()
+        .Type(GridCommandColumnType.Buttons)
+        .Width(120)
+        .Buttons(b =>
+        {
+            b.Add().Name(GridColumnButtonName.Edit);
+
+            b.Add()
+        .Hint("delete")
+        .Icon("trash")
+        .OnClick("onPrepareDeleteEmployee");
+        });
+    })
+    .Editing(editing =>
+    {
+        editing.Mode(GridEditMode.Row);
+        editing.AllowAdding(true);
+        editing.ConfirmDelete(false);
+        //  editing.AllowDeleting(true);
+        editing.AllowUpdating(true);
+    })
+    .Paging(p => p.PageSize(10))
+    .Pager(pager =>
+    {
+        pager.ShowPageSizeSelector(true);
+        pager.AllowedPageSizes(new[] { 10,50,100 });
+
+        //pager.ShowInfo(true);
+        //pager.InfoText("Strana {0}. Ukupno: {1} ({2} items)");
+    })
+    .Summary(s => s
+    .TotalItems(totalItems =>
+    {
+        totalItems.Add()
+               .Column("Name")
+               .Name("EmployeeSummary")
+               .SummaryType(SummaryType.Sum).DisplayFormat("Broj redova: " + ": {0}")
+               .CustomizeText("EmployeeCountPerPage");
+               
+    })
+    )
+
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .OnRowInserting("onRowInsertingEmployees")
+    .OnRowUpdating("onRowUpdatingEmployees")
+    .OnToolbarPreparing("onToolbarPreparingEmployees")
+
+    )
+    }

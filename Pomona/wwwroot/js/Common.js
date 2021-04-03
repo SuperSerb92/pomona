@@ -134,8 +134,14 @@ function onYes(e) {
     var popup = $("#popup-messageYesNo").dxPopup('instance');
     popup.hide();
     switch (actionType) { 
-        case 'DelArchAttr':
-            OnDelArchAttr();
+        case 'PrepareDeleteEmployee':
+            OnDeleteEmployee();
+            break;
+        case 'PrepareDeleteBuyer':
+            OnDeleteBuyer();
+            break;
+        case 'PrepareDeletePlot':
+            OnDeletePlot();
             break;
     }
 }

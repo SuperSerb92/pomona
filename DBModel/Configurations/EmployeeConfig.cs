@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccessLayer.EF.Configurations
+namespace DBModel.Configurations
 {
     public class EmployeeConfig : IEntityTypeConfiguration<Employee>
     {

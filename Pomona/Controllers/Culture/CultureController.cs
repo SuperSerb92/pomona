@@ -1,9 +1,9 @@
-﻿using DBModel.DataAccess;
-using DevExtreme.AspNet.Data;
+﻿using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
+using Pomona.Interfaces;
 using Pomona.Models;
 using System;
 using System.Collections.Generic;
@@ -14,35 +14,19 @@ namespace Pomona.Controllers.Culture
 {
     public class CultureController : Controller
     {
-        readonly DbModelContext db;
-        private List<Pomona.Models.Culture> cultures
+        ICultureService service;
+        private static List<Pomona.Models.Culture> cultures
         {
-            get
-            {
-                return (Session.AppContext.MemoryCache.Get("CultureList_" + Session.AppContext.Id) == null)
-                    ? null : (List<Pomona.Models.Culture>)(Session.AppContext.MemoryCache.Get("CultureList_" + Session.AppContext.Id));
-            }
-            set
-            {
-                Session.AppContext.MemoryCache.Set("CultureList_" + Session.AppContext.Id, value);
-            }
+            get;set;
         }
-        public CultureController(DBModel.DataAccess.DbModelContext db)
+        public CultureController(ICultureService service)
         {
-            this.db = db;
+            this.service = service;
         }
         public IActionResult Culture()
         {
-            List<DBModel.Models.Culture> dbCultures =   db.Cultures.ToList();
-            cultures = new List<Models.Culture>();
-            //todo uros mapiranje
-            foreach (var item in dbCultures)
-            {
-                Pomona.Models.Culture culture = new Models.Culture();
-                culture.CultureId = item.CultureId;
-                culture.CultureName = item.CultureName;
-                cultures.Add(culture);
-            }
+            cultures = service.GetCultures();
+          
             return View();
         }
 
@@ -55,17 +39,7 @@ namespace Pomona.Controllers.Culture
         [HttpGet]
         public object GetCulturesStaticList(DataSourceLoadOptions loadOptions)
         {
-            List<DBModel.Models.Culture>  dbCultures = db.Cultures.ToList();
-            cultures = new List<Models.Culture>();
-            //todo uros mapiranje
-            foreach (var item in dbCultures)
-            {
-                Pomona.Models.Culture culture = new Models.Culture();               
-                culture.CultureId = item.CultureId;
-                culture.CultureName = item.CultureName;
-                cultures.Add(culture);
-
-            }
+            cultures = service.GetCultures();
             return DataSourceLoader.Load(cultures, loadOptions);
         }
 
@@ -75,13 +49,10 @@ namespace Pomona.Controllers.Culture
         {
             var culture = new Pomona.Models.Culture();
             JsonConvert.PopulateObject(values, culture);
+            service.AddCulture(culture);
+            service.SaveChanges();
 
-            //todo: pitaj coku jel hocemo insert u prvi red  ili poslednji ovo ispod je insert na prvo mesto
-            //cultures.Insert(0, culture);
-
-            cultures.Add(culture);
-            db.Add(culture);
-            db.SaveChanges();
+            RefreshResources();
             return Ok();
         }
 
@@ -89,23 +60,30 @@ namespace Pomona.Controllers.Culture
         public IActionResult UpdateCulture(int key, string values)
         {
             var culture = cultures.FirstOrDefault(a => a.CultureId == key);
-            JsonConvert.PopulateObject(values, culture);
-
-            db.Update(culture);
-            db.SaveChanges();
+            if (culture != null)
+            {
+                JsonConvert.PopulateObject(values, culture);
+                service.UpdateCulture(culture);
+                service.SaveChanges();
+                RefreshResources();
+            }
             return Ok();
         }
 
         [HttpDelete]
         public void DeleteCulture(int key)
-        {
-            //todo: kad je spusten kljuc ne sme se brisati?
-
+        {         
             var culture = cultures.FirstOrDefault(a => a.CultureId == key);
-            db.Remove(culture);
-            db.SaveChanges();
-            cultures.Remove(culture);
-
+            if (culture != null)
+            {
+                service.DeleteCulture(culture);
+                service.SaveChanges();
+                cultures.Remove(culture);
+            }
+        }
+        private void RefreshResources()
+        {
+            cultures = service.GetCultures();
         }
     }
 }

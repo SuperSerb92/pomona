@@ -1,11 +1,12 @@
-﻿using DataAccessLayer.EF.Configurations;
+﻿//using DataAccessLayer.EF.Configurations;
+using DBModel.Configurations;
 using DBModel.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessLayer.EF
+namespace DBModel
 {
    public class DbModelContext:DbContext
     {
@@ -33,6 +34,7 @@ namespace DataAccessLayer.EF
             .HasKey(p => new { p.EmployeeID, p.PlotId,p.PackagingId,p.Rbr,p.CultureId,p.CultureTypeId,p.DateGenerated });
 
             modelBuilder.ApplyConfiguration(new EmployeeConfig());
+            modelBuilder.ApplyConfiguration(new LoginConfig());
         }
 
     }

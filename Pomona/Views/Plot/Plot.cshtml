@@ -3,6 +3,7 @@
 }
 
 @{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
 
 @using (Html.BeginForm())
 {
@@ -24,20 +25,48 @@
                                           {
                                               columns.AddFor(u => u.PlotName).Option("required", true).Caption("Parcela");
                                               columns.AddFor(u => u.PlotLabel).Caption("Oznaka").MinWidth(600);
+                                              columns.Add()
+                                               .Type(GridCommandColumnType.Buttons)
+                                               .Width(120)
+                                               .Buttons(b =>
+                                               {
+                                                   b.Add().Name(GridColumnButtonName.Edit);
+
+                                                   b.Add()
+                                                   .Hint("delete")
+                                                   .Icon("trash")
+                                                   .OnClick("onPrepareDeletePlot");
+                                               });
                                           })
                                           .Editing(editing =>
                                           {
                                               editing.Mode(GridEditMode.Row);
                                               editing.AllowAdding(true);
-                                              editing.AllowDeleting(true);
+                                              editing.ConfirmDelete(false);
                                               editing.AllowUpdating(true);
                                           })
-                                         .Paging(p => p.PageSize(13))
-                                         .FilterRow(f => f.Visible(true))
-                                         .HeaderFilter(f => f.Visible(true))
-                                         .FocusedRowEnabled(true)
+                                        .Paging(p => p.PageSize(10))
+                                        .Pager(pager =>
+                                        {
+                                            pager.ShowPageSizeSelector(true);
+                                            pager.AllowedPageSizes(new[] { 10, 50, 100 });
+                                        })
+                                        .Summary(s => s
+                                        .TotalItems(totalItems =>
+                                        {
+                                            totalItems.Add()
+                                                   .Column("PlotName")
+                                                   .Name("PlotSummary")
+                                                   .SummaryType(SummaryType.Sum).DisplayFormat("Broj redova: " + ": {0}")
+                                                   .CustomizeText("PlotCountPerPage");
+                                        })
+                                        )
+                                        .FilterRow(f => f.Visible(true))
+                                        .HeaderFilter(f => f.Visible(true))
+                                        .FocusedRowEnabled(true)
                                         .OnRowInserting("onRowInsertingPlot")
                                         .OnRowUpdating("onRowUpdatingPlot")
+                                        .OnToolbarPreparing("onToolbarPreparingPlot")
                                          // .OnFocusedRowChanged("OnFocusedRowChangedPlots")
                                          // .OnEditorPreparing("onPlotsGridEditorPreparing")
                                          )

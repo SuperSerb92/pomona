@@ -3,7 +3,7 @@
 }
 
 @{ await Html.RenderPartialAsync("PopupMessage"); }
-
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
 @using (Html.BeginForm())
 {
     @(Html.DevExtreme().DataGrid<Pomona.Models.Culture>()

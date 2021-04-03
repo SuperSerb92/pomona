@@ -1,9 +1,9 @@
-﻿using DBModel.DataAccess;
-using DevExtreme.AspNet.Data;
+﻿using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
+using Pomona.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,26 +13,19 @@ namespace Pomona.Controllers.Buyer
 {
     public class BuyerController : Controller
     {
-        readonly DbModelContext db;
-        private List<DBModel.Models.Buyer> buyers
+        private readonly IBuyerService service;
+        private static List<Models.Buyer> buyers
         {
-            get
-            {
-                return (Session.AppContext.MemoryCache.Get("BuyerList_" + Session.AppContext.Id) == null)
-                    ? null : (List<DBModel.Models.Buyer>)(Session.AppContext.MemoryCache.Get("BuyerList_" + Session.AppContext.Id));
-            }
-            set
-            {
-                Session.AppContext.MemoryCache.Set("BuyerList_" + Session.AppContext.Id, value);
-            }
+            get; set;
         }
-        public BuyerController(DBModel.DataAccess.DbModelContext db)
+        public BuyerController(IBuyerService service)
         {
-            this.db = db;
+            this.service = service;
         }
         public IActionResult Buyer()
         {
-            buyers = db.Buyers.ToList();
+            buyers = service.GetBuyers();
+
             return View();
         }
 
@@ -45,7 +38,7 @@ namespace Pomona.Controllers.Buyer
         [HttpGet]
         public object GetBuyersStaticList(DataSourceLoadOptions loadOptions)
         {
-            buyers = db.Buyers.ToList();
+            buyers = service.GetBuyers();
 
             return DataSourceLoader.Load(buyers, loadOptions);
         }
@@ -54,13 +47,17 @@ namespace Pomona.Controllers.Buyer
         [HttpPost]
         public IActionResult InsertBuyer(string values)
         {
-            var buyer = new DBModel.Models.Buyer();
+            var buyer = new Models.Buyer();
             JsonConvert.PopulateObject(values, buyer);
+            if (buyers.Any(x => x.Pib.Trim().ToUpper() == buyer.Pib.Trim().ToUpper()))
+            {
+                return BadRequest("Otkupljivač sa unetim pib-om već postoji u sistemu");
+            }
 
+            service.AddBuyer(buyer);
+            service.SaveChanges();
+            RefreshResources();
 
-            buyers.Add(buyer);
-            db.Add(buyer);
-            db.SaveChanges();
             return Ok();
         }
 
@@ -68,10 +65,13 @@ namespace Pomona.Controllers.Buyer
         public IActionResult UpdateBuyer(int key, string values)
         {
             var buyer = buyers.FirstOrDefault(a => a.BuyerId == key);
-            JsonConvert.PopulateObject(values, buyer);
-
-            db.Update(buyer);
-            db.SaveChanges();
+            if (buyer != null)
+            {
+                JsonConvert.PopulateObject(values, buyer);
+                service.UpdateBuyer(buyer);
+                service.SaveChanges();
+            }
+            RefreshResources();
             return Ok();
         }
 
@@ -79,13 +79,34 @@ namespace Pomona.Controllers.Buyer
         public void DeleteBuyer(int key)
         {
             //todo: kad je spusten kljuc ne sme se brisati?
-
             var buyer = buyers.FirstOrDefault(a => a.BuyerId == key);
-            db.Remove(buyer);
-            db.SaveChanges();
-            buyers.Remove(buyer);
-
+            if (buyer != null)
+            {
+                service.DeleteBuyer(buyer);
+                service.SaveChanges();
+                buyers.Remove(buyer);
+            }
         }
 
+        private void RefreshResources()
+        {
+            buyers = service.GetBuyers();
+        }
+
+        public JsonResult CheckForDuplicatePib(string Pib)
+        {
+            //todo: uzimamo svezu listu zbog paralelnog rada za svaki slucaj
+            var buyersList = service.GetBuyers();
+            if(buyersList != null)
+            {
+                if (buyersList.Any(x => x.Pib.Trim().ToUpper() == Pib.Trim().ToUpper()))
+                {
+                    return Json(new { success = false });
+                }
+            }
+
+            return Json(new { success = true });
+
+        }
     }
 }
