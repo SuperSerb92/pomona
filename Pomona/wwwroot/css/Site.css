@@ -162,12 +162,12 @@ body, html {
 
     .menu-container .dx-treeview .dx-treeview-node-container .dx-treeview-node.dx-state-selected > .dx-treeview-item * {*/
         /* color: #FF5722;*/
-        /*color: #fff;
+    /*color: #fff;
     }
-
+*/
     .menu-container .dx-treeview .dx-treeview-node-container .dx-treeview-node:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
          background-color: #3F3F4B;
-    }*/
+    }
 
 
 .dx-radiogroup-custom {
@@ -188,7 +188,7 @@ body, html {
 
 
 
-/*.demo-menu {
+    /*.demo-menu {
     position: absolute;
     height: 100%;
     z-index: 1;
@@ -198,8 +198,8 @@ body, html {
 }
 
     .demo-menu .dx-treeview {*/
-        /* padding: 20px 0 0 25px;*/
-        /*padding: 0 0 0 0;
+    /* padding: 20px 0 0 25px;*/
+    /*padding: 0 0 0 0;
     }
 
         .demo-menu .dx-treeview li.dx-treeview-node .dx-item a {
@@ -257,23 +257,23 @@ body, html {
 
     .demo-wrapper .simulator {
         border: 1px solid #E9E9E9;*/
-        /*min-height: 440px; jovana*/
-        /*min-height: 640px;
+    /*min-height: 440px; jovana*/
+    /*min-height: 640px;
     }
 
         .demo-wrapper .simulator .demo-device {
             border: 8px solid #F5F5F5;*/
-            /*min-height: 440px; jovana*/
-            /*min-height: 100%;
+    /*min-height: 440px; jovana*/
+    /*min-height: 100%;
         }
 
             .demo-wrapper .simulator .demo-device .demo-display {
                 background-color: #FFFFFF;
                 border: 1px solid #E9E9E9;*/
-                /* padding: 20px 30px;*/
-                /*padding: 0px 0px;*/
-                /*min-height: 440px; jovana*/
-                /*min-height: 100%;
+    /* padding: 20px 30px;*/
+    /*padding: 0px 0px;*/
+    /*min-height: 440px; jovana*/
+    /*min-height: 100%;
                 position: relative;
             }
 
@@ -294,8 +294,8 @@ body, html {
         }
 
     .demo-wrapper .description {*/
-        /* padding-bottom: 20px;*/
-        /*padding-bottom: 0px;
+    /* padding-bottom: 20px;*/
+    /*padding-bottom: 0px;
     }
 
 .demo-wrapper .code {
@@ -370,8 +370,7 @@ body, html {
 .p-t-6 {
     padding-top: 60px;
 }*/
-
-.gridAttr-group {
+    .gridAttr-group {
     width: 566px;
     margin-right: 0px;
 }
@@ -419,4 +418,8 @@ body, html {
 #yesPopupButton {
     margin-left: 150px;
 }
-
+/*
+.dx-treeview-node.dx-state-selected,
+.dx-treeview .dx-treeview-node:not(.dx-treeview-item-with-checkbox).dx-state-selected > .dx-treeview-item {
+    background-color: #2eb88e;
+}*/

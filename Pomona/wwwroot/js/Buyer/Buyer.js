@@ -2,11 +2,15 @@
     if (jQuery.isEmptyObject(e.data) || /^\s*$/.test(JSON.parse(JSON.stringify(e.data)).BuyerName) || e.data.BuyerName == undefined) {
         showInfo("Morate uneti naziv otkupljivača", "Otkupljivači");
         e.cancel = true;
+        isCanceledBuyer = true;
+
         return;
     }
     if (jQuery.isEmptyObject(e.data) || /^\s*$/.test(JSON.parse(JSON.stringify(e.data)).Pib) || e.data.Pib == undefined) {
         showInfo("Morate uneti PIB otkupljivača", "Otkupljivači");
         e.cancel = true;
+        isCanceledBuyer = true;
+
         return;
     }
 
@@ -25,6 +29,8 @@
             else {
                 showInfo("Već ste uneli otkupljivača sa ovim PIB-om", "Otkupljivači");
                 e.cancel = true;
+                isCanceledBuyer = true;
+
                 return;
             }
         },
@@ -39,23 +45,12 @@
 
 }
 
-function onToolbarPreparingBuyers(e) {
-    const addRowitem = e.toolbarOptions.items.find(item => item.name === 'addRowButton');
-    addRowitem.options.onClick = function () {
-        if (!e.component.option('editing.editRowKey')) {
-            e.component.addRow();
-        }
-        else {
-            showInfo("Morate sačuvati red u izmeni", "Otkupljivači");
-        }
-    }
-}
-
 function onRowUpdatingBuyers(e) {
-    if (e.newData.Name != undefined) {
+    if (e.newData.BuyerName != undefined) {
         if (jQuery.isEmptyObject(e.newData.BuyerName) || /^\s*$/.test(JSON.parse(JSON.stringify(e.newData.BuyerName)))) {
             showInfo("Morate uneti naziv otkupljivača", "Otkupljivači");
             e.cancel = true;
+            isCanceledBuyer = true;
             return;
         }
     }
@@ -64,6 +59,7 @@ function onRowUpdatingBuyers(e) {
         if (jQuery.isEmptyObject(e.newData.Pib) || /^\s*$/.test(JSON.parse(JSON.stringify(e.newData.Pib)))) {
             showInfo("Morate uneti pib otkupljivača", "Otkupljivači");
             e.cancel = true;
+            isCanceledBuyer = true;
             return;
         }
 
@@ -75,15 +71,16 @@ function onRowUpdatingBuyers(e) {
                 Pib: e.newData.Pib
             },
 
-         //   data: e.newData.Pib,
+            //   data: e.newData.Pib,
             async: false,
             success: function (data) {
                 if (data.success) {
-                 
+
                 }
                 else {
                     showInfo("Već ste uneli otkupljivača sa ovim PIB-om", "Otkupljivači");
                     e.cancel = true;
+                    isCanceledBuyer = true;
                     return;
                 }
             },
@@ -99,6 +96,37 @@ function onRowUpdatingBuyers(e) {
     }
 
 }
+var isCanceledBuyer = false;
+
+function onToolbarPreparingBuyers(e) {
+        $.each(e.toolbarOptions.items, function (i, v) {
+            v.location = "before";
+        })
+    
+    const addRowitem = e.toolbarOptions.items.find(item => item.name === 'addRowButton');
+    addRowitem.options.onClick = function () {
+        if (!e.component.option('editing.editRowKey')) {
+            e.component.addRow();
+        }
+        else {
+            isCanceledBuyer = false;
+            e.component.saveEditData().done(function (data) {
+                if (!isCanceledBuyer) {
+                    e.component.addRow();
+                }
+            });
+        }
+
+        //if (!e.component.option('editing.editRowKey')) {
+        //    e.component.addRow();
+        //}
+        //else {
+        //    showInfo("Morate sačuvati red u izmeni", "Otkupljivači");
+        //}
+    }
+}
+
+
 var buyerForDelete;
 function onPrepareDeleteBuyer(e) {
     buyerForDelete = e.row.rowIndex;

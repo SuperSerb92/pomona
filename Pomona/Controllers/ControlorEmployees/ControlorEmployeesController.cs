@@ -61,25 +61,7 @@ namespace Pomona.Controllers
             {
                 Session.AppContext.MemoryCache.Set("allControlors_" + Session.AppContext.Id, value);
             }
-        }
-
-
-
-        //private List<Pomona.Models.Employee> allEmployees
-        //{
-        //    get
-        //    {
-        //        return (Session.AppContext.MemoryCache.Get("allEmployees" + Session.AppContext.Id) == null)
-        //            ? null : (List<Pomona.Models.Employee>)(Session.AppContext.MemoryCache.Get("allEmployees" + Session.AppContext.Id));
-        //    }
-        //    set
-        //    {
-        //        Session.AppContext.MemoryCache.Set("allEmployees" + Session.AppContext.Id, value);
-        //    }
-        //}
-
-     
-
+        }   
 
         public ControlorEmployeesController(IControlorEmployeesService service,ILoginService loginService,IEmployeesService employeesService)
         {
@@ -120,22 +102,10 @@ namespace Pomona.Controllers
         [HttpGet]
         public JsonResult GetSelectedData(int UserID)
         {
-            ViewData["selectedData"] = allRelations.Where(x => x.UserID == UserID).Select(x => x.EmployeeID).ToList();
-
-            //ViewData["selectedData"] = (from l1 in allEmployees.ToList()
-            //                            join l2 in allRelations.ToList().Where(x => x.UserID == UserID)
-            //                             on l1.EmployeeID equals l2.EmployeeID
-            //                            select new { l1.EmployeeID }).ToList();
+            ViewData["selectedData"] = allRelations.Where(x => x.UserID == UserID).Select(x => x.EmployeeID).ToList();            
 
             return Json(new { success = true, result = ViewData["selectedData"] });
         }
-
-        ////todo mapiranje: kad se sredi mapiranje vratiti na employee kontroler 
-        //[HttpGet]
-        //public object GetEmployeesStaticList(DataSourceLoadOptions loadOptions)
-        //{
-        //    return DataSourceLoader.Load(allEmployees, loadOptions);
-        //}
 
         [HttpPost]
         public JsonResult SaveControlorEmployeeRelations(int UserID, List<Employee> employees)
@@ -144,8 +114,7 @@ namespace Pomona.Controllers
             {
                 ControlorEmployeesRelation employeesRelation;                   
                 service.RemoveRangeForUser(UserID);              
-             //   service.SaveChanges();
-
+         
                 foreach (var employee in employees)
                 {
                     employeesRelation = new ControlorEmployeesRelation();
@@ -153,7 +122,7 @@ namespace Pomona.Controllers
                     employeesRelation.UserID = UserID;
 
                     service.AddControlorEmployeeRelation(employeesRelation);
-                    //service.SaveChanges();
+                  
                 }
 
                 service.SaveChanges();

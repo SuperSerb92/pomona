@@ -27,7 +27,10 @@ namespace Pomona.Controllers
 
         }
 
-
+        public IActionResult EmptyView()
+        {
+            return View();
+        }
 
         public IActionResult Index(string autentification, int token)
         {
@@ -46,7 +49,7 @@ namespace Pomona.Controllers
                 else if (!IsGuid(autentification))
                 {
                     HttpContext.Response.Redirect($"/Pomona/Login/Login");
-                }                
+                }
                 else
                 {
                     Session.AppContext.UserID = token;

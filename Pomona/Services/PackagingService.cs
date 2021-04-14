@@ -21,27 +21,32 @@ namespace Pomona.Services
 
         public void AddPackaging(Packaging packaging)
         {
-            throw new NotImplementedException();
+            var packageDB = mapper.Map<DBModel.Models.Packaging>(packaging);
+            packagingRepository.Add(packageDB);
         }
 
         public void DeletePackaging(Packaging packaging)
         {
-            throw new NotImplementedException();
+            var packageDB = mapper.Map<DBModel.Models.Packaging>(packaging);
+            packagingRepository.Delete(packageDB);
         }
 
         public List<Packaging> GetPackagings()
         {
-            throw new NotImplementedException();
+            var packages = packagingRepository.GetPackaging();
+            var packageDB = mapper.Map<IEnumerable<Models.Packaging>>(packages);
+            return packageDB.ToList();
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            packagingRepository.SaveChanges();
         }
 
         public void UpdatePackaging(Packaging packaging)
         {
-            throw new NotImplementedException();
+            var packageDB = mapper.Map<DBModel.Models.Packaging>(packaging);
+            packagingRepository.Update(packageDB);
         }
     }
 }

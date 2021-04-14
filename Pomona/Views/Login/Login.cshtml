@@ -3,7 +3,9 @@
     Layout = "/Views/Shared/_LoginLayout.cshtml";
 }
 @{ await Html.RenderPartialAsync("PopupMessage"); }
-<img src="~/images/Untitled.png" />
+
+<img src="~/images/PNGNoText/PomonaLogo200NoText.png" style="padding-top:20px;padding-bottom:60px;margin-left:900px" />
+@*<img src="~/images/Untitled.png" />*@
 <div class="simulator">
 
     @using (Html.BeginForm())
@@ -11,14 +13,14 @@
         using (Html.DevExtreme().ValidationGroup())
         {
             @Html.AntiForgeryToken()
-     @(Html.DevExtreme().Form<Pomona.Models.User>()
+            @(Html.DevExtreme().Form<Pomona.Models.User>()
       .ID("loginForm")
       //  .ShowValidationSummary(true)
       .OnEditorEnterKey("SubmitLoginForm")
       .Items(items =>
       {
       items.AddGroup()
-      .Caption("Pomona")
+      .Caption("Pomona").CssClass("pomona-caption-login")
       .Items(groupItems =>
       {
           groupItems.AddSimpleFor(m => m.UserName)
@@ -43,21 +45,21 @@
       .ID("loginButton")
       //  .Type(ButtonType.Success)
       .OnClick("OnClickbtnLogin")
-      );     
+      );
 
       items.AddSimple()
       .Template(@<text>
               <a id="CreateAccountButton" href="#" onclick="OnClickCreateAccount();">Registracija</a>
                            </text>);
-      
+
               //items.AddButton()
               //.HorizontalAlignment(HorizontalAlignment.Left)
               //.ButtonOptions(b => b.Text("Kreiraj nalog").StylingMode(ButtonStylingMode.Outlined)
               //.ID("CreateAccountButton")
               //.OnClick("OnClickCreateAccount"));
           }).FormData(Model))
-              }
-          }
+        }
+    }
 
     @(Html.DevExtreme().Popup().ID("popupFormRegistration")
                   .ShowCloseButton(true)

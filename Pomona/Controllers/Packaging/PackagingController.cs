@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
+using Pomona.Interfaces;
 using Pomona.Models;
 using System;
 using System.Collections.Generic;
@@ -13,26 +14,20 @@ namespace Pomona.Controllers.Packaging
 {
     public class PackagingController : Controller
     {
-        
-        private List<DBModel.Models.Packaging> packagings
+        private readonly IPackagingService service;
+
+        private static List<Pomona.Models.Packaging> packagings
         {
-            get
-            {
-                return (Session.AppContext.MemoryCache.Get("PackagingList_" + Session.AppContext.Id) == null)
-                    ? null : (List<DBModel.Models.Packaging>)(Session.AppContext.MemoryCache.Get("PackagingList_" + Session.AppContext.Id));
-            }
-            set
-            {
-                Session.AppContext.MemoryCache.Set("PackagingList_" + Session.AppContext.Id, value);
-            }
+            get;set;
         }
-        public PackagingController()
+        public PackagingController(IPackagingService service)
         {
-         
+            this.service = service;
         }
         public IActionResult Packaging()
         {
-          //  packagings = db.Packagings.ToList();
+            packagings = service.GetPackagings();
+        
             return View();
         }
 
@@ -45,7 +40,7 @@ namespace Pomona.Controllers.Packaging
         [HttpGet]
         public object GetPackagingsStaticList(DataSourceLoadOptions loadOptions)
         {
-          //  packagings = db.Packagings.ToList();
+            packagings = service.GetPackagings();
 
             return DataSourceLoader.Load(packagings, loadOptions);
         }
@@ -54,39 +49,45 @@ namespace Pomona.Controllers.Packaging
         [HttpPost]
         public IActionResult InsertPackaging(string values)
         {
-            var packaging = new DBModel.Models.Packaging();
+            var packaging = new Pomona.Models.Packaging();
             JsonConvert.PopulateObject(values, packaging);
+            service.AddPackaging(packaging);
+            service.SaveChanges();
 
-            //todo: pitaj coku jel hocemo insert u prvi red  ili poslednji ovo ispod je insert na prvo mesto
-            //packagings.Insert(0, packaging);
-
-            packagings.Add(packaging);
-          //  db.Add(packaging);
-          //  db.SaveChanges();
+            RefreshResources();
             return Ok();
         }
 
         [HttpPut]
         public IActionResult UpdatePackaging(int key, string values)
         {
-            var packaging = packagings.FirstOrDefault(a => a.PackagingId == key);
-            JsonConvert.PopulateObject(values, packaging);
-
-           // db.Update(packaging);
-           // db.SaveChanges();
+            var package = packagings.FirstOrDefault(a => a.PackagingId == key);
+            if (package != null)
+            {
+                JsonConvert.PopulateObject(values, package);
+                service.UpdatePackaging(package);
+                service.SaveChanges();
+                RefreshResources();
+            }
             return Ok();
         }
 
         [HttpDelete]
         public void DeletePackaging(int key)
         {
-            //todo: kad je spusten kljuc ne sme se brisati?
+            var package = packagings.FirstOrDefault(a => a.PackagingId == key);
+            if (package != null)
+            {
+                service.DeletePackaging(package);
+                service.SaveChanges();
+                packagings.Remove(package);
+            }
 
-            var packaging = packagings.FirstOrDefault(a => a.PackagingId == key);
-         //   db.Remove(packaging);
-         //   db.SaveChanges();
-            packagings.Remove(packaging);
+        }
 
+        private void RefreshResources()
+        {
+            packagings = service.GetPackagings();
         }
     }
 }

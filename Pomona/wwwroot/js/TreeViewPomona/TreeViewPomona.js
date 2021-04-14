@@ -3,11 +3,11 @@ var lastComponent = {};
 
 
 function TreeViewPomonaItemClick(e) {
- 
+
     setTimeout(() => {
         e.component.unselectAll();
         e.component.selectItem(e.itemData);
-    },300)
+    }, 300)
 
     //if (!timeout) {
     //    lastComponent = e.itemData;
@@ -27,33 +27,34 @@ function TreeViewPomonaItemClick(e) {
     //}
 
     //else if (e.itemData === lastComponent) {
-        switch (e.node.key) {
-            case 2:
-                Redirect("/Employee/Employee", e.node.text);
-                break;
-            case 3:
-               OpenPopup("/ControlorEmployees/ControlorEmployees", "", 800, 850,  e.node.text);
-                break;
-            case 4:
-                Redirect("/Buyer/Buyer", e.node.text);
-                break;
-            case 5:
-               Redirect("/Plot/Plot", e.node.text);
-                break;
-            case 6:
-            //    Redirect("/Culture/Culture", e.node.text);
-                break;
-            case 7:
-             //  Redirect("/CultureType/CultureType", e.node.text);
-                break;
-            case 8:
-               // Redirect("/Packaging/Packaging", e.node.text);
-                break;
-            case 9:
-                //OpenPopup("/BarCodeGenerator/BarCodeGenerator","", 500,500, e.node.text, "");
-                break;
-        }
-   // }
+    switch (e.node.key) {
+        case 2:
+            Redirect("/Employee/Employee", e.node.text);
+            break;
+        case 3:
+            Redirect("/Home/EmptyView", e.node.text);
+            OpenPopup("/ControlorEmployees/ControlorEmployees", "", 800, 850, e.node.text, "ControlorEmployees");
+            break;
+        case 4:
+            Redirect("/Buyer/Buyer", e.node.text);
+            break;
+        case 5:
+            Redirect("/Plot/Plot", e.node.text);
+            break;
+        case 6:
+          //    Redirect("/Culture/Culture", e.node.text);
+            break;
+        case 7:
+          //  Redirect("/CultureType/CultureType", e.node.text);
+            break;
+        case 8:
+         //    Redirect("/Packaging/Packaging", e.node.text);
+            break;
+        case 9:
+            OpenPopup("/BarCodeGenerator/BarCodeGenerator", "", 550, 600, e.node.text, "");
+            break;
+    }
+    // }
 
 
 }

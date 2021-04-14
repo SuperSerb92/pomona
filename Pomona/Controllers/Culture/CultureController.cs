@@ -15,18 +15,25 @@ namespace Pomona.Controllers.Culture
     public class CultureController : Controller
     {
         ICultureService service;
+        ICultureTypeService typeService;
         private static List<Pomona.Models.Culture> cultures
         {
             get;set;
         }
-        public CultureController(ICultureService service)
+        private static List<Pomona.Models.CultureType> cultureTypes
+        {
+            get; set;
+        }
+        public CultureController(ICultureService service, ICultureTypeService typeService)
         {
             this.service = service;
+            this.typeService = typeService;
         }
         public IActionResult Culture()
         {
             cultures = service.GetCultures();
-          
+            cultureTypes = typeService.GetCultureTypes();
+
             return View();
         }
 
@@ -76,6 +83,17 @@ namespace Pomona.Controllers.Culture
             var culture = cultures.FirstOrDefault(a => a.CultureId == key);
             if (culture != null)
             {
+                var types = cultureTypes.Where(t => t.CultureId == culture.CultureId).ToList();
+
+                if(types != null)
+                {
+                    foreach (var item in types.ToList())
+                    {
+                        typeService.DeleteCultureType(item);
+                        types.Remove(item);
+                    }                  
+                }
+               
                 service.DeleteCulture(culture);
                 service.SaveChanges();
                 cultures.Remove(culture);
@@ -84,6 +102,7 @@ namespace Pomona.Controllers.Culture
         private void RefreshResources()
         {
             cultures = service.GetCultures();
+            
         }
     }
 }

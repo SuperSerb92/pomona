@@ -10,5 +10,7 @@ namespace DBModel.Models
         public int CultureId { get; set; }
         [MaxLength(200)]
         public string CultureName { get; set; }
+
+      
     }
 }

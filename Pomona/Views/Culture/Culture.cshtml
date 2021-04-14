@@ -23,23 +23,53 @@
                                           .Columns(columns =>
                                           {
                                               columns.AddFor(u => u.CultureName).Option("required", true).Caption("Vrsta voća");
-                                              //columns.AddFor(u => u.Surname).Caption("Prezime");
-                                              //columns.AddFor(u => u.PhoneNumber).Caption("Broj telefona");
-                                              //columns.AddFor(u => u.Recomendation).Caption("Preporuka");
+                                              columns.Add()
+                                               .Type(GridCommandColumnType.Buttons)
+                                               .Width(120)
+                                               .Buttons(b =>
+                                               {
+                                                   b.Add().Name(GridColumnButtonName.Edit);
+
+                                                   b.Add()
+                                               .Hint("delete")
+                                               .Icon("trash")
+                                               .OnClick("onPrepareDeleteCulture");
+                                               });
                                           })
                                           .Editing(editing =>
                                           {
                                               editing.Mode(GridEditMode.Row);
                                               editing.AllowAdding(true);
-                                              editing.AllowDeleting(true);
+                                              editing.ConfirmDelete(false);
+                                              //  editing.AllowDeleting(true);
                                               editing.AllowUpdating(true);
                                           })
-                                         .Paging(p => p.PageSize(13))
+                                        .Paging(p => p.PageSize(10))
+                                         .Pager(pager =>
+                                         {
+                                             pager.ShowPageSizeSelector(true);
+                                             pager.AllowedPageSizes(new[] { 10, 50, 100 });
+
+                                             //pager.ShowInfo(true);
+                                             //pager.InfoText("Strana {0}. Ukupno: {1} ({2} items)");
+                                         })
+                                         .Summary(s => s
+                                         .TotalItems(totalItems =>
+                                         {
+                                             totalItems.Add()
+                                                    .Column("CultureName")
+                                                    .Name("CultureSummary")
+                                                    .SummaryType(SummaryType.Sum).DisplayFormat("Broj redova: " + ": {0}")
+                                                    .CustomizeText("CultureCountPerPage");
+
+                                         })
+                                         )
                                          .FilterRow(f => f.Visible(true))
                                          .HeaderFilter(f => f.Visible(true))
                                          .FocusedRowEnabled(true)
                                         .OnRowInserting("onRowInsertingCultures")
                                         .OnRowUpdating("onRowUpdatingCultures")
+                                         .OnToolbarPreparing("onToolbarPreparingCultures")
                                          // .OnFocusedRowChanged("OnFocusedRowChangedCultures")
                                          // .OnEditorPreparing("onCulturesGridEditorPreparing")
                                          )

@@ -12,12 +12,12 @@ using Pomona.Interfaces;
 
 namespace Pomona.Controllers.Plot
 {
-    public class PlotController :Controller
+    public class PlotController : Controller
     {
         private readonly IPlotService service;
         private static List<Pomona.Models.Plot> plots
         {
-            get;set;
+            get; set;
         }
         public PlotController(IPlotService service)
         {
@@ -26,8 +26,14 @@ namespace Pomona.Controllers.Plot
         public IActionResult Plot()
         {
             plots = service.GetPlots();
-      
+
             return View();
+        }
+
+        public IActionResult AddingPlotRows()
+        {
+            return View();
+
         }
 
         [HttpGet]
@@ -35,6 +41,24 @@ namespace Pomona.Controllers.Plot
         {
             return DataSourceLoader.Load(plots, loadOptions);
         }
+
+        [HttpGet]
+        public object GetPlotList(DataSourceLoadOptions loadOptions)
+        {
+            //todo : uros kad odradi plot list da zameni ovo testno sa pozivom iz baze
+            List<PlotList> list = new List<PlotList>();
+            PlotList pl = new PlotList();
+            pl.PlotListId = 1;
+            pl.PlotListName = "Lepa parcela";
+            list.Add(pl);
+            pl = new PlotList();
+            pl.PlotListId = 2;
+            pl.PlotListName = "Ruzna parcela";
+            list.Add(pl);
+
+            return DataSourceLoader.Load(list, loadOptions);
+        }
+
 
         [HttpGet]
         public object GetPlotsStaticList(DataSourceLoadOptions loadOptions)
@@ -53,7 +77,7 @@ namespace Pomona.Controllers.Plot
             service.AddPlot(plot);
             service.SaveChanges();
             RefreshSources();
-          
+
             return Ok();
         }
 
@@ -86,6 +110,46 @@ namespace Pomona.Controllers.Plot
             }
 
         }
+        [HttpPost]
+        public JsonResult SavePlotRows(PlotRows plotRows)
+        {
+            try
+            {
+                if (plotRows != null && plotRows.PlotListId > 0)
+                {
+                    List<decimal> list = RangeIncrement(1, plotRows.RowCount, 1);
+
+                    foreach (var num in list)
+                    {
+                        if (!plots.Any(x => x.PlotListId == plotRows.PlotListId && x.PlotLabel == num.ToString()))
+                        {
+                            var plot = new Pomona.Models.Plot();
+                            plot.PlotListId = plotRows.PlotListId;
+                            plot.PlotLabel = num.ToString();
+                            service.AddPlot(plot);
+                        }
+                    }
+
+                    service.SaveChanges();
+                    RefreshSources();
+                }
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, result = ex.Message });
+            }
+        }
+
+
+        private List<decimal> RangeIncrement(decimal start, decimal end, decimal increment)
+        {
+            return Enumerable
+                .Repeat(start, (int)((end - start) / increment) + 1)
+                .Select((tr, ti) => tr + (increment * ti))
+                .ToList();
+        }
+
 
         private void RefreshSources()
         {

@@ -9,13 +9,14 @@
     <meta name="author" content="">
 
     <title>Pomona</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/images/download.jfif" rel="shortcut icon" type="image/x-icon" />
 
     @* Uncomment to use the HtmlEditor control *@
     @* <script src="https://unpkg.com/devextreme-quill/dist/dx-quill.min.js"></script> *@
 
     <link rel="stylesheet" href="~/css/vendor.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Site.css" />
+    
     <script src="~/js/vendor.js" asp-append-version="true"></script>
     <script src="~/js/TreeViewPomona/TreeViewPomona.js"></script>
     <script src="~/js/Common.js"></script>
@@ -31,7 +32,7 @@
     <script src="~/js/Culture/Culture.js"></script>
     <script src="~/js/CultureType/CultureType.js"></script>
     <script src="~/js/Packaging/Packaging.js"></script>
-
+    <script src="~/js/devextreme/localization/dx.messages.en.js"></script>
 </head>
 
 <body class="dx-viewport"  oncopy="return false;" onpaste="return false;" oncut="return false;">
@@ -47,6 +48,8 @@
                         )
                         .Location(ToolbarItemLocation.Before)
                         .CssClass("menu-button");
+
+
                     items.Add()
                         .Html("<div>Pomona</div>")
                         .Location(ToolbarItemLocation.Before)
@@ -128,7 +131,7 @@
 
     <script>
 
-
+        DevExpress.localization.locale("en");
         //function onLogoutClick(e) {
         //    console.log(virtualDirectory + "/Pomona/Login/Login");
         //    window.location.href =   "/Pomona/Login/Login";
@@ -172,6 +175,10 @@
 
         function onHiding(e) {
             switch (mainControl) {
+                case "ControlorEmployees":
+                    e.cancel = true;       
+                    ShowPopupYesNo("Da li ste sigurni da želite da napustite formu?", "HidingControlorEmployees", "Kontrolori");                  
+                    break;
                 default:
                     var popup = $("#popupForm").dxPopup('instance');
                     popup.hide();

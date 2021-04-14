@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
+
+@using (Html.BeginForm())
+{
+    @(Html.DevExtreme().Form<Pomona.Models.PlotRows>()
+                         .ID("AddPlotRows")
+                         .ColCount(1)
+                        // .Width("500px")
+                         .Items(items =>
+                         {
+                             items.AddGroup()
+                             .ColSpan(1)
+                             .ColCount(1)
+                             .Items(groupItems =>
+                             {
+                                 groupItems.AddSimpleFor(m => m.PlotListId)
+                                 .      ColSpan(1)
+                                 .Editor(e => e.SelectBox().ID("PlotListSelectBox")
+                                            // .Width("450px")
+                                             .Placeholder("")
+                                             .SearchEnabled(true)
+                                             .DataSource(d => d.Mvc().Controller("Plot").LoadAction("GetPlotList").Key("PlotListId"))
+                                             .DisplayExpr("PlotListName")
+                                             .ValueExpr("PlotListId"))
+                                             .Label(t => t.Text("Parcela:").Location(FormLabelLocation.Left))
+                                             .ValidationRules(rules => rules.AddRequired()
+                                             .Message("Morate izabrati parcelu"));
+
+                                 groupItems.AddSimpleFor(m => m.RowCount)
+                                     .Editor(e => e.NumberBox().Width("450px").ID("rowNum").Min(1))
+                                     .Label(t => t.Text("Broj redova:").Location(FormLabelLocation.Left));
+
+                             });
+
+                         items.AddGroup()                     
+                         .ColSpan(1)
+                         .ColCount(1)
+                         .Items(groupItems =>
+                         {
+                             groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Center)
+                                                   .ButtonOptions(x => x.ID("PlotRowsSave")
+                                                   .OnClick("onSavePlotRows")
+                                                   .Text("Snimi"));
+                        
+                         });
+
+                         }).FormData(Model))
+
+
+}

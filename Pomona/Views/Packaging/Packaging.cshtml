@@ -24,20 +24,48 @@
                                           {
                                               columns.AddFor(u => u.PackagingType).Option("required", true).Caption("Tip ambalaže");
                                               columns.AddFor(u => u.Tara).Caption("Tara").Format("#0");
+                                              columns.Add()
+                                                .Type(GridCommandColumnType.Buttons)
+                                                .Width(120)
+                                                .Buttons(b =>
+                                                {
+                                                    b.Add().Name(GridColumnButtonName.Edit);
+
+                                                    b.Add()
+                                                    .Hint("delete")
+                                                    .Icon("trash")
+                                                    .OnClick("onPrepareDeletePackaging");
+                                                });
                                           })
                                           .Editing(editing =>
                                           {
                                               editing.Mode(GridEditMode.Row);
                                               editing.AllowAdding(true);
-                                              editing.AllowDeleting(true);
+                                              editing.ConfirmDelete(false);
                                               editing.AllowUpdating(true);
                                           })
-                                         .Paging(p => p.PageSize(13))
+                                          .Paging(p => p.PageSize(10))
+                                          .Pager(pager =>
+                                          {
+                                              pager.ShowPageSizeSelector(true);
+                                              pager.AllowedPageSizes(new[] { 10, 50, 100 });
+                                          })
+                                          .Summary(s => s
+                                          .TotalItems(totalItems =>
+                                          {
+                                              totalItems.Add()
+                                                     .Column("PackagingName")
+                                                     .Name("PackagingSummary")
+                                                     .SummaryType(SummaryType.Sum).DisplayFormat("Broj redova: " + ": {0}")
+                                                     .CustomizeText("PackagingCountPerPage");
+                                          }))
                                          .FilterRow(f => f.Visible(true))
                                          .HeaderFilter(f => f.Visible(true))
                                          .FocusedRowEnabled(true)
                                         .OnRowInserting("onRowInsertingPackaging")
                                         .OnRowUpdating("onRowUpdatingPackaging")
+                                         .OnToolbarPreparing("onToolbarPreparingPackaging")
+                                         .OnInitNewRow("function(e) { e.data.Tara = 0; }")
                                          // .OnFocusedRowChanged("OnFocusedRowChangedPackagings")
                                          // .OnEditorPreparing("onPackagingsGridEditorPreparing")
                                          )

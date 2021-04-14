@@ -1,4 +1,6 @@
-﻿var Pomona1 = (function () {
+﻿
+
+var Pomona1 = (function () {
 
     var DRAWER_OPENED_KEY = "MetaDesigner-drawer-opened1";
 
@@ -143,6 +145,19 @@ function onYes(e) {
         case 'PrepareDeletePlot':
             OnDeletePlot();
             break;
+        case 'HidingControlorEmployees':
+            onHidingControlorEmployees();
+            break;
+        case 'PrepareDeleteCulture':
+            onDeleteCulture();
+            break;
+        case 'PrepareDeleteCultureType':
+            onDeleteCultureType();
+            break;
+        case 'PrepareDeletePackaging':
+            onDeletePackaging();
+            break;
+            
     }
 }
 
@@ -154,20 +169,8 @@ function onNo(e) {
     //element.style.display = "none";
 
     switch (actionType) {
-        case 'DelUser':
-            OnDelUser(false);
-            break;
-        case 'PrepareDelFileFormat':
-            onCancelDeleteFileFormat();
-            break;
-        case 'PrepareDelSoftware':
-            onCancelDeleteSoftware();
-            break;
-        case 'PrepareDelAttribute':
-            onCancelDelAttribute();
-            break;
-        case 'PrepareDelArchAttribute':
-            onCancelDelArchAttribute();
+        case 'HidingControlorEmployees':
+            mainControl = "ControlorEmployees";
             break;
     }
 }

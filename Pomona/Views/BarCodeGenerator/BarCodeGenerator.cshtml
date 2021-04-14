@@ -14,14 +14,13 @@
                  {
                      items.AddGroup()
                      .ColSpan(1)
-
                      .ColCount(1)
                      .Items(groupItems =>
                      {
                          groupItems.AddSimpleFor(m => m.EmployeeID)
                          .ColSpan(1)
                          .Editor(e => e.SelectBox().ID("EmployeeIDSelectBox")
-                                     .Width("450px")
+                                     .Width("300px")
                                      .Placeholder("")
                                      .SearchEnabled(true)
                                      .DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
@@ -31,6 +30,70 @@
                                      .ValidationRules(rules => rules.AddRequired()
                                      .Message("Morate izabrati radnika"));
 
+                         groupItems.AddSimpleFor(m => m.EmployeeID)
+                         .ColSpan(1)
+                         .Editor(e => e.SelectBox().ID("EmployeeIDSelectBox")
+                                     .Width("300px")
+                                     .Placeholder("")
+                                     .SearchEnabled(true)
+                                     .DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
+                                     .DisplayExpr("Name")
+                                     .ValueExpr("EmployeeID"))
+                                     .Label(t => t.Text("Parcela").Location(FormLabelLocation.Left))
+                                     .ValidationRules(rules => rules.AddRequired()
+                                     .Message("Morate izabrati parcelu"));
+
+                         groupItems.AddSimpleFor(m => m.EmployeeID)
+                         .ColSpan(1)
+                         .Editor(e => e.SelectBox().ID("EmployeeIDSelectBox")
+                                     .Width("280px")
+                                     .Placeholder("")
+                                     .SearchEnabled(true)
+                                     .DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
+                                     .DisplayExpr("Name")
+                                     .ValueExpr("EmployeeID"))
+                                     .Label(t => t.Text("Red parcele").Location(FormLabelLocation.Left))
+                                     .ValidationRules(rules => rules.AddRequired()
+                                     .Message("Morate izabrati red parcele"));
+
+                         groupItems.AddSimpleFor(m => m.EmployeeID)
+                         .ColSpan(1)
+                         .Editor(e => e.SelectBox().ID("EmployeeIDSelectBox")
+                                     .Width("285px")
+                                     .Placeholder("")
+                                     .SearchEnabled(true)
+                                     .DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
+                                     .DisplayExpr("Name")
+                                     .ValueExpr("EmployeeID"))
+                                     .Label(t => t.Text("Vrsta voca").Location(FormLabelLocation.Left))
+                                     .ValidationRules(rules => rules.AddRequired()
+                                     .Message("Morate izabrati vrstu voca"));
+
+                         groupItems.AddSimpleFor(m => m.EmployeeID)
+                         .ColSpan(1)
+                         .Editor(e => e.SelectBox().ID("EmployeeIDSelectBox")
+                                     .Width("285px")
+                                     .Placeholder("")
+                                     .SearchEnabled(true)
+                                     .DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
+                                     .DisplayExpr("Name")
+                                     .ValueExpr("EmployeeID"))
+                                     .Label(t => t.Text("Sorta voca").Location(FormLabelLocation.Left))
+                                     .ValidationRules(rules => rules.AddRequired()
+                                     .Message("Morate izabrati sortu voca"));
+
+                         groupItems.AddSimpleFor(m => m.EmployeeID)
+                         .ColSpan(1)
+                         .Editor(e => e.SelectBox().ID("EmployeeIDSelectBox")
+                                     .Width("270px")
+                                     .Placeholder("")
+                                     .SearchEnabled(true)
+                                     .DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
+                                     .DisplayExpr("Name")
+                                     .ValueExpr("EmployeeID"))
+                                     .Label(t => t.Text("Tip ambalaze").Location(FormLabelLocation.Left))
+                                     .ValidationRules(rules => rules.AddRequired()
+                                     .Message("Morate izabrati tip ambalaze"));
                          //groupItems.AddSimpleFor(m => m.IdType)
                          //            .ColSpan(1)
                          //            .Editor(e => e.SelectBox().ID("volSelectBox")
@@ -61,7 +124,7 @@
                      .ColCount(1)
                      .Items(groupItems =>
                      {
-                         groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Left)
+                         groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Center)
                                                .ButtonOptions(x => x.ID("BarCodeOk")
                                                .OnClick("saveBarCodeClick")
                                                .Text("Generisi"));

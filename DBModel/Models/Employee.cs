@@ -17,5 +17,6 @@ namespace DBModel.Models
         public string PhoneNumber { get; set; }
         [MaxLength(100)]
         public string Recomendation { get; set; }
+        public string MiddleName { get; set; }
     }
 }

@@ -21,8 +21,7 @@ namespace DBModel
         public DbSet<User> Users { get; set; }
         public DbSet<ControlorEmployeesRelation> ControlorEmployeesRelations { get; set; }
         public DbSet<BarCodeGenerator> BarCodeGenerators { get; set; }
-
-
+        public DbSet<PlotList> PlotList { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,9 +31,13 @@ namespace DBModel
 
             modelBuilder.Entity<BarCodeGenerator>()
             .HasKey(p => new { p.EmployeeID, p.PlotId,p.PackagingId,p.Rbr,p.CultureId,p.CultureTypeId,p.DateGenerated });
-
-            modelBuilder.ApplyConfiguration(new EmployeeConfig());
+                                
+             modelBuilder.ApplyConfiguration(new EmployeeConfig());
             modelBuilder.ApplyConfiguration(new LoginConfig());
+            modelBuilder.ApplyConfiguration(new CultureTypeConfig());
+            modelBuilder.ApplyConfiguration(new CultureConfig());
+            modelBuilder.ApplyConfiguration(new PlotConfig());
+            modelBuilder.ApplyConfiguration(new PlotListConfig());
         }
 
     }

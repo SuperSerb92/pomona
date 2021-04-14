@@ -16,7 +16,7 @@ namespace DBModel.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DBModel.Models.BarCodeGenerator", b =>
@@ -139,7 +139,7 @@ namespace DBModel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CultureId")
+                    b.Property<int>("CultureId")
                         .HasColumnType("int");
 
                     b.Property<string>("CultureTypeName")
@@ -160,13 +160,16 @@ namespace DBModel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Recomendation")
                         .HasMaxLength(100)
@@ -227,13 +230,33 @@ namespace DBModel.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int>("PlotListId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PlotName")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("PlotId");
 
+                    b.HasIndex("PlotListId");
+
                     b.ToTable("Plots");
+                });
+
+            modelBuilder.Entity("DBModel.Models.PlotList", b =>
+                {
+                    b.Property<int>("PlotListId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PlotListName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PlotListId");
+
+                    b.ToTable("PlotList");
                 });
 
             modelBuilder.Entity("DBModel.Models.User", b =>
@@ -344,9 +367,22 @@ namespace DBModel.Migrations
                 {
                     b.HasOne("DBModel.Models.Culture", "Culture")
                         .WithMany()
-                        .HasForeignKey("CultureId");
+                        .HasForeignKey("CultureId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Culture");
+                });
+
+            modelBuilder.Entity("DBModel.Models.Plot", b =>
+                {
+                    b.HasOne("DBModel.Models.PlotList", "PlotList")
+                        .WithMany()
+                        .HasForeignKey("PlotListId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("PlotList");
                 });
 #pragma warning restore 612, 618
         }

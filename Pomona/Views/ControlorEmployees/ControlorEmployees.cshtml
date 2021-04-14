@@ -56,16 +56,20 @@
                                       {
                                           columns.AddFor(u => u.EmployeeID).Visible(false).Width(1);
                                           columns.AddFor(u => u.Name).Caption("Ime").Width("200px");
+                                          columns.AddFor(u => u.MiddleName).Caption("Srednje ime").Width("200px");
                                           columns.AddFor(u => u.Surname).Caption("Prezime");
                                       })
                                      .SelectedRowKeys(@selectedDataVar)
                                      .Selection(s => s.Mode(SelectionMode.Multiple)
-                                     .ShowCheckBoxesMode(GridSelectionShowCheckBoxesMode.Always).AllowSelectAll(false))
+                                     .ShowCheckBoxesMode(GridSelectionShowCheckBoxesMode.Always)
+                                     //.AllowSelectAll(false)
+                                     )
                                      .FilterRow(f => f.Visible(true))
                                      .HeaderFilter(f => f.Visible(true))
                                      .FocusedRowEnabled(true)
                                      .OnEditorPreparing("onEditorPreparingCE")
                                      .OnSelectionChanged("onSelectionChangedCE")
+                                     .OnCellPrepared("OnCellPreparedCE")
                                             )
                                 </text>);
 

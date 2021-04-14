@@ -7,6 +7,12 @@
 
 @using (Html.BeginForm())
 {
+
+    @*@(Html.DevExtreme().Button().ID("yesPopupButton1").Option("HorizontalAlignment", "Center")
+                                        .Icon("add")
+                                        .OnClick("addPlotRowsClick")
+                                )*@
+
     @(Html.DevExtreme().DataGrid<Pomona.Models.Plot>()
                                           .ID("plotGrid")
                                           .ShowBorders(true)
@@ -23,7 +29,15 @@
                                           .Key("PlotId"))
                                           .Columns(columns =>
                                           {
-                                              columns.AddFor(u => u.PlotName).Option("required", true).Caption("Parcela");
+
+                                              columns.AddFor(m => m.PlotListId).Caption("Parcela").AllowEditing(false)
+                                              .MinWidth(600)
+                                              .Lookup(lookup => lookup
+                                              .DataSource(d => d.Mvc().Controller("Plot").LoadAction("GetPlotList").Key("PlotListId"))
+                                              .DisplayExpr("PlotListName").Option("dx-placeholder", "test")
+                                              .ValueExpr("PlotListId"));
+
+
                                               columns.AddFor(u => u.PlotLabel).Caption("Oznaka").MinWidth(600);
                                               columns.Add()
                                                .Type(GridCommandColumnType.Buttons)
@@ -55,10 +69,10 @@
                                         .TotalItems(totalItems =>
                                         {
                                             totalItems.Add()
-                                                   .Column("PlotName")
+                                                   .Column("PlotListId")
                                                    .Name("PlotSummary")
                                                    .SummaryType(SummaryType.Sum).DisplayFormat("Broj redova: " + ": {0}")
-                                                   .CustomizeText("PlotCountPerPage");
+                                                   .CustomizeText("PlotCountPerPage");               
                                         })
                                         )
                                         .FilterRow(f => f.Visible(true))
@@ -68,6 +82,11 @@
                                         .OnRowUpdating("onRowUpdatingPlot")
                                         .OnToolbarPreparing("onToolbarPreparingPlot")
                                          // .OnFocusedRowChanged("OnFocusedRowChangedPlots")
-                                         // .OnEditorPreparing("onPlotsGridEditorPreparing")
+                                          .OnEditorPreparing("OnEditorPreparingPlot")
                                          )
+
+
+
+
+
 }

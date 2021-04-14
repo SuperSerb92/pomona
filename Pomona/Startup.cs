@@ -82,6 +82,7 @@ namespace Pomona
             services.AddScoped<IBuyerService, BuyerService>();
 
             services.AddScoped<IPackagingRepository, PackagingRepository>();
+            services.AddScoped<IPackagingService, PackagingService>();
 
             services.AddScoped<IPlotRepository, PlotRepository>();
             services.AddScoped<IPlotService, PlotService>();

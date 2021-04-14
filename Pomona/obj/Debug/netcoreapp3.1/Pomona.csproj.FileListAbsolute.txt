@@ -122,3 +122,6 @@ C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicati
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Packaging\Packaging.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DataAccessLayer.dll
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DataAccessLayer.pdb
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Home\EmptyView.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Plot\AddingPlotRows.cshtml.g.cs
