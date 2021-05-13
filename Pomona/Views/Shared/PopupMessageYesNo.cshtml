@@ -17,13 +17,15 @@
         .Title("Information")
         .Visible(false)
         .DragEnabled(true)
-        .CloseOnOutsideClick(false)
+        .OnHiding("OnHidingYesNoPopUp")
+        .OnShown("function(){ $('#yesPopupButton').focus() ;}")
+        .CloseOnOutsideClick(false)     
         .Position(pos => pos
         .My(HorizontalAlignment.Center, VerticalAlignment.Center)
         .At(HorizontalAlignment.Center, VerticalAlignment.Center)
         .Of(new JS("window"))
 
-          )
+)
     )
 
     //    groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Left)
@@ -47,37 +49,37 @@
 
         @*<p id="custom_text"></p>
 
-        <div id="popup-bottom" class="dx-toolbar dx-widget dx-visibility-change-handler dx-collection dx-popup-bottom" role="toolbar">
-            <div class="dx-toolbar-items-container">
-                <div class="dx-toolbar-before">
-                </div>
-                <div class="dx-toolbar-center" style="margin: 0px 225px 0px 0px; float: right;"></div>
-                <div class="dx-toolbar-after">
-                    <div class="dx-item dx-toolbar-item dx-toolbar-button">
-                        <div class="dx-item-content dx-toolbar-item-content">
-                            <div class="dx-button dx-button-normal dx-button-mode-contained dx-widget dx-button-has-text">
-                                @(Html.DevExtreme().Button()
-                                        .Text("Da")
-                                        .ID("btnYes")
-                                        .OnClick("onYes")
-                                           )
+            <div id="popup-bottom" class="dx-toolbar dx-widget dx-visibility-change-handler dx-collection dx-popup-bottom" role="toolbar">
+                <div class="dx-toolbar-items-container">
+                    <div class="dx-toolbar-before">
+                    </div>
+                    <div class="dx-toolbar-center" style="margin: 0px 225px 0px 0px; float: right;"></div>
+                    <div class="dx-toolbar-after">
+                        <div class="dx-item dx-toolbar-item dx-toolbar-button">
+                            <div class="dx-item-content dx-toolbar-item-content">
+                                <div class="dx-button dx-button-normal dx-button-mode-contained dx-widget dx-button-has-text">
+                                    @(Html.DevExtreme().Button()
+                                            .Text("Da")
+                                            .ID("btnYes")
+                                            .OnClick("onYes")
+                                               )
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dx-item dx-toolbar-item dx-toolbar-button">
+                            <div class="dx-item-content dx-toolbar-item-content">
+                                <div class="dx-button dx-button-normal dx-button-mode-contained dx-widget dx-button-has-text">
+                                    @(Html.DevExtreme().Button()
+                                             .Text("Ne")
+                                             .ID("btnNo")
+                                             .OnClick("onNo")
+                                            )
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="dx-item dx-toolbar-item dx-toolbar-button">
-                        <div class="dx-item-content dx-toolbar-item-content">
-                            <div class="dx-button dx-button-normal dx-button-mode-contained dx-widget dx-button-has-text">
-                                @(Html.DevExtreme().Button()
-                                         .Text("Ne")
-                                         .ID("btnNo")
-                                         .OnClick("onNo")
-                                        )
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
 
 
     }

@@ -1,0 +1,112 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
+
+@(Html.DevExtreme().DataGrid<Pomona.Models.BarCodeGenerator>()
+                                          .ID("barcodeGrid")
+                                          .ShowBorders(true)
+                                           .ElementAttr("overflow", "auto")
+                                          .ShowColumnHeaders(true)
+                                          // .AllowColumnResizing(true)
+                                          .ColumnMinWidth(50)
+                                          .ColumnResizingMode(ColumnResizingMode.Widget)
+                                          .DataSource(d => d.Mvc().Controller("BarCodeMenu")
+                                          .LoadAction("GetBarCodes")
+                                          .InsertAction("InsertBarcode")
+                                          .Key("BarCode"))
+                                          .Columns(columns =>
+                                          {
+
+                                              //columns.AddFor(m => m.EmployeeID).Caption("Radnik").AllowEditing(false)
+                                              //.MinWidth(600)
+                                              //.Lookup(lookup => lookup
+                                              //.DataSource(d => d.Mvc().Controller("Employee").LoadAction("GetEmployeesStaticList").Key("EmployeeID"))
+                                              //.DisplayExpr("Name").Option("dx-placeholder", "test")
+                                              //.ValueExpr("EmployeeID"));
+
+                                              columns.AddFor(u => u.EmployeeID).Lookup(lookup =>
+                                              lookup.DataSource(ds=> ds.WebApi().Controller("Employee").LoadAction("GetEmployeesStaticList")
+                                              .Key("EmployeeID")).DisplayExpr("Name").ValueExpr("EmployeeID"))
+                                              .Caption("Ime Prezime").MinWidth(120);
+
+                                              columns.AddFor(u => u.UserID).Lookup(lookup =>
+                                             lookup.DataSource(ds => ds.WebApi().Controller("Login").LoadAction("GetUsersStaticList")
+                                             .Key("UserID")).DisplayExpr("NameSurname").ValueExpr("UserID"))
+                                             .Caption("Kontrolor").MinWidth(120);
+
+                                              columns.AddFor(u => u.DateGenerated).Caption("Datum").MinWidth(80);
+
+                                              columns.AddFor(u => u.PlotId).Lookup(lookup =>
+                                              lookup.DataSource(ds => ds.WebApi().Controller("Plot").LoadAction("GetPlotList")
+                                              .Key("PlotListId")).DisplayExpr("PlotListName").ValueExpr("PlotListId")).Caption("Parcela").MinWidth(100);
+
+                                              columns.AddFor(u => u.PlotId).Lookup(lookup =>
+                                              lookup.DataSource(ds => ds.WebApi().Controller("Plot").LoadAction("GetPlotsStaticList")
+                                              .Key("PlotId")).DisplayExpr("PlotLabel").ValueExpr("PlotId")).Caption("Red Parcele").MinWidth(100);
+
+                                              columns.AddFor(u => u.CultureId).Lookup(lookup =>
+                                              lookup.DataSource(ds => ds.WebApi().Controller("Culture").LoadAction("GetCulturesStaticList")
+                                              .Key("CultureId")).DisplayExpr("CultureName").ValueExpr("CultureId")).Caption("Vrsta voca").MinWidth(100);
+
+                                              columns.AddFor(u => u.CultureTypeId).Lookup(lookup =>
+                                              lookup.DataSource(ds => ds.WebApi().Controller("CultureType").LoadAction("GetCultureTypesStaticList")
+                                              .Key("CultureTypeId")).DisplayExpr("CultureTypeName").ValueExpr("CultureTypeId")).Caption("Sorta voca").MinWidth(100);
+
+                                              columns.AddFor(u => u.PackagingId).Lookup(lookup =>
+                                              lookup.DataSource(ds => ds.WebApi().Controller("Packaging").LoadAction("GetPackagingsStaticList")
+                                              .Key("PackagingId")).DisplayExpr("PackagingType").ValueExpr("PackagingId")).Caption("Tip ambalaze").MinWidth(100);
+                                              columns.AddFor(u => u.Tara).Caption("Tara ambalaze").MinWidth(50);
+                                              columns.AddFor(u => u.StatusDisplay).Caption("Status").MinWidth(50);
+
+                                              columns.AddFor(u => u.BarCode).Caption("Barkod").MinWidth(100);
+                                              columns.Add()
+                                               .Type(GridCommandColumnType.Buttons)
+                                               .Width(120)
+                                               .Buttons(b =>
+                                               {
+                                                   b.Add().Name(GridColumnButtonName.Save);
+                                                   b.Add().Name(GridColumnButtonName.Delete);                                                   
+                                                   b.Add()
+                                                    .Hint("Clone")
+                                                    .Icon("repeat");
+                                                   b.Add().Hint("Print").Icon("print");
+                                                   //.OnClick("onPrepareDeletePlot");
+                                               });
+                                          })
+                                          .Editing(editing =>
+                                          {
+                                              editing.Mode(GridEditMode.Row);
+                                              editing.AllowAdding(true);
+                                              editing.ConfirmDelete(false);
+                                              editing.AllowUpdating(true);
+                                          })
+                                        .Paging(p => p.PageSize(10))
+                                        .Pager(pager =>
+                                        {
+                                            pager.ShowPageSizeSelector(true);
+                                            pager.AllowedPageSizes(new[] { 10, 50, 100 });
+                                        })
+                                        //.Summary(s => s
+                                        //.TotalItems(totalItems =>
+                                        //{
+                                        //    totalItems.Add()
+                                        //           .Column("PlotListId")
+                                        //           .Name("PlotSummary")
+                                        //           .SummaryType(SummaryType.Sum).DisplayFormat("Broj redova: " + ": {0}")
+                                        //           .CustomizeText("PlotCountPerPage");
+                                        //})
+                                        //)
+                                        .FilterRow(f => f.Visible(true))
+                                        .HeaderFilter(f => f.Visible(true))
+                                        .FocusedRowEnabled(true)
+                                        
+                                         // .OnRowInserting("onRowInsertingPlot")
+                                         //.OnRowUpdating("onRowUpdatingPlot")
+                                         //.OnToolbarPreparing("onToolbarPreparingPlot")
+                                         // .OnFocusedRowChanged("OnFocusedRowChangedPlots")
+                                         // .OnEditorPreparing("OnEditorPreparingPlot")
+                                         )
+

@@ -127,6 +127,25 @@ function onSelectionChangedCE(e) {
 }
 
 
+//const getKeyDownHandler = function (popupInstance) {
+//    return function (e) {
+//        if (e.jQueryEvent.keyCode == 27) {
+//            popupInstance.hide();
+//        }
+//    }
+//}
+
+
+function OnKeyDownCE(e) {
+    if (e.event.key === "Escape") {
+        var popup = $("#popupForm").dxPopup('instance');
+        popup.hide();
+    }
+    //if (e.jQueryEvent.keyCode == 27) {
+    //}
+}
+
+
 function onSaveControlorEmployeeRelations(e) {
     var formData = $("#ControlorEmployeesRelationForm").dxForm("instance").option("formData");
     var selectedEmployees = $("#ControlorEmployeesGrid").dxDataGrid("instance").getSelectedRowsData();

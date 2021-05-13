@@ -30,7 +30,7 @@ namespace DBModel
               .HasKey(p => new { p.UserID, p.EmployeeID });
 
             modelBuilder.Entity<BarCodeGenerator>()
-            .HasKey(p => new { p.EmployeeID, p.PlotId,p.PackagingId,p.Rbr,p.CultureId,p.CultureTypeId,p.DateGenerated });
+            .HasKey(p => new { p.EmployeeID,p.UserID, p.PlotId,p.PackagingId,p.Rbr,p.CultureId,p.CultureTypeId,p.DateGenerated });
                                 
              modelBuilder.ApplyConfiguration(new EmployeeConfig());
             modelBuilder.ApplyConfiguration(new LoginConfig());

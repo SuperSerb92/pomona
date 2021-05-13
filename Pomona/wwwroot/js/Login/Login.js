@@ -82,6 +82,7 @@ function OnRegistration(e) {
                 data: formData,
                 success: function (data) {
                     if (data.success) {
+                        popupWithHidden = 'Registration';
                         showInfoWithHidden("Uspešno ste se registrovali", "Registracija");
                     
                      //   $("#popupFormRegistration").dxPopup('instance').hide();
@@ -108,10 +109,6 @@ function showInfoWithHidden(data, title) {
     })
     ins.option("title", title);
     ins.show();
-}
-
-function OnHiddenPopupMessage(e) {
-    $("#regForm").dxForm("instance").option("formData", null);
 }
 
 

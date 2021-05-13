@@ -115,25 +115,56 @@ namespace Pomona.Controllers.Plot
         {
             try
             {
+                int countInsertedForDisplay = 0;
+
                 if (plotRows != null && plotRows.PlotListId > 0)
                 {
-                    List<decimal> list = RangeIncrement(1, plotRows.RowCount, 1);
 
-                    foreach (var num in list)
+                    int row = 0;
+
+                    int.TryParse(plotRows.RowCount, out row);
+                    if (row == 0)
                     {
-                        if (!plots.Any(x => x.PlotListId == plotRows.PlotListId && x.PlotLabel == num.ToString()))
+                        #region uneta slovna vrednost 
+                        if (!plots.Any(x => x.PlotLabel == plotRows.RowCount))
                         {
                             var plot = new Pomona.Models.Plot();
                             plot.PlotListId = plotRows.PlotListId;
-                            plot.PlotLabel = num.ToString();
+                            plot.PlotLabel = plotRows.RowCount;
                             service.AddPlot(plot);
+                            countInsertedForDisplay = 1;
                         }
+                        else
+                        {
+                            countInsertedForDisplay = 0;
+                        }
+                        #endregion
                     }
+
+                    else
+                    {
+                        #region uneta numericka vrednost
+                        List<decimal> list = RangeIncrement(1, Convert.ToInt32(plotRows.RowCount), 1);
+
+                        foreach (var num in list)
+                        {
+                            if (!plots.Any(x => x.PlotListId == plotRows.PlotListId && x.PlotLabel == num.ToString()))
+                            {
+                                var plot = new Pomona.Models.Plot();
+                                plot.PlotListId = plotRows.PlotListId;
+                                plot.PlotLabel = num.ToString();
+                                service.AddPlot(plot);
+                                countInsertedForDisplay++;
+                            }
+                        }
+                        #endregion
+                    }
+
 
                     service.SaveChanges();
                     RefreshSources();
                 }
-                return Json(new { success = true });
+                return Json(new { success = true, result = countInsertedForDisplay });
             }
             catch (Exception ex)
             {

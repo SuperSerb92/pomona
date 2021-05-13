@@ -9,6 +9,8 @@ namespace Pomona.Models
     {
         public int EmployeeID { get; set; }
         public Employee Employee { get; set; }
+        public int UserID { get; set; }
+        public User User { get; set; }
         public int PlotId { get; set; }
         public Plot Plot { get; set; }
         public int CultureTypeId { get; set; }
@@ -24,5 +26,11 @@ namespace Pomona.Models
         /// //0 nije 1 jeste
         /// </summary>
         public int IndStorn { get; set; }
+        public int Status { get; set; }
+
+        public string StatusDisplay { get; set; }
+
+        public int Tara { get; set; }
+
     }
 }

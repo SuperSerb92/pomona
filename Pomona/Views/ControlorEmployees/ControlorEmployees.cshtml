@@ -31,6 +31,7 @@
                                      .DataSource(d => d.Mvc().Controller("ControlorEmployees").LoadAction("GetControlors").Key("UserID"))
                                      .DisplayExpr("NameSurname")
                                      .ValueExpr("UserID")
+                                     .OnKeyDown("OnKeyDownCE")
                                      .OnSelectionChanged("OnSelectionChangedControlor"))
                                      .Label(t => t.Text("Kontrolori").Location(FormLabelLocation.Left))
                                      .ValidationRules(rules => rules.AddRequired()
@@ -70,6 +71,7 @@
                                      .OnEditorPreparing("onEditorPreparingCE")
                                      .OnSelectionChanged("onSelectionChangedCE")
                                      .OnCellPrepared("OnCellPreparedCE")
+                                     .OnKeyDown("OnKeyDownCE")
                                             )
                                 </text>);
 

@@ -129,6 +129,9 @@
                                                .OnClick("saveBarCodeClick")
                                                .Text("Generisi"));
 
+                         groupItems.AddSimpleFor(m => m.BarCode)
+                                  .Editor(e => e.TextBox().Width("300px").ID("rowNum").ReadOnly(true))
+                                  .Label(t => t.Text("Barcode:").Location(FormLabelLocation.Left));
                          //groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Right)
                          //                      .ButtonOptions(x => x.ID("AddEditVolumeCancel")
                          //                      .OnClick("cancelVolumeClick")

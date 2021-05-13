@@ -105,11 +105,12 @@
                 //.Width(900)
                 .ShowCloseButton(true)
                 .DragEnabled(true)
-                .CloseOnOutsideClick(false)
+                .CloseOnOutsideClick(false)               
                 .ElementAttr("class", "popup")
-                .OnContentReady("onContentReady")
+                .OnContentReady("onContentReady")               
                 .OnHiding("onHiding")
                 .OnResizeEnd("adjustSize")
+               // .OnInitialized("OnInitialized")
                 .Position(pos => pos
                     .My(HorizontalAlignment.Center, VerticalAlignment.Center)
                     .At(HorizontalAlignment.Center, VerticalAlignment.Center)
@@ -172,6 +173,15 @@
             var contentElement = $('#scrollView').dxScrollView('instance').content();
             contentElement.html(partialViewDataGlobal);
         }
+
+        //function OnInitialized(e) {
+        //    e.component.registerKeyHandler("escape", function (arg) {
+        //        console.log('jovana ' + arg);
+        //        e.component.hide();
+        //    })
+        //}  
+
+
 
         function onHiding(e) {
             switch (mainControl) {

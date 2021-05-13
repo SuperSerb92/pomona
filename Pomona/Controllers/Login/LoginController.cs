@@ -23,7 +23,10 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
         //inicijalizuje se group service
         public string username;
         public string password;
-
+        private static List<User> users
+        {
+            get; set;
+        }
 
         public LoginController(ILoginService service,IGroupService groupService)
         {
@@ -49,6 +52,13 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
             
 
             return DataSourceLoader.Load(list, loadOptions);
+        }
+        [HttpGet]
+        public object GetUsersStaticList(DataSourceLoadOptions loadOptions)
+        {
+            users = service.GetUsers();
+
+            return DataSourceLoader.Load(users, loadOptions);
         }
 
         [HttpPost]

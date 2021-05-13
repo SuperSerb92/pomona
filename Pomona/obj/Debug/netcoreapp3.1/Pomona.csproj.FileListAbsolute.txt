@@ -110,7 +110,6 @@ C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\libman.json
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\web.config
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Shared\popupMessageWithOnHidden.cshtml.g.cs
-C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\BarCodeGenerator\BarCodeGenerator.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\ControlorEmployees\ControlorEmployees.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Buyer\Buyer.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\CultureType\CultureType.cshtml.g.cs
@@ -125,3 +124,5 @@ C:\Users\Filip\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DataAccessLayer.pdb
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Home\EmptyView.cshtml.g.cs
 C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\Plot\AddingPlotRows.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\BarCodeMenu\BarCodeGenerator.cshtml.g.cs
+C:\Users\Filip\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\BarCodeMenu\BarCodeMenu.cshtml.g.cs

@@ -133,9 +133,11 @@ function ShowPopupYesNo(data, action, title) {
 
 
 function onYes(e) {
+    var actionTypeTemp = actionType;
+    actionType = ""; //da se ne bi opaljivao event na hide ponovo 
     var popup = $("#popup-messageYesNo").dxPopup('instance');
     popup.hide();
-    switch (actionType) { 
+    switch (actionTypeTemp) { 
         case 'PrepareDeleteEmployee':
             OnDeleteEmployee();
             break;
@@ -168,13 +170,25 @@ function onNo(e) {
     //var element = document.getElementById("popup-bottom");
     //element.style.display = "none";
 
+    //switch (actionType) {
+    //    case 'HidingControlorEmployees':
+    //        mainControl = "ControlorEmployees";
+    //        break;
+    //}
+}
+
+
+function OnHidingYesNoPopUp(e) {
     switch (actionType) {
         case 'HidingControlorEmployees':
+            var popup = $("#popupForm").dxPopup('instance');
+            if (popup != undefined) {
+                popup.focus();
+            }
             mainControl = "ControlorEmployees";
             break;
     }
 }
-
 
 var virtualDirectory = "";
 var url = window.location.href.split('/');
@@ -238,5 +252,33 @@ function onHidingCommon(s, e) {
 function ValidateSelectBox(data) {
     if (data.value == 0 || data.value == null) return false;
     return true;
+}
+
+
+
+function OnHiddenInfoMessage(e) {
+    var popup = $("#popupForm").dxPopup('instance');
+    if (popup != undefined) {
+        popup.focus();
+    }
+}
+
+var popupWithHidden;
+function OnHiddenPopupMessage(e) {
+    switch (popupWithHidden) {
+        case 'Registration':
+            $("#regForm").dxForm("instance").option("formData", null);
+            break;
+        case 'PlotRows':
+            $("#AddPlotRows").dxForm("instance").option("formData", null);
+            var popup = $("#popupForm").dxPopup('instance');
+            if (popup != undefined) {
+                popup.focus();
+            }
+            break;
+        default:
+            break;
+    }
+
 }
 

@@ -45,13 +45,14 @@ function TreeViewPomonaItemClick(e) {
           //    Redirect("/Culture/Culture", e.node.text);
             break;
         case 7:
-          //  Redirect("/CultureType/CultureType", e.node.text);
+            Redirect("/CultureType/CultureType", e.node.text);
             break;
         case 8:
          //    Redirect("/Packaging/Packaging", e.node.text);
             break;
         case 9:
-            OpenPopup("/BarCodeGenerator/BarCodeGenerator", "", 550, 600, e.node.text, "");
+            Redirect("/BarCodeMenu/BarCodeMenu", e.node.text);
+          //  OpenPopup("/BarCodeMenu/BarCodeGenerator", "", 550, 600, e.node.text, "");
             break;
     }
     // }

@@ -21,27 +21,43 @@ namespace Pomona.Services
 
         public void AddBarCode(BarCodeGenerator barCode)
         {
-            throw new NotImplementedException();
+            var barcodeDB = mapper.Map<DBModel.Models.BarCodeGenerator>(barCode);
+            barCodeRepository.Add(barcodeDB);
         }
 
         public void DeleteBarCode(BarCodeGenerator barCode)
         {
-            throw new NotImplementedException();
+            var barcodeDB = mapper.Map<DBModel.Models.BarCodeGenerator>(barCode);
+            barCodeRepository.Delete(barcodeDB);
         }
 
         public List<BarCodeGenerator> GetBarCode()
         {
-            throw new NotImplementedException();
+            var barcode = barCodeRepository.GetBarCodeGenerators();
+            var barcodeDto = mapper.Map<IEnumerable<Models.BarCodeGenerator>>(barcode);
+            foreach (var item in barcodeDto)
+            {
+                if (item.Status==0)
+                {
+                    item.StatusDisplay = "Aktivan";
+                }
+                if (item.Status==1)
+                {
+                    item.StatusDisplay = "Neaktivan";
+                }
+            }
+            return barcodeDto.ToList();
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+           barCodeRepository.SaveChanges();
         }
 
         public void UpdateBarCode(BarCodeGenerator barCode)
         {
-            throw new NotImplementedException();
+            var barcodeDB = mapper.Map<DBModel.Models.BarCodeGenerator>(barCode);
+            barCodeRepository.Update(barcodeDB);
         }
     }
 }

@@ -10,6 +10,8 @@ namespace DBModel.Models
     {
         public int EmployeeID { get; set; }
         public Employee Employee { get; set; }
+        public int UserID { get; set; }
+        public User User { get; set; }
         public int PlotId { get; set; }
         public Plot Plot { get; set; }
         public int CultureTypeId { get; set; }
@@ -26,6 +28,6 @@ namespace DBModel.Models
         /// </summary>
         public int IndStorn { get; set; }
         
-
+        public int Status { get; set;}//0-aktivan 1 storniran
     }
 }

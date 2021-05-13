@@ -92,7 +92,13 @@ function onSavePlotRows(e) {
             success: function (data) {
                 if (data.success) {
                     // var popup = $("#popupFormConfiguration").dxPopup('instance');
-                   // popup.hide();                   
+                    // popup.hide();         
+                    popupWithHidden = 'PlotRows';
+                    if (data.result == 0) {
+                        showInfo("Niste dodali nijedan novi red, postoje duplikati u označavanju", "Redovi parcele");
+                    } else {
+                        showInfoWithHidden("Uspešno ste dodali " + data.result + " reda(redova)", "Redovi parcele");
+                    }
                     getPlotGrid().refresh();
                 }
                 else {
@@ -100,6 +106,11 @@ function onSavePlotRows(e) {
                 }
             },
         });
+    } else {
+        var popup = $("#popupForm").dxPopup('instance');
+        if (popup != undefined) {
+            popup.focus();
+        }
     }
 }
 

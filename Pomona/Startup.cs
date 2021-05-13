@@ -97,6 +97,7 @@ namespace Pomona
             services.AddScoped<ICultureTypeService, CultureTypeService>();
 
             services.AddScoped<IBarCodeGeneratorRepository, BarCodeGeneratorRepository>();
+            services.AddScoped<IBarCodeGeneratorService, BarCodeGeneratorService>();
 
             services.AddScoped<IControlorEmployeesRelationRepository, ControlorEmployeesRelationRepository>();
             services.AddScoped<IControlorEmployeesService, ControlorEmployeesRelationService>();

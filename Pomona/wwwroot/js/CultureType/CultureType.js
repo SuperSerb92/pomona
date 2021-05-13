@@ -64,3 +64,39 @@ function onDeleteCultureType() {
 function CultureTypeCountPerPage(e) {
     return "Broj redova:  " + $("#cultureTypeGrid").dxDataGrid("instance").getVisibleRows().length;
 }
+
+
+function onCultureTypesGridEditorPreparing(e) {
+    if (e.parentType == "dataRow" && e.dataField == "CultureId") {
+        e.editorOptions.searchEnabled = false;
+    }
+    //if (e.parentType === "filterRow" && e.dataField === "CultureId") {
+    //    e.editorName = "dxTextBox"
+    //    e.editorOptions.valueChangeEvent = "keyup";
+    //}
+}
+
+//function CalculateFilterExpressionCT(filterValue, selectedFilterOperation, target) {
+//    console.log(selectedFilterOperation);
+//    let column = this;
+//    if (target === "filterRow") {
+//        return [
+//            function (item) {
+//                console.log("column" + column);
+//                let lookUpName = column.lookup.dataSource.filter((data) => {
+//                    return data.ID === item.CultureId;
+//                });
+//                switch (selectedFilterOperation) {
+//                    case "contains":
+//                        return lookUpName[0].CultureName.includes(filterValue);
+//                    case "notcontains":
+//                        return !lookUpName[0].CultureName.includes(filterValue);
+//                }
+//            },
+//            "=",
+//            true
+//        ];
+//    }
+//    return this.defaultCalculateFilterExpression.apply(this, arguments);
+//}
+

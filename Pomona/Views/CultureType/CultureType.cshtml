@@ -26,8 +26,11 @@
     {
 
         columns.AddFor(u => u.CultureTypeName).Option("required", true).Caption("Sorta voća");
-
+        
         columns.AddFor(m => m.CultureId).Caption("Vrsta voća")
+       //.FilterOperations(IEnumerable<GridFilterOperations>  GridFilterOperations.Contains )
+    //    .FilterOperations(new[] { FilterOperations.Contains })
+       // .CalculateFilterExpression("CalculateFilterExpressionCT")
         .MinWidth(600)
         .Lookup(lookup => lookup
         .DataSource(d => d.Mvc().Controller("Culture").LoadAction("GetCulturesStaticList").Key("CultureId"))
@@ -77,6 +80,6 @@
     .OnRowUpdating("onRowUpdatingCultureTypes")
     .OnToolbarPreparing("onToolbarPreparingCultureTypes")
     // .OnFocusedRowChanged("OnFocusedRowChangedCultureTypes")
-    // .OnEditorPreparing("onCultureTypesGridEditorPreparing")
+     .OnEditorPreparing("onCultureTypesGridEditorPreparing")
     )
     }

@@ -8,7 +8,7 @@ namespace Pomona.Models
     public class PlotRows
     {
         public int PlotListId { get; set; }
-        public int RowCount { get; set; }
+        public string RowCount { get; set; }
     }
 }
 
