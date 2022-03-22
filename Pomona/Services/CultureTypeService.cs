@@ -35,7 +35,7 @@ namespace Pomona.Services
         {
             var cultureTypes = cultureTypeRepository.GetCultureTypes();
             var cultureTypesDto = mapper.Map<IEnumerable<Models.CultureType>>(cultureTypes);
-            return cultureTypesDto.ToList();
+            return cultureTypesDto.OrderBy(x=>x.CultureTypeName).ToList();
         }
 
         public void SaveChanges()

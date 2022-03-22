@@ -11,8 +11,8 @@ namespace Pomona.Models
         public Employee Employee { get; set; }
         public int UserID { get; set; }
         public User User { get; set; }
-        public int PlotId { get; set; }
-        public Plot Plot { get; set; }
+        public int? PlotId { get; set; }
+      //  public Plot Plot { get; set; }
         public int CultureTypeId { get; set; }
         public CultureType CultureType { get; set; }
         public int CultureId { get; set; }
@@ -31,6 +31,12 @@ namespace Pomona.Models
         public string StatusDisplay { get; set; }
 
         public int Tara { get; set; }
-
+        public int Neto { get; set; }
+        public int Bruto { get; set; }
+        public PlotList PlotList { get; set; }
+        public int PlotListId { get; set; }
+        public int IndPrint { get; set; } //0-nije stampan 1 stampan
+        public int MaxRbr { get; set; }
+        public int LoggedUserID { get; set; }
     }
 }

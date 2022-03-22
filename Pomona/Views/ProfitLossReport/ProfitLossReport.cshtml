@@ -1,0 +1,252 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="dx-field">
+        <div style="padding-top:40px;padding-right:20px;padding-left:20px;">Datum od</div>
+        <div style="padding-top:20px;padding-right:20px;">
+            @(Html.DevExtreme().DateBox().ID("dateFrom")
+                .Type(DateBoxType.Date)
+                .StylingMode(EditorStylingMode.Filled)
+                .Value(DateTime.Now)
+            )
+        </div>
+        <div style="padding-top:40px;padding-right:20px;">Datum do</div>
+        @*class="dx-field-label"*@
+        <div style="padding-top:20px;padding-right:20px;">
+            @*class="dx-field-value"*@
+            @(Html.DevExtreme().DateBox().ID("dateTo")
+                .Type(DateBoxType.Date)
+                .StylingMode(EditorStylingMode.Filled)
+                .Value(DateTime.Now)
+            )
+        </div>
+
+        <div style="padding-top:20px;">
+            @(Html.DevExtreme().Button().Text("Popuni")
+      .ID("FillButtonProfit")
+      .OnClick("OnClickbtnFillProfit")
+      )
+
+        </div>
+
+    </div>
+    <div class="dx-field">
+         <div style="padding-top:20px;padding-right:20px;padding-left:20px;">AVG prodajna cena: </div>
+            <div style="padding-top:10px;padding-right:20px;">
+                @(Html.DevExtreme().TextBox()
+                    .ID("ProsecnaCena").ReadOnly(true)
+                )
+            </div>
+    </div>
+
+    @*<div class="=dx-fieldset">
+            <div class="dx-field">
+                <div class="dx-field-label">Trošak (rsd)</div>
+                <div class="dx-field-value">@(Html.DevExtreme().TextBox().Value("empty").ReadOnly(true))</div>
+            </div>
+        </div>*@
+
+
+
+    @(Html.DevExtreme().DataGrid<Pomona.Models.ProfitLossReport>
+        ()
+    .ID("profitLossReportGrid")
+    .ShowBorders(true)
+    .ElementAttr("overflow", "auto")
+    .ShowColumnHeaders(true)
+    .WordWrapEnabled(true)
+    .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+    .ColumnMinWidth(50)
+    .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+    .OnExporting("exporting")
+    .ColumnResizingMode(ColumnResizingMode.Widget)
+    .DataSource(d => d.Mvc().Controller("ProfitLossReport")
+    .LoadAction("GetReport")
+    //  .UpdateAction("UpdateEvaluation")
+    .Key("Datum"))
+    .Columns(columns =>
+    {
+        columns.AddFor(u => u.Datum).Caption("Datum").AllowEditing(false);
+        columns.AddFor(u => u.BrojBeraca).Caption("Broj berača").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.BrojKutija).Caption("Broj gajbica").AllowEditing(false).Format(Format.FixedPoint);
+      //  columns.AddFor(u => u.ProsecanTrosakPoBeracu).Caption("AVG trošak po beraču (rsd)").AllowEditing(false);
+        columns.AddFor(u => u.Trosak).Caption("Trošak (rsd)").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.NetoOtkup).Caption("Neto otkup (kg)").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.ProsecnaPC).Caption("AVG prodajna cena (rsd)").AllowEditing(false);
+        columns.AddFor(u => u.ProsecnaCenaKost).Caption("AVG cena koštanja (rsd)").AllowEditing(false);
+        columns.AddFor(u => u.Prihod).Caption("Prihod (rsd)").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.Profit).Caption("Profit (rsd)").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.TrosakProc).Caption("Trošak u odnosu na prihod (%)").AllowEditing(false);
+
+
+    })
+    .Editing(editing =>
+    {
+        editing.Mode(GridEditMode.Row);
+        editing.AllowAdding(false);
+        editing.ConfirmDelete(false);
+        editing.AllowUpdating(false);
+    })
+    .Paging(p => p.PageSize(10))
+    .Pager(pager =>
+    {
+        pager.ShowPageSizeSelector(true);
+        pager.AllowedPageSizes(new[] { 10,50,100 });
+
+    })
+    .Summary(s => s
+    .TotalItems(totalItems =>
+    {
+        totalItems.Add()
+               .Column("BrojBeraca")
+               .Name("BrojBeraca")
+               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+               .Column("BrojKutija")
+               .Name("NoOfBoxes")
+               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+         .Column("Trosak")
+         .Name("Trosak")
+         .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+        .Column("ProsecanTrosakPoBeracu")
+        .Name("ProsecanTrosakPoBeracu")
+        .SummaryType(SummaryType.Avg).DisplayFormat("AVG: " + " {0}").ValueFormat(f=>
+        {
+            f.Type(Format.FixedPoint);
+            f.Precision(2);
+        });
+
+        totalItems.Add()
+      .Column("NetoOtkup")
+      .Name("NetoOtkup")
+      .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+       .Column("ProsecnaPC")
+       .Name("ProsecnaPC")
+       .SummaryType(SummaryType.Avg).DisplayFormat("AVG: " + " {0}").ValueFormat(f =>
+       {
+           f.Type(Format.FixedPoint);
+           f.Precision(2);
+       });
+
+        totalItems.Add()
+       .Column("ProsecnaCenaKost")
+       .Name("ProsecnaCenaKost")
+       .SummaryType(SummaryType.Avg).DisplayFormat("AVG: " + " {0}").ValueFormat(f =>
+       {
+           f.Type(Format.FixedPoint);
+           f.Precision(2);
+       });
+
+        totalItems.Add()
+   .Column("Prihod")
+   .Name("Prihod")
+   .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+   .Column("Profit")
+   .Name("Profit")
+   .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+              .Column("TrosakProc")
+              .Name("TrosakProc")
+              .SummaryType(SummaryType.Avg).DisplayFormat("AVG: " + " {0}").ValueFormat(f =>
+              {
+                  f.Type(Format.FixedPoint);
+                  f.Precision(2);
+              });
+
+    })
+    )
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .FocusedRowEnabled(false)
+
+
+    )
+<div class="dx-field">
+    <div style="padding-right:100px;padding-left:50px;">
+        @(Html.DevExtreme().PieChart().ID("pita")
+        .Series(s =>
+            s.Add().ArgumentField("Naziv").ValueField("Procenat").Label(l => l
+            .Visible(true)
+            .Font(f => f.Size(16))
+            .Connector(c => c
+                .Visible(true)
+                .Width(0.5)
+            )
+            .Position(PieChartLabelPosition.Columns)
+            .CustomizeText(@<text>
+                function(arg) {
+                    return arg.valueText + " (" + arg.percentText + ")";
+                }
+            </text>).Format(Format.FixedPoint)
+        )//.Label(e => { e.Visible(true);e.Format(Format.FixedPoint);});
+        )
+        .Palette(VizPalette.Violet)
+        .SizeGroup("sizeGroupName")
+        .Title("Prihod (rsd)")
+        .Legend(l => l
+            .VerticalAlignment(VerticalEdge.Top)
+            .HorizontalAlignment(HorizontalAlignment.Center)
+            .ItemTextPosition(Position.Right)
+            .RowCount(2)
+        )
+        .Size(s=> s.Width(600).Height(600))
+        .DataSource(d => d.Mvc().Controller("ProfitLossReport")
+                   .LoadAction("GetReportSum"))
+    )
+    </div>
+        @(Html.DevExtreme().Chart()
+        .ID("line-chart")
+        .Palette(VizPalette.Violet)
+        .CommonSeriesSettings(s => s
+            .ArgumentField("DatumBezVremena")
+            .Type(SeriesType.Line)
+        )
+        .Margin(m => m.Bottom(20))
+        .ArgumentAxis(a => a
+            .ValueMarginsEnabled(false)
+            .DiscreteAxisDivisionMode(DiscreteAxisDivisionMode.CrossLabels)
+            .Grid(g => g.Visible(true))
+        )
+        .Series(s => {
+            s.Add().ValueField("Trosak").Name("Trošak (rsd)").Label(e => { e.Visible(true); e.Format(Format.FixedPoint); });
+            s.Add().ValueField("Prihod").Name("Prihod (rsd)").Label(e => { e.Visible(true); e.Format(Format.FixedPoint); });
+            s.Add().ValueField("Profit").Name("Profit (rsd)").Label(e => { e.Visible(true); e.Format(Format.FixedPoint); });
+
+        })
+        .Legend(l => l
+            .VerticalAlignment(VerticalEdge.Bottom)
+            .HorizontalAlignment(HorizontalAlignment.Center)
+            .ItemTextPosition(Position.Bottom)
+        )
+        .Title(t => t
+            .Text("Presek stanja za odabrani vremenski period")
+        )
+        .Export(e => e.Enabled(true))
+        .Tooltip(t => t.Enabled(true))
+        .Size(s => s.Width(800).Height(600))
+        .DataSource(d => d.Mvc().Controller("ProfitLossReport")
+                   .LoadAction("GetReport"))
+    )
+    </div>
+    }
+
+
+

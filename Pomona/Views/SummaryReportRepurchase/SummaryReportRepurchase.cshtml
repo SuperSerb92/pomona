@@ -1,0 +1,149 @@
+﻿@{
+    Layout = null;
+}
+@{
+    var selectedDataVar = ViewData["selectedData"] as List<int>;
+    //  var selectedDataVar = ViewData["selectedData"] as List<Pomona.Models.Employee>;
+}
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
+
+
+@using (Html.BeginForm())
+{
+    <div class="dx-field">
+        <div style="padding-top:40px;padding-right:20px;padding-left:20px;">Datum od</div>
+        <div style="padding-top:20px;padding-right:20px;">
+            @(Html.DevExtreme().DateBox().ID("dateFromRep")
+                .Type(DateBoxType.Date)
+                .StylingMode(EditorStylingMode.Filled)
+                .Value(new DateTime(DateTime.Now.Year, 1, 1))
+            )
+        </div>
+        <div style="padding-top:40px;padding-right:20px;">Datum do</div>
+        @*class="dx-field-label"*@
+        <div style="padding-top:20px;padding-right:20px;">
+            @*class="dx-field-value"*@
+            @(Html.DevExtreme().DateBox().ID("dateToRep")
+                .Type(DateBoxType.Date)
+                .StylingMode(EditorStylingMode.Filled)
+                .Value(DateTime.Now)
+            )
+        </div>
+
+        <div style="padding-top:20px;padding-right:20px;">
+            @(Html.DevExtreme().Button().Text("Popuni")
+      .ID("FillButtonRep")
+      .OnClick("OnClickbtnFillRep")
+      )
+
+        </div>
+        <div style="padding-top:20px;">
+            @(Html.DevExtreme().Button()
+        .Icon("print")
+        .Text("Print")
+        .OnClick("printRep")
+    )
+            </div>
+        </div>
+        @(Html.DevExtreme().DataGrid<Pomona.Models.SummaryReportRepurchase>()
+    .ID("summaryReportRepurchaseGrid")
+    .ShowBorders(true)
+    .ElementAttr("overflow", "auto")
+    .ShowColumnHeaders(true)
+    // .AllowColumnResizing(true)
+    .ColumnMinWidth(50)
+    .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+    .OnExporting("exporting")
+    .ColumnResizingMode(ColumnResizingMode.Widget)
+    .DataSource(d => d.Mvc().Controller("SummaryReportRepurchase")
+    .LoadAction("GetReportRepurchase")
+    .UpdateAction("UpdateReportRepurchase")
+    .Key("Id"))
+    .Columns(columns =>
+    {
+        columns.AddFor(u => u.Date).Caption("Datum").AllowEditing(false);
+        columns.AddFor(u => u.Buyer).Caption("Otkupljivač").AllowEditing(false);
+        columns.AddFor(u => u.CultureName).Caption("Vrsta voća").AllowEditing(false);
+        columns.AddFor(u => u.Net).Caption("Neto ubrano (kg)").AllowEditing(false);
+        columns.AddFor(u => u.NetBuyed).Caption("Neto otkup (kg)").AllowEditing(false);
+        columns.AddFor(u => u.NetDifference).Caption("Razlika (kg)").AllowEditing(false);
+        columns.AddFor(u => u.Price).Caption("Cena(rsd)").Visible(false);
+        columns.AddFor(u => u.Income).Caption("Prihod").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.NoOfBoxes).Caption("Broj gajbica").AllowEditing(false);
+        columns.AddFor(u => u.PaidDate).Caption("Datum naplate").AllowEditing(true);
+        columns.AddFor(u => u.Comment).Caption("Napomena").AllowEditing(true);
+        columns.AddFor(u => u.Paid).Caption("Naplaćeno").AllowEditing(true);
+        
+     
+
+
+    })
+    .Editing(editing =>
+    {
+        editing.Mode(GridEditMode.Batch);
+        editing.AllowAdding(false);
+        editing.ConfirmDelete(false);
+        editing.SelectTextOnEditStart(true);
+        editing.AllowUpdating(true);
+        editing.StartEditAction(GridStartEditAction.Click);
+    })
+    .Paging(p => p.PageSize(10))
+    .Pager(pager =>
+    {
+        pager.ShowPageSizeSelector(true);
+        pager.AllowedPageSizes(new[] { 10,50,100 });
+
+        //pager.ShowInfo(true);
+        //pager.InfoText("Strana {0}. Ukupno: {1} ({2} items)");
+    })
+    .Summary(s => s
+    .TotalItems(totalItems =>
+    {
+      @*  totalItems.Add()
+               .ShowInColumn("NameSurname")
+               .Name("DistinctRadnik")
+               .SummaryType(SummaryType.Custom).DisplayFormat("Ukupno: " + " {0}")
+               ;*@
+
+        totalItems.Add()
+               .Column("Net")
+               .Name("NetSummary")
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+               .Column("NetBuyed")
+               .Name("NetBuyedSummary")
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+               .Column("NetDifference")
+               .Name("NetDiffSummary")
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+               .Column("Income")
+               .Name("IncomeSummary")
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+         .Column("NoOfBoxes")
+         .Name("NoOfBoxes")
+         .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}");
+
+    })//.CalculateCustomSummary("customSummary")
+    )
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .FocusedRowEnabled(false)
+    // .OnInitialized("filterGridOnStart")
+    //.OnRowInserting("onRowInsertingEmployees")
+    .OnRowUpdating("onRowUpdatingSummaryRep")
+    // .OnToolbarPreparing("toolbar_prep")
+
+    )
+        }
+
+
+
+

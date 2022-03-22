@@ -84,6 +84,7 @@ namespace Osa.Unidocs.Web.MetaDesigner.Controllers.Login
                 {
                     // byte[] bytes = Encoding.UTF8.GetBytes(login.UserName);
                     //  LoginUser(login.UserID);
+                   
                     return Json(new { success = true, result = Session.AppContext.sessionID, user = login.UserID }); ;
                 }
             }

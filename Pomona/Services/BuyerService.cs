@@ -34,7 +34,7 @@ namespace Pomona.Services
         {
             var buyers = buyerRepository.GetBuyers();
             var buyersDto = mapper.Map<IEnumerable<Models.Buyer>>(buyers);
-            return buyersDto.ToList();
+            return buyersDto.OrderBy(x => x.BuyerId).ToList();
         }
 
         public void SaveChanges()

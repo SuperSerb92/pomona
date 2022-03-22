@@ -16,7 +16,7 @@ namespace DBModel.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DBModel.Models.BarCodeGenerator", b =>
@@ -27,7 +27,7 @@ namespace DBModel.Migrations
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PlotId")
+                    b.Property<int>("PlotListId")
                         .HasColumnType("int");
 
                     b.Property<int>("PackagingId")
@@ -48,13 +48,34 @@ namespace DBModel.Migrations
                     b.Property<string>("BarCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Bruto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IndPrint")
+                        .HasColumnType("int");
+
                     b.Property<int>("IndStorn")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LoggedUserID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxRbr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Neto")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PlotId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("EmployeeID", "UserID", "PlotId", "PackagingId", "Rbr", "CultureId", "CultureTypeId", "DateGenerated");
+                    b.Property<int>("Tara")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmployeeID", "UserID", "PlotListId", "PackagingId", "Rbr", "CultureId", "CultureTypeId", "DateGenerated");
 
                     b.HasIndex("CultureId");
 
@@ -62,7 +83,7 @@ namespace DBModel.Migrations
 
                     b.HasIndex("PackagingId");
 
-                    b.HasIndex("PlotId");
+                    b.HasIndex("PlotListId");
 
                     b.HasIndex("UserID");
 
@@ -267,6 +288,173 @@ namespace DBModel.Migrations
                     b.ToTable("PlotList");
                 });
 
+            modelBuilder.Entity("DBModel.Models.ProfitLossReport", b =>
+                {
+                    b.Property<int>("BrojBeraca")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BrojKutija")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Datum")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NetoOtkup")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Prihod")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Profit")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProsecanTrosakPoBeracu")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProsecnaCenaKost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProsecnaPC")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Trosak")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TrosakProc")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("ProfitLossReports");
+                });
+
+            modelBuilder.Entity("DBModel.Models.Repurchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BuyerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CultureId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Difference")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Income")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Neto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("NetoShipped")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Repurchases");
+                });
+
+            modelBuilder.Entity("DBModel.Models.SummaryReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Culture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CultureId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CultureType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CultureTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NameSurname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Neto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoOfBoxes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlotListId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlotListName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SummaryReports");
+                });
+
+            modelBuilder.Entity("DBModel.Models.SummaryReportRepurchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Buyer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CultureName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Income")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Net")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("NetBuyed")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("NetDifference")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("NoOfBoxes")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("Paid")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("PaidDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SummaryReportsRepurchases");
+                });
+
             modelBuilder.Entity("DBModel.Models.User", b =>
                 {
                     b.Property<int>("UserID")
@@ -309,6 +497,47 @@ namespace DBModel.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("DBModel.Models.WorkEvaluation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Evaluation")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpenseKg")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NameSurname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Neto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoOfBoxes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PayPerDay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeID");
+
+                    b.ToTable("WorkEvaluations");
+                });
+
             modelBuilder.Entity("DBModel.Models.BarCodeGenerator", b =>
                 {
                     b.HasOne("DBModel.Models.Culture", "Culture")
@@ -335,9 +564,9 @@ namespace DBModel.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DBModel.Models.Plot", "Plot")
+                    b.HasOne("DBModel.Models.PlotList", "PlotList")
                         .WithMany()
-                        .HasForeignKey("PlotId")
+                        .HasForeignKey("PlotListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -355,7 +584,7 @@ namespace DBModel.Migrations
 
                     b.Navigation("Packaging");
 
-                    b.Navigation("Plot");
+                    b.Navigation("PlotList");
 
                     b.Navigation("User");
                 });
@@ -399,6 +628,17 @@ namespace DBModel.Migrations
                         .IsRequired();
 
                     b.Navigation("PlotList");
+                });
+
+            modelBuilder.Entity("DBModel.Models.WorkEvaluation", b =>
+                {
+                    b.HasOne("DBModel.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 #pragma warning restore 612, 618
         }

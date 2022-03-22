@@ -12,8 +12,8 @@ namespace DBModel.Models
         public Employee Employee { get; set; }
         public int UserID { get; set; }
         public User User { get; set; }
-        public int PlotId { get; set; }
-        public Plot Plot { get; set; }
+        public int? PlotId { get; set; }
+     //   public Plot Plot { get; set; }
         public int CultureTypeId { get; set; }
         public CultureType CultureType { get; set;}
         public int CultureId { get; set; }
@@ -29,5 +29,13 @@ namespace DBModel.Models
         public int IndStorn { get; set; }
         
         public int Status { get; set;}//0-aktivan 1 storniran
+        public int Tara { get; set; }
+        public int Neto { get; set; }
+        public int Bruto { get; set; }
+        public PlotList PlotList { get; set; }
+        public int PlotListId { get; set; }
+        public int IndPrint { get; set; } //0-nije stampan 1 stampan
+        public int LoggedUserID { get; set; }
+        public int MaxRbr { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace Pomona.Services
         {
             var controlorEmployeeDB = conEmpRelRepository.GetConEmployeesRelations();
             var controlorEmployee = mapper.Map<IEnumerable<Models.ControlorEmployeesRelation>>(controlorEmployeeDB);
-            return controlorEmployee.ToList();
+            return controlorEmployee.OrderBy(x => x.EmployeeID).ToList();
         }
 
         public void SaveChanges()

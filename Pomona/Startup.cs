@@ -18,6 +18,7 @@ using Pomona.Interfaces;
 using Pomona.Services;
 using Pomona.SignalRChat.Hubs;
 using Pomona.Extensions;
+using DevExpress.AspNetCore;
 
 namespace Pomona
 {
@@ -51,7 +52,7 @@ namespace Pomona
             services.AddSignalR();
             // services.AddSession();
             services.AddAutoMapper(typeof(Startup));
-           
+          
             services.AddSession(opt =>
             {
                 opt.Cookie.IsEssential = true;
@@ -87,6 +88,9 @@ namespace Pomona
             services.AddScoped<IPlotRepository, PlotRepository>();
             services.AddScoped<IPlotService, PlotService>();
 
+            services.AddScoped<IPlotListRepository, PlotListRepository>();
+            services.AddScoped<IPlotListService, PlotListService>();
+
             services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddScoped<IGroupService, GroupService>();
 
@@ -99,9 +103,23 @@ namespace Pomona
             services.AddScoped<IBarCodeGeneratorRepository, BarCodeGeneratorRepository>();
             services.AddScoped<IBarCodeGeneratorService, BarCodeGeneratorService>();
 
+            services.AddScoped<IWorkEvaluationRepository, WorkEvaluationRepository>();
+            services.AddScoped<IWorkEvaluationService, WorkEvaluationService>();
+
             services.AddScoped<IControlorEmployeesRelationRepository, ControlorEmployeesRelationRepository>();
             services.AddScoped<IControlorEmployeesService, ControlorEmployeesRelationService>();
 
+            services.AddScoped<ISummaryReportRepository, SummaryReportRepository>();
+            services.AddScoped<ISummaryReportService, SummaryReportService>();
+
+            services.AddScoped<IRepurchaseRepository, RepurchaseRepository>();
+            services.AddScoped<IRepurchaseService, RepurchaseService>();
+
+            services.AddScoped<IProfitLossReportRepository, ProfitLossReportRepository>();
+            services.AddScoped<IProfitLossReportService, ProfitLossReportService>();
+
+            services.AddScoped<ISummaryRepurchaseRepository, SummaryRepurchaseRepository>();
+            services.AddScoped<ISummaryRepurchaseService, SummaryRepurchaseService>();
 
             //services.AddMvc();
 
@@ -111,6 +129,14 @@ namespace Pomona
                 o.JsonSerializerOptions.DictionaryKeyPolicy = null;
 
             });
+            services.AddCors(options => {
+                options.AddPolicy("AllowCorsPolicy", builder => {
+                    // Allow all ports on local host.
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
+                    builder.WithHeaders("Content-Type");
+                });
+            });
+            services.AddDevExpressControls();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -137,7 +163,7 @@ namespace Pomona
 
             app.UseStaticFiles();
             app.UseSession();
-          
+         
           Session.AppContext.Configure(app.ApplicationServices
                       .GetRequiredService<IHttpContextAccessor>(), app.ApplicationServices
                       .GetRequiredService<IMemoryCache>());
@@ -154,7 +180,7 @@ namespace Pomona
             });
 
             app.UseRouting();
-
+            app.UseDevExpressControls();
             app.UseEndpoints(endpoints =>
             {            
                 endpoints.MapHub<ChatHub>("/chathub");

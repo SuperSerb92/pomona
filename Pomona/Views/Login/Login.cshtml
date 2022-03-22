@@ -4,7 +4,9 @@
 }
 @{ await Html.RenderPartialAsync("PopupMessage"); }
 
-<img src="~/images/PNGNoText/PomonaLogoGreenGrey.png" style="padding-top:20px;padding-bottom:60px;margin-left:600px" width="300" height="300" />
+@*<img src="~/images/PNGNoText/PomonaLogoGreenGrey.png" style="padding-top:20px;padding-bottom:60px;margin-left:600px" width="300" height="300" />*@
+@*<img src="~/images/white.jpg" style="padding-top:20px;padding-bottom:5px;margin-left:600px" width="500" height="200" />*@
+    <img src="~/images/PNGNoText/PomonaLogoGreenGreyWhite2.png" style="padding-bottom:5px;margin-left:750px" width="400" height="400" />
 @*<img src="~/images/Untitled.png" />*@
 <div class="simulator">
 
@@ -20,7 +22,7 @@
       .Items(items =>
       {
       items.AddGroup()
-      .Caption("Pomona").CssClass("pomona-caption-login")
+      .Caption("POMONA").CssClass("pomona-caption-login")
       .Items(groupItems =>
       {
           groupItems.AddSimpleFor(m => m.UserName)
@@ -89,5 +91,6 @@
     }
 
 </div>
+@*<img src="~/images/PNGNoText/PomonaLogoGreenGrey2.png" style="padding-bottom:5px;margin-left:750px" width="400" height="400" />*@
 
 

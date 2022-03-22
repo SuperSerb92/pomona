@@ -1,0 +1,117 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
+
+@(Html.DevExtreme().DataGrid<Pomona.Models.BarCodeGenerator>()
+                                              .ID("barcodeReaderGrid")
+                                              .ShowBorders(true)
+                                               .ElementAttr("overflow", "auto")
+                                              .ShowColumnHeaders(true)
+                                              .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+                                              .ColumnMinWidth(50)
+                                              .ColumnResizingMode(ColumnResizingMode.Widget)
+                                              .DataSource(d => d.Mvc().Controller("BarCodeReader")
+                                              .LoadAction("GetBarCodes")
+                                              .UpdateAction("UpdateBarcode")
+                                              .DeleteAction("DeleteBarcode")
+                                              .Key("BarCode")).KeyExpr("BarCode")
+                                              .Columns(columns =>
+                                              {
+                                                  columns.AddFor(u => u.BarCode).Caption("Barkod").MinWidth(100).AllowEditing(false).SelectedFilterOperation(FilterOperations.StartsWith);
+
+                                                  columns.AddFor(u => u.EmployeeID).Lookup(lookup =>
+                                                  lookup.DataSource(ds => ds.WebApi().Controller("Employee").LoadAction("GetEmployeesStaticList")
+                                                  .Key("EmployeeID")).DisplayExpr("NameSurname").ValueExpr("EmployeeID"))
+                                                  .Caption("Berač").MinWidth(120).AllowEditing(false);
+
+                                                  columns.AddFor(u => u.UserID).Lookup(lookup =>
+                                                 lookup.DataSource(ds => ds.WebApi().Controller("Login").LoadAction("GetUsersStaticList")
+                                                 .Key("UserID")).DisplayExpr("NameSurname").ValueExpr("UserID"))
+                                                 .Caption("Kontrolor").MinWidth(120).AllowEditing(false);
+
+                                                  columns.AddFor(u => u.DateGenerated).Caption("Datum").MinWidth(80).AllowEditing(false);
+
+                                                  columns.AddFor(u => u.PlotListId).Lookup(lookup =>
+                                                  lookup.DataSource(ds => ds.WebApi().Controller("Plot").LoadAction("GetPlotList")
+                                                  .Key("PlotListId")).DisplayExpr("PlotListName").ValueExpr("PlotListId")).Caption("Parcela").MinWidth(100).AllowEditing(false);
+
+                                                  columns.AddFor(u => u.PlotId).Lookup(lookup =>
+                                                  lookup.DataSource(ds => ds.WebApi().Controller("Plot").LoadAction("GetPlotsStaticList")
+                                                  .Key("PlotId")).DisplayExpr("PlotLabel").ValueExpr("PlotId")).Caption("Red Parcele").MinWidth(100).AllowEditing(false);
+
+                                                  columns.AddFor(u => u.CultureId).Lookup(lookup =>
+                                                  lookup.DataSource(ds => ds.WebApi().Controller("Culture").LoadAction("GetCulturesStaticList")
+                                                  .Key("CultureId")).DisplayExpr("CultureName").ValueExpr("CultureId")).Caption("Vrsta voća").MinWidth(100).AllowEditing(false);
+
+                                                  columns.AddFor(u => u.CultureTypeId).Lookup(lookup =>
+                                                  lookup.DataSource(ds => ds.WebApi().Controller("CultureType").LoadAction("GetCultureTypesStaticList")
+                                                  .Key("CultureTypeId")).DisplayExpr("CultureTypeName").ValueExpr("CultureTypeId")).Caption("Sorta voća").MinWidth(100).AllowEditing(false);
+
+                                                  columns.AddFor(u => u.PackagingId).Lookup(lookup =>
+                                                  lookup.DataSource(ds => ds.WebApi().Controller("Packaging").LoadAction("GetPackagingsStaticList")
+                                                  .Key("PackagingId")).DisplayExpr("PackagingType").ValueExpr("PackagingId")).Caption("Tip ambalaže").MinWidth(100).AllowEditing(false);
+                                                  columns.AddFor(u => u.Tara).Caption("Tara ambalaže(g)").MinWidth(30).AllowEditing(false).Format(Format.FixedPoint);
+                                                  columns.AddFor(u => u.Neto).Caption("Neto(g)").MinWidth(40).AllowEditing(false).Format(Format.FixedPoint);
+                                                  columns.AddFor(u => u.Bruto).Caption("Bruto(g)").MinWidth(40).Format(Format.FixedPoint);
+
+                                                  columns.Add()
+                                                   .Type(GridCommandColumnType.Buttons)
+                                                   .Width(120)
+                                                   .Buttons(b =>
+                                                   {
+                                                       b.Add().Name(GridColumnButtonName.Edit);
+                                                       b.Add().Hint("Merenje").Icon("cart")
+                                                        .OnClick("Measure");
+                                                       b.Add()
+                                                        .Hint("Storniraj")
+                                                        .Icon("trash")
+                                                        .OnClick("onPrepareDeleteBarcodeRead");
+                                                   });
+                                              })
+                                              .Editing(editing =>
+                                              {
+                                                  editing.Mode(GridEditMode.Row);
+                                                  editing.AllowAdding(false);
+                                                  editing.ConfirmDelete(false);
+                                                  editing.AllowUpdating(true);
+                                              })
+                                            .Paging(p => p.PageSize(25))
+                                            .Pager(pager =>
+                                            {
+                                                pager.ShowPageSizeSelector(true);
+                                                pager.AllowedPageSizes(new[] { 25,50,100,200 });
+                                               
+                                            })
+                                            .Summary(s => s
+                                            .TotalItems(totalItems =>
+                                            {
+                                                totalItems.Add()
+                                                       .Column("BarCode")
+                                                       .Name("Barcode")
+                                                       .SummaryType(SummaryType.Count).DisplayFormat("Broj redova: " + " {0}");
+
+                                                totalItems.Add()
+                                                     .Column("Neto")
+                                                     .Name("Neto")
+                                                     .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+
+                                                totalItems.Add()
+                                                   .Column("Bruto")
+                                                   .Name("Bruto")
+                                                   .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+                                            })
+                                            )
+                                            .FilterRow(f => f.Visible(true))
+                                            .HeaderFilter(f => f.Visible(true))
+                                            .FocusedRowEnabled(true)
+
+                                         //  .OnFocusedRowChanged("onRowChanged")
+                                         // .OnRowInserting("onRowInsertingPlot")
+                                         .OnRowUpdating("onRowUpdatingRead")
+                                         //.OnToolbarPreparing("onToolbarPreparingPlot")
+                                         // .OnFocusedRowChanged("OnFocusedRowChangedPlots")
+                                         // .OnEditorPreparing("OnEditorPreparingPlot")
+                                         )

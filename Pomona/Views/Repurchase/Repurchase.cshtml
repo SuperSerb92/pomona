@@ -1,0 +1,139 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
+
+@using (Html.BeginForm())
+{
+    @(Html.DevExtreme().DateBox().Width(400)
+                .ID("advanced-dateboxR")
+                .Value(new JS("new Date().getTime()"))
+                .StylingMode(EditorStylingMode.Outlined)
+                .OnInitialized("dateOnInitializedR")
+                .OnValueChanged("dateChangedR")
+                .Buttons(buttons => {
+                    buttons.Add()
+                        .Name("todayR")
+                        .Location(TextEditorButtonLocation.Before)
+                        .Widget(w => w.Button()
+                            .Text("Danas")
+                            .OnClick("today"));
+
+                    buttons.Add()
+                        .Name("prevDateR")
+                        .Location(TextEditorButtonLocation.Before)
+                        .Widget(w => w.Button()
+                            .Icon("spinprev")
+                            .StylingMode(ButtonStylingMode.Text)
+                            .OnClick("prevDate"));
+
+                    buttons.Add()
+                        .Name("nextDateR")
+                        .Location(TextEditorButtonLocation.After)
+                        .Widget(w => w.Button()
+                            .Icon("spinnext")
+                            .StylingMode(ButtonStylingMode.Text)
+                            .OnClick("nextDate"));
+
+                    buttons.Add()
+                        .Name("dropDown");
+                })
+            )
+
+
+    @(Html.DevExtreme().DataGrid<Pomona.Models.Repurchase>
+    ()
+    .ID("repurchaseGrid")
+    .ShowBorders(true)
+    .ElementAttr("overflow", "auto")
+    .ShowColumnHeaders(true)
+    .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+    .ColumnMinWidth(50)
+    .ColumnResizingMode(ColumnResizingMode.Widget)
+    .DataSource(d => d.Mvc().Controller("Repurchase")
+    .LoadAction("GetRepurchases")
+    .InsertAction("InsertRepurchase")
+    .UpdateAction("UpdateRepurchase")
+    .DeleteAction("DeleteRepurchase")
+    .Key("Id"))
+    .Columns(columns =>
+    {
+        columns.AddFor(u => u.CultureId).Lookup(lookup =>
+       lookup.DataSource(ds => ds.WebApi().Controller("Culture").LoadAction("GetCulturesStaticList")
+       .Key("CultureId")).DisplayExpr("CultureName").ValueExpr("CultureId")).Caption("Vrsta voća").MinWidth(100);
+        columns.AddFor(u => u.Date).Caption("Datum otkupa");
+        columns.AddFor(u => u.BuyerId).Lookup(lookup =>
+       lookup.DataSource(ds => ds.WebApi().Controller("Buyer").LoadAction("GetBuyersStaticList")
+       .Key("BuyerId")).DisplayExpr("BuyerName").ValueExpr("BuyerId")).SetCellValue("setStateValueNeto").Caption("Otkupljivač").MinWidth(100);
+        columns.AddFor(u => u.Neto).Caption("Neto (g)").Format(Format.FixedPoint).ValidationRules(r=> r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
+        columns.AddFor(u => u.NetoShipped).Caption("Neto otkup (g)").Format(Format.FixedPoint).ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
+        columns.AddFor(u => u.Difference).Caption("Razlika").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.Price).Caption("Cena (rsd)").Format(Format.FixedPoint).ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
+        columns.AddFor(u => u.Income).Caption("Prihod (rsd)").AllowEditing(false).Format(Format.FixedPoint);
+        columns.Add()
+        .Type(GridCommandColumnType.Buttons)
+        .Width(120)
+        .Buttons(b =>
+        {
+            b.Add().Name(GridColumnButtonName.Save);
+            b.Add().Name(GridColumnButtonName.Edit);
+
+            b.Add()
+        .Hint("delete")
+        .Icon("trash")
+        .OnClick("onPrepareDeleteRep");
+        });
+    })
+    .Editing(editing =>
+    {
+        editing.Mode(GridEditMode.Row);
+        editing.AllowAdding(true);
+        editing.ConfirmDelete(false);
+        //  editing.AllowDeleting(true);
+        editing.AllowUpdating(true);
+    })
+    .Paging(p => p.PageSize(10))
+    .Pager(pager =>
+    {
+        pager.ShowPageSizeSelector(true);
+        pager.AllowedPageSizes(new[] { 10,50,100 });
+
+        //pager.ShowInfo(true);
+        //pager.InfoText("Strana {0}. Ukupno: {1} ({2} items)");
+    })
+    .Summary(s => s
+    .TotalItems(totalItems =>
+    {
+        totalItems.Add()
+               .Column("Neto")
+               .Name("Neto")
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+        // .CustomizeText("EmployeeCountPerPage");
+        totalItems.Add()
+       .Column("Difference")
+       .Name("Razlika")
+       .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+        totalItems.Add()
+             .Column("NetoShipped")
+             .Name("NetoOtkup")
+             .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+        totalItems.Add()
+             .Column("Income")
+             .Name("Prihod")
+             .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+    })
+    )
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+     .OnInitialized("filterGridOnStartR")
+     .OnInitNewRow("onInitNewRowR")
+     .OnRowInserting("onRowInsertingRepurchase")
+    // .OnRowUpdating("cellChanged")
+     .OnToolbarPreparing("onToolbarPreparingR")
+     .OnFocusedCellChanged("cellChanged")
+    //  .OnFocusedRowChanged("cellChanged")
+    )
+}

@@ -37,7 +37,7 @@ namespace Pomona.Services
         {
             var employees = employeeRepository.GetEmployees();
             var employeesDto = mapper.Map<IEnumerable<Models.Employee>>(employees);
-            return employeesDto.ToList();
+            return employeesDto.OrderBy(x => x.EmployeeID).ToList();
         }
 
         public void SaveChanges()

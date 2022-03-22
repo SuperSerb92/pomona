@@ -5,12 +5,23 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Views\BarCodeMenu\BarcodeReport.repx" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Views\BarCodeMenu\BarcodeReport.repx" />
+    </ItemGroup>
+
+    <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="DevExpress.AspNetCore.Common" Version="21.2.5" />
+    <PackageReference Include="DevExpress.Reporting.Core" Version="21.2.5" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.7.1" />
     <PackageReference Include="DevExtreme.AspNet.Core" Version="20.2.5" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,6 +32,7 @@
 
     <ItemGroup>
       <Folder Include="Files\" />
+      <Folder Include="Reports\" />
       <Folder Include="Views\PlotList\" />
     </ItemGroup>
 
@@ -28,6 +40,15 @@
       <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
       <ProjectReference Include="..\DBModel\DBModel.csproj" />
       <ProjectReference Include="..\Session\Session.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\BarCodeMenu\BarcodeReport.cs">
+        <DependentUpon>BarcodeReport.repx</DependentUpon>
+      </Compile>
+      <Compile Update="Views\BarCodeMenu\BarcodeReport.Designer.cs">
+        <DependentUpon>BarcodeReport.repx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ProjectExtensions><VisualStudio><UserProperties TemplateFeatures="NETCORE" /></VisualStudio></ProjectExtensions>

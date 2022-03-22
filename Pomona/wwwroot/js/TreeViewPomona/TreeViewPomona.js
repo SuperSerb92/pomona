@@ -42,18 +42,40 @@ function TreeViewPomonaItemClick(e) {
             Redirect("/Plot/Plot", e.node.text);
             break;
         case 6:
-          //    Redirect("/Culture/Culture", e.node.text);
+            Redirect("/Culture/Culture", e.node.text);
             break;
         case 7:
             Redirect("/CultureType/CultureType", e.node.text);
             break;
         case 8:
-         //    Redirect("/Packaging/Packaging", e.node.text);
+            Redirect("/Packaging/Packaging", e.node.text);
             break;
-        case 9:
+        case 10:
             Redirect("/BarCodeMenu/BarCodeMenu", e.node.text);
           //  OpenPopup("/BarCodeMenu/BarCodeGenerator", "", 550, 600, e.node.text, "");
             break;
+        case 11:
+            Redirect("/BarCodeReader/BarCodeReader", e.node.text);
+            break;
+        case 13:
+            Redirect("/WorkEvaluation/WorkEvaluation", e.node.text);       
+            break;
+        case 14:
+            Redirect("/Repurchase/Repurchase", e.node.text);
+            break;
+        case 15:
+            Redirect("/SummaryReport/SummaryReport", e.node.text);
+            break;
+        case 16:
+            Redirect("/SummaryReportRepurchase/SummaryReportRepurchase", e.node.text);
+            break;      
+        case 17:
+            Redirect("/ProfitLossReport/ProfitLossReport", e.node.text);
+            break;
+        case 18:
+            Redirect("/Scheduler/Scheduler", e.node.text);
+            break;
+       
     }
     // }
 

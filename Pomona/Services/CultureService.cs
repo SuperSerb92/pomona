@@ -32,7 +32,7 @@ namespace Pomona.Services
         {
             var cultures = cultureRepository.GetCultures();
             var culturesDto = mapper.Map<IEnumerable<Models.Culture>>(cultures);
-            return culturesDto.ToList();
+            return culturesDto.OrderBy(x=>x.CultureName).ToList();
         }
         public void SaveChanges()
         {

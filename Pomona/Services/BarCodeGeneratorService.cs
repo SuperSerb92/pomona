@@ -48,6 +48,24 @@ namespace Pomona.Services
             }
             return barcodeDto.ToList();
         }
+        public List<BarCodeGenerator> GetBarCodeActive()
+        {
+            var barcode = barCodeRepository.GetBarCodeGenerators().Where(x=>x.Status==0).ToList();
+            var barcodeDto = mapper.Map<IEnumerable<Models.BarCodeGenerator>>(barcode);
+            foreach (var item in barcodeDto)
+            {
+                if (item.Status == 0)
+                {
+                    item.StatusDisplay = "Aktivan";
+                }
+            }
+            return barcodeDto.ToList();
+        }
+
+        public void Measure(ref int vrednostSaVage,string port)
+        {
+            barCodeRepository.Measure(ref vrednostSaVage,port);
+        }
 
         public void SaveChanges()
         {

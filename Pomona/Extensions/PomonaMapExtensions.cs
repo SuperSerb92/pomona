@@ -28,9 +28,15 @@ namespace Pomona.Extensions
             CreateMap<ControlorEmployeesRelation, Pomona.Models.ControlorEmployeesRelation>();
             CreateMap<BarCodeGenerator, Pomona.Models.BarCodeGenerator>();
             CreateMap<Plot, Pomona.Models.Plot>();
+            CreateMap<PlotList, Pomona.Models.PlotList>();
             CreateMap<Packaging, Pomona.Models.Packaging>();
             CreateMap<Culture, Pomona.Models.Culture>();
             CreateMap<CultureType, Pomona.Models.CultureType>();
+            CreateMap<WorkEvaluation, Pomona.Models.WorkEvaluation>();
+            CreateMap<SummaryReport, Pomona.Models.SummaryReport>();
+            CreateMap<Repurchase, Pomona.Models.Repurchase>();
+            CreateMap<ProfitLossReport, Pomona.Models.ProfitLossReport>();
+            CreateMap<SummaryReportRepurchase, Pomona.Models.SummaryReportRepurchase>();
 
             CreateMap<Pomona.Models.Employee,Employee> ();
             CreateMap<Pomona.Models.Group, Group>();
@@ -42,6 +48,11 @@ namespace Pomona.Extensions
             CreateMap<Pomona.Models.Culture, Culture>();
             CreateMap<Pomona.Models.CultureType, CultureType>();
             CreateMap<Pomona.Models.BarCodeGenerator, BarCodeGenerator>();
+            CreateMap<Pomona.Models.WorkEvaluation, WorkEvaluation>();
+            CreateMap<Pomona.Models.SummaryReport, SummaryReport>();
+            CreateMap<Pomona.Models.Repurchase, Repurchase>();
+            CreateMap<Pomona.Models.ProfitLossReport, ProfitLossReport>();
+            CreateMap<Pomona.Models.SummaryReportRepurchase, SummaryReportRepurchase>();
         }
     }
    

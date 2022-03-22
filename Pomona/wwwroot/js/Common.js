@@ -159,7 +159,15 @@ function onYes(e) {
         case 'PrepareDeletePackaging':
             onDeletePackaging();
             break;
-            
+        case 'PrepareStornBarcode':
+            OnDeleteBarcode();
+            break;  
+        case 'PrepareStornBarcodeRead':
+            OnDeleteBarcodeReader();
+            break;   
+        case 'PrepareDeleteRep':
+            OnDeleteRepurchase();
+            break;   
     }
 }
 

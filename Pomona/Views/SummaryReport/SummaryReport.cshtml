@@ -1,0 +1,123 @@
+﻿@{
+    Layout = null;
+}
+
+@{ await Html.RenderPartialAsync("PopupMessage"); }
+@{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="dx-field">
+        <div style="padding-top:40px;padding-right:20px;padding-left:20px;">Datum od</div>
+        <div style="padding-top:20px;padding-right:20px;">
+            @(Html.DevExtreme().DateBox().ID("dateFrom")
+                .Type(DateBoxType.Date)
+                .StylingMode(EditorStylingMode.Filled)
+                .Value(DateTime.Now)
+            )
+        </div>
+        <div style="padding-top:40px;padding-right:20px;">Datum do</div>
+        @*class="dx-field-label"*@
+        <div style="padding-top:20px;padding-right:20px;">
+            @*class="dx-field-value"*@
+            @(Html.DevExtreme().DateBox().ID("dateTo")
+                .Type(DateBoxType.Date)
+                .StylingMode(EditorStylingMode.Filled)
+                .Value(DateTime.Now)
+            )
+        </div>
+
+        <div style="padding-top:20px;padding-right:20px;">
+            @(Html.DevExtreme().Button().Text("Popuni")
+      .ID("FillButton")
+      .OnClick("OnClickbtnFill")
+      )
+
+        </div>
+        <div style="padding-top:20px;">
+            @(Html.DevExtreme().Button()
+        .Icon("print")
+        .Text("Print")
+        .OnClick("print")
+    )
+            </div>
+        </div>
+        @(Html.DevExtreme().DataGrid<Pomona.Models.SummaryReport>
+    ()
+    .ID("summaryReportGrid")
+    .ShowBorders(true)
+    .ElementAttr("overflow", "auto")
+    .ShowColumnHeaders(true)
+    .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+    .ColumnMinWidth(50)
+    .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+    .OnExporting("exporting")
+    .ColumnResizingMode(ColumnResizingMode.Widget)
+    .DataSource(d => d.Mvc().Controller("SummaryReport")
+    .LoadAction("GetReport")
+    //  .UpdateAction("UpdateEvaluation")
+    .Key("Id"))
+    .Columns(columns =>
+    {
+        columns.AddFor(u => u.NameSurname).Caption("Berač").AllowEditing(false);
+        columns.AddFor(u => u.PlotListName).Caption("Parcela").AllowEditing(false);
+        columns.AddFor(u => u.Culture).Caption("Vrsta voća").AllowEditing(false);
+        columns.AddFor(u => u.CultureType).Caption("Sorta voća").AllowEditing(false);
+        columns.AddFor(u => u.Date).Caption("Datum").Visible(false);
+        columns.AddFor(u => u.Neto).Caption("Neto težina(g)").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.NoOfBoxes).Caption("Broj kutija").AllowEditing(false);
+
+
+    })
+    .Editing(editing =>
+    {
+        editing.Mode(GridEditMode.Row);
+        editing.AllowAdding(false);
+        editing.ConfirmDelete(false);
+        editing.AllowUpdating(false);
+    })
+    .Paging(p => p.PageSize(10))
+    .Pager(pager =>
+    {
+        pager.ShowPageSizeSelector(true);
+        pager.AllowedPageSizes(new[] { 10,50,100 });
+
+        //pager.ShowInfo(true);
+        //pager.InfoText("Strana {0}. Ukupno: {1} ({2} items)");
+    })
+    .Summary(s => s
+    .TotalItems(totalItems =>
+    {
+        totalItems.Add()
+               .ShowInColumn("NameSurname")
+               .Name("DistinctRadnik")
+               .SummaryType(SummaryType.Custom).DisplayFormat("Ukupno: " + " {0}")
+               ;
+
+        totalItems.Add()
+               .Column("Neto")
+               .Name("NetSummary")
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+
+        totalItems.Add()
+         .Column("NoOfBoxes")
+         .Name("NoOfBoxes")
+         .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}");
+
+    }).CalculateCustomSummary("customSummary")
+    )
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .FocusedRowEnabled(false)
+    // .OnInitialized("filterGridOnStart")
+    //.OnRowInserting("onRowInsertingEmployees")
+    //.OnRowUpdating("onRowUpdatingEmployees")
+    // .OnToolbarPreparing("toolbar_prep")
+
+    )
+        }
+
+
+

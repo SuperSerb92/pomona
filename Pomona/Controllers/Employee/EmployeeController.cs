@@ -66,11 +66,21 @@ namespace Pomona.Controllers
         {
             var employee = new Models.Employee();
             JsonConvert.PopulateObject(values, employee);
-            service.AddEmployee(employee);
-            service.SaveChanges();
-            RefreshSources();
 
-            return Ok();
+            var employeeExist = employees.Where(o => o.Name == employee.Name && o.MiddleName == employee.MiddleName && o.Surname == employee.Surname).ToList();
+            if (employeeExist.Count()>0)
+            {
+                return StatusCode(500, "Postoji radnik sa istim imenom, prezimenom i srednjim imenom.");
+            }
+            else
+            {
+                service.AddEmployee(employee);
+                service.SaveChanges();
+                RefreshSources();
+
+                return Ok();
+            }
+          
         }
 
         [HttpPut]

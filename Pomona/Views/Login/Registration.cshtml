@@ -90,7 +90,7 @@
                                                   .DataSource(d => d.Mvc().Controller("Login").LoadAction("GetGroups").Key("Id"))
                                                   .DisplayExpr("GroupName")
                                                   .ValueExpr("Id"))
-                                                  .Label(t => t.Text("Korisnik").Location(FormLabelLocation.Left))
+                                                  .Label(t => t.Text("Uloga").Location(FormLabelLocation.Left))
                                                   .ValidationRules(rules => rules.AddRequired()
                                                   .Message("Morate izabrati grupu"));
                             });

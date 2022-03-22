@@ -15,13 +15,19 @@ namespace Pomona.Controllers.Plot
     public class PlotController : Controller
     {
         private readonly IPlotService service;
+        private readonly IPlotListService serviceL;
         private static List<Pomona.Models.Plot> plots
         {
             get; set;
         }
-        public PlotController(IPlotService service)
+        private static List<Pomona.Models.PlotList> plotLists
+        {
+            get; set;
+        }
+        public PlotController(IPlotService service,IPlotListService serviceL)
         {
             this.service = service;
+            this.serviceL = serviceL;
         }
         public IActionResult Plot()
         {
@@ -46,17 +52,9 @@ namespace Pomona.Controllers.Plot
         public object GetPlotList(DataSourceLoadOptions loadOptions)
         {
             //todo : uros kad odradi plot list da zameni ovo testno sa pozivom iz baze
-            List<PlotList> list = new List<PlotList>();
-            PlotList pl = new PlotList();
-            pl.PlotListId = 1;
-            pl.PlotListName = "Lepa parcela";
-            list.Add(pl);
-            pl = new PlotList();
-            pl.PlotListId = 2;
-            pl.PlotListName = "Ruzna parcela";
-            list.Add(pl);
+            plotLists = serviceL.GetPlotLists();
 
-            return DataSourceLoader.Load(list, loadOptions);
+            return DataSourceLoader.Load(plotLists, loadOptions);
         }
 
 

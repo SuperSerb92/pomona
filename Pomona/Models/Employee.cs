@@ -13,5 +13,6 @@ namespace Pomona.Models
         public string PhoneNumber { get; set; }
         public string Recomendation { get; set; }
         public string MiddleName { get; set; }
+        public string NameSurname { get { return Name + " " +MiddleName +" " + Surname; } }
     }
 }

@@ -11,7 +11,7 @@
                                           .ShowBorders(true)
                                            .ElementAttr("overflow", "auto")
                                           .ShowColumnHeaders(true)
-                                          // .AllowColumnResizing(true)
+                                          .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
                                           .ColumnMinWidth(50)
                                           .ColumnResizingMode(ColumnResizingMode.Widget)
                                           .DataSource(d => d.Mvc().Controller("Culture")

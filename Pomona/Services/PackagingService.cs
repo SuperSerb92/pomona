@@ -35,7 +35,7 @@ namespace Pomona.Services
         {
             var packages = packagingRepository.GetPackaging();
             var packageDB = mapper.Map<IEnumerable<Models.Packaging>>(packages);
-            return packageDB.ToList();
+            return packageDB.OrderBy(x=>x.PackagingType).ToList();
         }
 
         public void SaveChanges()

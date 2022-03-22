@@ -22,15 +22,19 @@ namespace DBModel
         public DbSet<ControlorEmployeesRelation> ControlorEmployeesRelations { get; set; }
         public DbSet<BarCodeGenerator> BarCodeGenerators { get; set; }
         public DbSet<PlotList> PlotList { get; set; }
+        public DbSet<WorkEvaluation> WorkEvaluations { get; set; }
+        public DbSet<SummaryReport> SummaryReports { get; set; }
+        public DbSet<Repurchase> Repurchases { get; set; }
 
-
+        public DbSet<ProfitLossReport> ProfitLossReports { get; set; }
+        public DbSet<SummaryReportRepurchase> SummaryReportsRepurchases { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ControlorEmployeesRelation>()              
               .HasKey(p => new { p.UserID, p.EmployeeID });
 
             modelBuilder.Entity<BarCodeGenerator>()
-            .HasKey(p => new { p.EmployeeID,p.UserID, p.PlotId,p.PackagingId,p.Rbr,p.CultureId,p.CultureTypeId,p.DateGenerated });
+            .HasKey(p => new { p.EmployeeID,p.UserID, p.PlotListId,p.PackagingId,p.Rbr,p.CultureId,p.CultureTypeId,p.DateGenerated });
                                 
              modelBuilder.ApplyConfiguration(new EmployeeConfig());
             modelBuilder.ApplyConfiguration(new LoginConfig());
@@ -38,6 +42,10 @@ namespace DBModel
             modelBuilder.ApplyConfiguration(new CultureConfig());
             modelBuilder.ApplyConfiguration(new PlotConfig());
             modelBuilder.ApplyConfiguration(new PlotListConfig());
+            modelBuilder.ApplyConfiguration(new WorkEvaluationConfig());
+            modelBuilder.ApplyConfiguration(new RepurchaseConfig());
+            modelBuilder.ApplyConfiguration(new ProfitLossReportConfig());
+
         }
 
     }

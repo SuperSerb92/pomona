@@ -36,7 +36,7 @@ namespace Pomona.Services
         {
             var plots = plotRepository.GetPlots();
             var plotsDB = mapper.Map<IEnumerable<Models.Plot>>(plots);
-            return plotsDB.ToList();
+            return plotsDB.OrderBy(x => x.PlotListId).ThenBy(a=>a.PlotLabel).ToList();
         }
 
         public void SaveChanges()
