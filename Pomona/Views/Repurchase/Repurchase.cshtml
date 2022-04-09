@@ -67,8 +67,9 @@
         columns.AddFor(u => u.BuyerId).Lookup(lookup =>
        lookup.DataSource(ds => ds.WebApi().Controller("Buyer").LoadAction("GetBuyersStaticList")
        .Key("BuyerId")).DisplayExpr("BuyerName").ValueExpr("BuyerId")).SetCellValue("setStateValueNeto").Caption("Otkupljivač").MinWidth(100);
-        columns.AddFor(u => u.Neto).Caption("Neto (g)").Format(Format.FixedPoint).ValidationRules(r=> r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
-        columns.AddFor(u => u.NetoShipped).Caption("Neto otkup (g)").Format(Format.FixedPoint).ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
+        columns.AddFor(u => u.NoOfBoxes).Caption("Broj kutija");
+        columns.AddFor(u => u.Neto).Caption("Neto (kg)").Format(Format.FixedPoint).ValidationRules(r=> r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
+        columns.AddFor(u => u.NetoShipped).Caption("Neto otkup (kg)").Format(Format.FixedPoint).ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
         columns.AddFor(u => u.Difference).Caption("Razlika").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.Price).Caption("Cena (rsd)").Format(Format.FixedPoint).ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
         columns.AddFor(u => u.Income).Caption("Prihod (rsd)").AllowEditing(false).Format(Format.FixedPoint);

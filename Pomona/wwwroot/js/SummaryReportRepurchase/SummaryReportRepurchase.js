@@ -35,7 +35,7 @@ function OnClickbtnFillRep(e) {
 
 function printRep() {
 
-  
+    window.jsPDF = window.jspdf.jsPDF;
     var doc = new jsPDF();
     //doc.addFileToVFS('./fonts/Roboto-Regular.ttf', './Roboto-Regular-normal.js');
     //doc.addFileToVFS('./fonts/Roboto-Bold.ttf', './Roboto-Bold-bold.js');
@@ -48,28 +48,16 @@ function printRep() {
     var dataGrid = $("#summaryReportRepurchaseGrid").dxDataGrid("instance");
     DevExpress.pdfExporter.exportDataGrid({
         jsPDFDocument: doc,
-        component: dataGrid,
-         autoTableOptions: {
-            theme: "striped",         
-            bodyStyles: {
-                lineWidth: 1
-            },
-            alternateRowStyles: {
-                fillColor: null
-            }
-        }
+        component: dataGrid                
     }).then(function () {
         doc.save("Sumarni izvestaj - Otkup.pdf");
     });
 }
 
 function onRowUpdatingSummaryRep(e) {
-    if (e.newData.Comment == e.oldData.Comment) {
-        showInfo("Možete uneti vrednost samo u jedno polje ()", "Sumarni izvestaj otkup");
-        e.cancel = true;
-        isCanceled = true;
 
-        return;
+    if (e.newData.Comment == undefined) {
+        e.newData.Comment = null;
     }
     var datum;
     var paid;

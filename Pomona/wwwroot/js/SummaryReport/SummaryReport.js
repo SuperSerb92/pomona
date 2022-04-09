@@ -68,6 +68,7 @@ function exporting(e) {
     e.cancel = true;
 }
 function print() {
+    window.jsPDF = window.jspdf.jsPDF;
     var doc = new jsPDF();
     var dataGrid = $("#summaryReportGrid").dxDataGrid("instance");
     DevExpress.pdfExporter.exportDataGrid({

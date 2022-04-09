@@ -131,7 +131,7 @@ namespace Pomona.Controllers.Repurchase
                 {
                     netoRep = rep.Sum(a => a.Neto);
                 }
-                neto = neto - netoRep;
+                neto -= netoRep;
             }
             else
             {
@@ -139,6 +139,33 @@ namespace Pomona.Controllers.Repurchase
             }
 
             return Json(new { success = true, result = neto });
+            // return Ok();
+
+        }
+
+        [HttpGet]
+        public object GetNoOfBoxes(int key, DateTime date)
+        {
+            int brKutija = 0;
+            int brojKutijaRep = 0;
+            var rep = repurchases.Where(x => x.CultureId == key && x.Date.Date == date.Date).ToList();
+
+            barcodes = barCodeGeneratorService.GetBarCodeActive().Where(x => x.CultureId == key && x.DateGenerated.Date == date.Date).ToList();
+            if (barcodes.Count > 0)
+            {
+                brKutija = barcodes.Count();
+                if (rep.Count() > 0)
+                {
+                    brojKutijaRep = rep.Sum(x=>x.NoOfBoxes);
+                }
+                brKutija -= brojKutijaRep;
+            }
+            else
+            {
+                return Json(new { success = false, result = "Nema kutija za odabrani datum i vrstu voća" });
+            }
+
+            return Json(new { success = true, result = brKutija });
             // return Ok();
 
         }

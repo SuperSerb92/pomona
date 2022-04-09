@@ -38,7 +38,8 @@ function setStateValueNeto(rowData, value) {
     
     //if (rowData.CultureId != undefined) {
        
-        rowData.Neto = neto;
+    rowData.Neto = neto;
+    rowData.NoOfBoxes = brojKutija;
  //   }
 }
 function onRowInsertingRepurchase(e) {
@@ -84,6 +85,7 @@ function OnDeleteRepurchase() {
     $("#repurchaseGrid").dxDataGrid("instance").deleteRow(RowForDelete);
 }
 var neto = 0;
+var brojKutija = 0;
 function cellChanged(e) {
     if (e.row.data.CultureId != undefined) {
         $.ajax({
@@ -97,6 +99,23 @@ function cellChanged(e) {
             success: function (data) {
                 if (data.success) {
                     neto = data.result;
+                }
+                else {
+                    showInfo(data.result, "Otkup");
+                }
+            },
+        });
+        $.ajax({
+            url: virtualDirectory + '/Repurchase/GetNoOfBoxes',
+            type: 'GET',
+            data: {
+                key: e.row.data.CultureId,
+                date: new Date(dateEditor.option("value")).toLocaleDateString()
+            },
+            key: "Id",
+            success: function (data) {
+                if (data.success) {
+                    brojKutija = data.result;
                 }
                 else {
                     showInfo(data.result, "Otkup");
