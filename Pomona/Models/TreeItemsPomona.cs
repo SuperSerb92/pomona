@@ -102,20 +102,21 @@ namespace Pomona.Models
                 Text ="Evidentiranje radnika",
                 Expanded = true
             },  
-                 new TreeItemPomona {
+                new TreeItemPomona {
                 ID = 14,
                 ParentId = 12,
                 ImageUrl = "../../images/Pomona/Diskovi.png",
-                Text ="Otkup",
+                Text ="Sumarni izveštaj - Radnici",
                 Expanded = true
             },
                  new TreeItemPomona {
                 ID = 15,
                 ParentId = 12,
                 ImageUrl = "../../images/Pomona/Diskovi.png",
-                Text ="Sumarni izveštaj",
+                Text ="Otkup",
                 Expanded = true
-            },             
+            },
+                    
             
                   new TreeItemPomona {
                 ID = 16,
@@ -129,7 +130,7 @@ namespace Pomona.Models
                 ID = 17,
                 ParentId = 12,
                 ImageUrl = "../../images/Pomona/Diskovi.png",
-                Text ="Profit/Trošak",
+                Text ="Profit/Gubitak",
                 Expanded = true
             } 
                   //,

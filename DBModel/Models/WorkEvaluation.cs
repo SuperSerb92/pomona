@@ -12,7 +12,7 @@ namespace DBModel.Models
         public Employee Employee { get; set; }
         public string NameSurname { get; set; }
         public DateTime Date { get; set; }
-        public int Neto { get; set; }
+        public decimal Neto { get; set; }
         public int NoOfBoxes { get; set; }
         public int Evaluation { get; set; }//ocena 1-3
         public int PayPerDay { get; set; }//dnevnica

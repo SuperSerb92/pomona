@@ -15,7 +15,7 @@
             @(Html.DevExtreme().DateBox().ID("dateFrom")
                 .Type(DateBoxType.Date)
                 .StylingMode(EditorStylingMode.Filled)
-                .Value(DateTime.Now)
+                .Value(DateTime.Now).DisplayFormat("dd.MM.yyyy")
             )
         </div>
         <div style="padding-top:40px;padding-right:20px;">Datum do</div>
@@ -25,7 +25,7 @@
             @(Html.DevExtreme().DateBox().ID("dateTo")
                 .Type(DateBoxType.Date)
                 .StylingMode(EditorStylingMode.Filled)
-                .Value(DateTime.Now)
+                .Value(DateTime.Now).DisplayFormat("dd.MM.yyyy")
             )
         </div>
 
@@ -74,13 +74,13 @@
     .Key("Datum"))
     .Columns(columns =>
     {
-        columns.AddFor(u => u.Datum).Caption("Datum").AllowEditing(false);
+        columns.AddFor(u => u.Datum).Caption("Datum").AllowEditing(false).Format("dd.MM.yyyy");
         columns.AddFor(u => u.BrojBeraca).Caption("Broj berača").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.BrojKutija).Caption("Broj kutija").AllowEditing(false).Format(Format.FixedPoint);
       //  columns.AddFor(u => u.ProsecanTrosakPoBeracu).Caption("AVG trošak po beraču (rsd)").AllowEditing(false);
         columns.AddFor(u => u.Trosak).Caption("Trošak (rsd)").AllowEditing(false).Format(Format.FixedPoint);
-        columns.AddFor(u => u.NetoOtkup).Caption("Neto otkup (kg)").AllowEditing(false).Format(Format.FixedPoint);
-        columns.AddFor(u => u.ProsecnaPC).Caption("AVG prodajna cena (rsd)").AllowEditing(false);
+        columns.AddFor(u => u.NetoOtkup).Caption("Neto otkup (kg)").AllowEditing(false).Format("#,##0.00");
+        columns.AddFor(u => u.ProsecnaPC).Caption("AVG dnevna prodajna cena (rsd)").AllowEditing(false);
         columns.AddFor(u => u.ProsecnaCenaKost).Caption("AVG cena koštanja (rsd)").AllowEditing(false);
         columns.AddFor(u => u.Prihod).Caption("Prihod (rsd)").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.Profit).Caption("Profit (rsd)").AllowEditing(false).Format(Format.FixedPoint);
@@ -132,7 +132,7 @@
         totalItems.Add()
       .Column("NetoOtkup")
       .Name("NetoOtkup")
-      .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+      .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()
        .Column("ProsecnaPC")
@@ -168,7 +168,7 @@
               .SummaryType(SummaryType.Avg).DisplayFormat("AVG: " + " {0}").ValueFormat(f =>
               {
                   f.Type(Format.FixedPoint);
-                  f.Precision(2);
+                  //f.Precision(2);
               });
 
     })

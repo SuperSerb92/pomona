@@ -15,7 +15,7 @@
             @(Html.DevExtreme().DateBox().ID("dateFrom")
                 .Type(DateBoxType.Date)
                 .StylingMode(EditorStylingMode.Filled)
-                .Value(DateTime.Now)
+                .Value(DateTime.Now).DisplayFormat("dd.MM.yyyy")
             )
         </div>
         <div style="padding-top:40px;padding-right:20px;">Datum do</div>
@@ -25,7 +25,7 @@
             @(Html.DevExtreme().DateBox().ID("dateTo")
                 .Type(DateBoxType.Date)
                 .StylingMode(EditorStylingMode.Filled)
-                .Value(DateTime.Now)
+                .Value(DateTime.Now).DisplayFormat("dd.MM.yyyy")
             )
         </div>
 
@@ -66,7 +66,7 @@
         columns.AddFor(u => u.Culture).Caption("Vrsta voća").AllowEditing(false);
         columns.AddFor(u => u.CultureType).Caption("Sorta voća").AllowEditing(false);
         columns.AddFor(u => u.Date).Caption("Datum").Visible(false);
-        columns.AddFor(u => u.Neto).Caption("Neto težina(kg)").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.Neto).Caption("Neto težina(kg)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.NoOfBoxes).Caption("Broj kutija").AllowEditing(false);
 
 

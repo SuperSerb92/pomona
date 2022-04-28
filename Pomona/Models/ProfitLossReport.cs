@@ -12,12 +12,12 @@ namespace Pomona.Models
         int brojKutija;
         int prosecanTrosakPoBeracu;
         int trosak;
-        int netoOtkup;
+        decimal netoOtkup;
         int prosecnaPC;
         int prosecnaCenaKost;
         int prihod;
         int profit;
-        decimal trosakProc;
+        int trosakProc;
         string datumBezVremena;
         string trosakS;
         string prihodS;
@@ -28,12 +28,12 @@ namespace Pomona.Models
         public int BrojKutija { get => brojKutija; set => brojKutija = value; }
         public int ProsecanTrosakPoBeracu { get => prosecanTrosakPoBeracu; set => prosecanTrosakPoBeracu = value; }
         public int Trosak { get => trosak; set => trosak = value; }
-        public int NetoOtkup { get => netoOtkup; set => netoOtkup = value; }
+        public decimal NetoOtkup { get => netoOtkup; set => netoOtkup = value; }
         public int ProsecnaPC { get => prosecnaPC; set => prosecnaPC = value; }
         public int ProsecnaCenaKost { get => prosecnaCenaKost; set => prosecnaCenaKost = value; }
         public int Prihod { get => prihod; set => prihod = value; }
         public int Profit { get => profit; set => profit = value; }
-        public decimal TrosakProc { get => trosakProc; set => trosakProc = value; }
+        public int TrosakProc { get => trosakProc; set => trosakProc = value; }
         public string DatumBezVremena { get => datumBezVremena; set => datumBezVremena = value; }
         public string ProfitS { get => profitS; set => profitS = value; }
         public string PrihodS { get => prihodS; set => prihodS = value; }

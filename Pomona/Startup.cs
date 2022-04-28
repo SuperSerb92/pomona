@@ -19,6 +19,8 @@ using Pomona.Services;
 using Pomona.SignalRChat.Hubs;
 using Pomona.Extensions;
 using DevExpress.AspNetCore;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace Pomona
 {

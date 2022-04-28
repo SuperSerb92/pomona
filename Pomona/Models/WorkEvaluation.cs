@@ -14,13 +14,13 @@ namespace Pomona.Models
         public Employee Employee { get; set; }
         public string NameSurname { get; set; }
         public DateTime Date { get; set; }
-        public int Neto { get; set; }
+        public decimal Neto { get; set; }
         public int NoOfBoxes { get; set; }
         public int Evaluation { get; set; }//ocena 1-3
         public string Datum { get { return Date.Date.ToString("MM/dd/yyyy"); } }
         public int PayPerDay { get; set; }//dnevnica
         public int ExpenseKg { get; set; }//trosak po kg
-        public int Total { get; set; }
+        public decimal Total { get; set; }
 
     }
 }

@@ -1,8 +1,9 @@
 ﻿var dateEditor;
 var millisecondsInDay = 24 * 60 * 60 * 1000;
+
+
 function dateOnInitializedR(e) {
     dateEditor = e.component;
-
 }
 
 function todayR() {

@@ -17,7 +17,7 @@
             @(Html.DevExtreme().DateBox().ID("dateFromRep")
                 .Type(DateBoxType.Date)
                 .StylingMode(EditorStylingMode.Filled)
-                .Value(new DateTime(DateTime.Now.Year, 1, 1))
+                .Value(new DateTime(DateTime.Now.Year, 1, 1)).DisplayFormat("dd.MM.yyyy")
             )
         </div>
         <div style="padding-top:40px;padding-right:20px;">Datum do</div>
@@ -27,7 +27,7 @@
             @(Html.DevExtreme().DateBox().ID("dateToRep")
                 .Type(DateBoxType.Date)
                 .StylingMode(EditorStylingMode.Filled)
-                .Value(DateTime.Now)
+                .Value(DateTime.Now).DisplayFormat("dd.MM.yyyy")
             )
         </div>
 
@@ -62,18 +62,18 @@
     .Key("Id"))
     .Columns(columns =>
     {
-        columns.AddFor(u => u.Date).Caption("Datum").AllowEditing(false);
+        columns.AddFor(u => u.Date).Caption("Datum").AllowEditing(false).Format("dd.MM.yyyy");
         columns.AddFor(u => u.Buyer).Caption("Otkupljivač").AllowEditing(false);
         columns.AddFor(u => u.CultureName).Caption("Vrsta voća").AllowEditing(false);
-        columns.AddFor(u => u.Net).Caption("Neto ubrano (kg)").AllowEditing(false);
-        columns.AddFor(u => u.NetBuyed).Caption("Neto otkup (kg)").AllowEditing(false);
-        columns.AddFor(u => u.NetDifference).Caption("Razlika (kg)").AllowEditing(false);
+        columns.AddFor(u => u.Net).Caption("Neto ubrano (kg)").AllowEditing(false).Format("#,##0.00");
+        columns.AddFor(u => u.NetBuyed).Caption("Neto otkup (kg)").AllowEditing(false).Format("#,##0.00");
+        columns.AddFor(u => u.NetDifference).Caption("Razlika (kg)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.Price).Caption("Cena(rsd)").Visible(false);
         columns.AddFor(u => u.Income).Caption("Prihod").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.NoOfBoxes).Caption("Broj kutija").AllowEditing(false);
         columns.AddFor(u => u.PaidDate).Caption("Datum naplate").AllowEditing(true);
         columns.AddFor(u => u.Comment).Caption("Napomena").AllowEditing(true);
-        columns.AddFor(u => u.Paid).Caption("Naplaćeno").AllowEditing(true);
+       // columns.AddFor(u => u.Paid).Caption("Naplaćeno").AllowEditing(true);
         
      
 
@@ -100,26 +100,26 @@
     .Summary(s => s
     .TotalItems(totalItems =>
     {
-      @*  totalItems.Add()
-               .ShowInColumn("NameSurname")
-               .Name("DistinctRadnik")
-               .SummaryType(SummaryType.Custom).DisplayFormat("Ukupno: " + " {0}")
-               ;*@
+        totalItems.Add()
+               .ShowInColumn("Date").Column("Id")
+               .Name("CountRows")
+               .SummaryType(SummaryType.Count).DisplayFormat("Ukupno: " + " {0}")
+               ;
 
         totalItems.Add()
                .Column("Net")
                .Name("NetSummary")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()
                .Column("NetBuyed")
                .Name("NetBuyedSummary")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()
                .Column("NetDifference")
                .Name("NetDiffSummary")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+               .SummaryType(SummaryType.Avg).DisplayFormat("AVG: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()
                .Column("Income")

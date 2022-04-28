@@ -59,12 +59,12 @@ function TreeViewPomonaItemClick(e) {
             break;
         case 13:
             Redirect("/WorkEvaluation/WorkEvaluation", e.node.text);       
-            break;
+            break;      
         case 14:
-            Redirect("/Repurchase/Repurchase", e.node.text);
+            Redirect("/SummaryReport/SummaryReport", e.node.text);
             break;
         case 15:
-            Redirect("/SummaryReport/SummaryReport", e.node.text);
+            Redirect("/Repurchase/Repurchase", e.node.text);
             break;
         case 16:
             Redirect("/SummaryReportRepurchase/SummaryReportRepurchase", e.node.text);

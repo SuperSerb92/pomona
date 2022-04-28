@@ -12,7 +12,7 @@
                 .Value(new JS("new Date().getTime()"))
                 .StylingMode(EditorStylingMode.Outlined)
                 .OnInitialized("dateOnInitializedR")
-                .OnValueChanged("dateChangedR")
+                .OnValueChanged("dateChangedR").DisplayFormat("dd.MM.yyyy")
                 .Buttons(buttons => {
                     buttons.Add()
                         .Name("todayR")
@@ -63,15 +63,15 @@
         columns.AddFor(u => u.CultureId).Lookup(lookup =>
        lookup.DataSource(ds => ds.WebApi().Controller("Culture").LoadAction("GetCulturesStaticList")
        .Key("CultureId")).DisplayExpr("CultureName").ValueExpr("CultureId")).Caption("Vrsta voća").MinWidth(100);
-        columns.AddFor(u => u.Date).Caption("Datum otkupa");
+        columns.AddFor(u => u.Date).Caption("Datum otkupa").Format("dd.MM.yyyy");
         columns.AddFor(u => u.BuyerId).Lookup(lookup =>
        lookup.DataSource(ds => ds.WebApi().Controller("Buyer").LoadAction("GetBuyersStaticList")
        .Key("BuyerId")).DisplayExpr("BuyerName").ValueExpr("BuyerId")).SetCellValue("setStateValueNeto").Caption("Otkupljivač").MinWidth(100);
         columns.AddFor(u => u.NoOfBoxes).Caption("Broj kutija");
-        columns.AddFor(u => u.Neto).Caption("Neto (kg)").Format(Format.FixedPoint).ValidationRules(r=> r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
-        columns.AddFor(u => u.NetoShipped).Caption("Neto otkup (kg)").Format(Format.FixedPoint).ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
+        columns.AddFor(u => u.Neto).Caption("Neto (kg)").Format("#,##0.00");//.ValidationRules(r=> r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
+        columns.AddFor(u => u.NetoShipped).Caption("Neto otkup (kg)").Format("#,##0.00").ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
         columns.AddFor(u => u.Difference).Caption("Razlika").AllowEditing(false).Format(Format.FixedPoint);
-        columns.AddFor(u => u.Price).Caption("Cena (rsd)").Format(Format.FixedPoint).ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
+        columns.AddFor(u => u.Price).Caption("Cena (rsd)").Format("#,##0.00");
         columns.AddFor(u => u.Income).Caption("Prihod (rsd)").AllowEditing(false).Format(Format.FixedPoint);
         columns.Add()
         .Type(GridCommandColumnType.Buttons)
@@ -110,7 +110,7 @@
         totalItems.Add()
                .Column("Neto")
                .Name("Neto")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
         // .CustomizeText("EmployeeCountPerPage");
         totalItems.Add()
        .Column("Difference")
@@ -119,7 +119,7 @@
         totalItems.Add()
              .Column("NetoShipped")
              .Name("NetoOtkup")
-             .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+             .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
         totalItems.Add()
              .Column("Income")
              .Name("Prihod")
@@ -131,7 +131,8 @@
     .FocusedRowEnabled(true)
      .OnInitialized("filterGridOnStartR")
      .OnInitNewRow("onInitNewRowR")
-     .OnRowInserting("onRowInsertingRepurchase")
+     .OnRowInserting("onRowInsertingRepurchase").
+     OnFocusedCellChanged("checkNoOfBoxes")
     // .OnRowUpdating("cellChanged")
      .OnToolbarPreparing("onToolbarPreparingR")
      .OnFocusedCellChanged("cellChanged")

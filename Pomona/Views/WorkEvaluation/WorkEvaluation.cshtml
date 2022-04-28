@@ -22,7 +22,7 @@
                 .Value(new JS("new Date().getTime()"))
                 .StylingMode(EditorStylingMode.Outlined)
                 .OnInitialized("dateOnInitialized")
-                .OnValueChanged("dateChanged")              
+                .OnValueChanged("dateChanged").DisplayFormat("dd.MM.yyyy")              
                 .Buttons(buttons => {
                     buttons.Add()
                         .Name("today")
@@ -70,7 +70,7 @@
     .Columns(columns =>
     {
         columns.AddFor(u => u.NameSurname).Caption("Berač").AllowEditing(false);
-        columns.AddFor(u => u.Neto).Caption("Neto težina (g)").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.Neto).Caption("Neto težina (kg)").AllowEditing(false).Format("#,##0.000");
         columns.AddFor(u => u.Date).Caption("Datum").Visible(false);
         columns.AddFor(u => u.NoOfBoxes).Caption("Broj kutija").AllowEditing(false);
         columns.AddFor(u => u.PayPerDay).Caption("Dnevnica (rsd)").DataType(GridColumnDataType.Number).Format(Format.FixedPoint);
@@ -115,7 +115,7 @@
         totalItems.Add()
                .Column("Neto")
                .Name("NetSummary")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.000");
 
         totalItems.Add()
          .Column("NoOfBoxes")
