@@ -14,7 +14,7 @@
 
 @using (Html.BeginForm())
 {
-    @* <div class="dx-field">*@
+    <div class="dx-field">
     @*<div class="dx-field-label" width="50">Pretraga</div>*@
     @* <div class="dx-field-value" width="50px">*@
     @(Html.DevExtreme().DateBox().Width(400)
@@ -51,8 +51,15 @@
                         .Name("dropDown");
                 })
             )
-    @*</div>
-        </div>*@
+               <div style="padding-left:20px;padding-top:10px;">
+        @(Html.DevExtreme().Button()
+        .Icon("print")
+        .Text("Print")
+        .OnClick("printEval")
+         )
+         </div>
+    </div>
+       
 
     @(Html.DevExtreme().DataGrid<Pomona.Models.WorkEvaluation>
     ()

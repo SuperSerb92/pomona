@@ -7,6 +7,7 @@
 
 @using (Html.BeginForm())
 {
+    <div class="dx-field">
     @(Html.DevExtreme().DateBox().Width(400)
                 .ID("advanced-dateboxR")
                 .Value(new JS("new Date().getTime()"))
@@ -42,6 +43,14 @@
                 })
             )
 
+          <div style="padding-left:20px;padding-top:10px;">
+        @(Html.DevExtreme().Button()
+        .Icon("print")
+        .Text("Print")
+        .OnClick("printRepurchase")
+         )
+         </div>
+         </div>
 
     @(Html.DevExtreme().DataGrid<Pomona.Models.Repurchase>
     ()
