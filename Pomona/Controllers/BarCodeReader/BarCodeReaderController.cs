@@ -72,11 +72,18 @@ namespace Pomona.Controllers.BarCodeReader
             if (barc != null)
             {
                 JsonConvert.PopulateObject(values, barc);
-                if (barc.Bruto > barc.Tara)
+                if (barc.Bruto > barc.Tara && barc.IndikatorStorn==false)
                 {
                    
                     barc.Neto = barc.Bruto - barc.Tara;
                     barc.LoggedUserID = Session.AppContext.UserID;
+                    service.UpdateBarCode(barc);
+                    service.SaveChanges();
+                }
+                if (barc.IndikatorStorn==true)
+                {
+                    barc.Status = 1;
+                    barc.StatusDisplay = "Neaktivan";
                     service.UpdateBarCode(barc);
                     service.SaveChanges();
                 }

@@ -71,7 +71,7 @@
         columns.AddFor(u => u.Price).Caption("Cena(rsd)").Visible(false);
         columns.AddFor(u => u.Income).Caption("Prihod").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.NoOfBoxes).Caption("Broj kutija").AllowEditing(false);
-        columns.AddFor(u => u.PaidDate).Caption("Datum naplate").AllowEditing(true);
+        columns.AddFor(u => u.PaidDate).Caption("Datum naplate").AllowEditing(true).Format("dd.MM.yyyy");
         columns.AddFor(u => u.Comment).Caption("Napomena").AllowEditing(true);
        // columns.AddFor(u => u.Paid).Caption("Naplaćeno").AllowEditing(true);
         
@@ -103,18 +103,18 @@
         totalItems.Add()
                .ShowInColumn("Date").Column("Id")
                .Name("CountRows")
-               .SummaryType(SummaryType.Count).DisplayFormat("Ukupno: " + " {0}")
+               .SummaryType(SummaryType.Count).DisplayFormat("TOTAL: " + " {0}")
                ;
 
         totalItems.Add()
                .Column("Net")
                .Name("NetSummary")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
+               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()
                .Column("NetBuyed")
                .Name("NetBuyedSummary")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
+               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()
                .Column("NetDifference")
@@ -124,12 +124,12 @@
         totalItems.Add()
                .Column("Income")
                .Name("IncomeSummary")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
 
         totalItems.Add()
          .Column("NoOfBoxes")
          .Name("NoOfBoxes")
-         .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}");
+         .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}");
 
     })//.CalculateCustomSummary("customSummary")
     )

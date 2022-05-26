@@ -64,6 +64,19 @@ namespace Pomona.Controllers.Repurchase
             rep.Difference = rep.NetoShipped - rep.Neto;
             rep.Date = rep.Date.Date;
 
+            int brKutija = 0;
+            int brojKutijaRep = 0;
+            var repu = repurchases.Sum(x=> x.NoOfBoxes);
+
+            barcodes = barCodeGeneratorService.GetBarCodeActive().Where(x => x.DateGenerated.Date == rep.Date).ToList();
+
+            brKutija = barcodes.Count();
+
+            if (repu > brKutija)
+            {
+               // return 
+            }
+
             service.AddRepurchase(rep);
             service.SaveChanges();
             RefreshSources();

@@ -86,10 +86,10 @@
       //  columns.AddFor(u => u.ProsecanTrosakPoBeracu).Caption("AVG trošak po beraču (rsd)").AllowEditing(false);
         columns.AddFor(u => u.Trosak).Caption("Trošak (rsd)").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.NetoOtkup).Caption("Neto otkup (kg)").AllowEditing(false).Format("#,##0.00");
-        columns.AddFor(u => u.ProsecnaPC).Caption("AVG dnevna prodajna cena (rsd)").AllowEditing(false);
+        columns.AddFor(u => u.ProsecnaPC).Caption("AVG dnevna prodajna cena (rsd)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.ProsecnaCenaKost).Caption("AVG cena koštanja (rsd)").AllowEditing(false);
-        columns.AddFor(u => u.Prihod).Caption("Prihod (rsd)").AllowEditing(false).Format(Format.FixedPoint);
-        columns.AddFor(u => u.Profit).Caption("Profit (rsd)").AllowEditing(false).Format(Format.FixedPoint);
+        columns.AddFor(u => u.Prihod).Caption("Prihod (rsd)").AllowEditing(false).Format("#,##0.00");
+        columns.AddFor(u => u.Profit).Caption("Profit (rsd)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.TrosakProc).Caption("Trošak u odnosu na prihod (%)").AllowEditing(false);
 
 
@@ -111,15 +111,20 @@
     .Summary(s => s
     .TotalItems(totalItems =>
     {
+         totalItems.Add()
+               .Column("Datum")
+               .Name("Datum")
+               .SummaryType(SummaryType.Count).DisplayFormat("TOTAL: " + " {0}").ValueFormat(Format.FixedPoint);
+
         totalItems.Add()
                .Column("BrojBeraca")
                .Name("BrojBeraca")
-               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+               .SummaryType(SummaryType.Sum).DisplayFormat("TOTAL: " + " {0}").ValueFormat(Format.FixedPoint);
 
         totalItems.Add()
                .Column("BrojKutija")
                .Name("NoOfBoxes")
-               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+               .SummaryType(SummaryType.Sum).DisplayFormat("TOTAL: " + " {0}").ValueFormat(Format.FixedPoint);
 
         totalItems.Add()
          .Column("Trosak")

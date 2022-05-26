@@ -43,7 +43,7 @@ namespace DataAccessLayer.EF.Repositories
                 }
                 else
                 {
-                    return result[0].TrosakProc;
+                    return result[0].Profit;
                 }
             }
             catch (Exception)

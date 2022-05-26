@@ -26,6 +26,7 @@ namespace Pomona.Controllers.BarCodeMenu
         private readonly IConfiguration _config;
         private readonly IControlorEmployeesService controlorEmployeesService;
         string printerName;
+        bool hasPrinter;
         private static List<Pomona.Models.BarCodeGenerator> barcodes
         {
             get; set;
@@ -69,6 +70,7 @@ namespace Pomona.Controllers.BarCodeMenu
             this.controlorEmployeesService = controlorEmployeesService;
             _config = config;
             printerName = _config.GetValue<string>("Logging:PrinterName");
+            hasPrinter = _config.GetValue<bool>("Logging:HasPrinter");
         }
         public IActionResult BarCodeGenerator()
         {
@@ -136,9 +138,12 @@ namespace Pomona.Controllers.BarCodeMenu
             report.Variety.Value = cultureType[0].CultureTypeName;
             report.Supervisor.Value = user[0].NameSurname;
             report.CreateDocument();
-           // PrintToolBase tool = new PrintToolBase(report.PrintingSystem);
-           // tool.Print();
-         //   report.Print(printerName);
+            if (hasPrinter==true)
+            {
+                PrintToolBase tool = new PrintToolBase(report.PrintingSystem);
+                tool.Print();
+                report.Print(printerName);
+            }
             barCode.IndPrint = 1;
             service.AddBarCode(barCode);
             service.SaveChanges();

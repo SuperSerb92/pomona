@@ -49,12 +49,58 @@ function onRowInsertingRepurchase(e) {
         e.cancel = true;
         isCanceled = true;
         return;
-    } else {
+    }
+    else if (e.data.NoOfBoxes > brojKutija) {
+        showInfo("Uneli ste više kutija nego sto ima na odabrani datum", "Otkup");
+        e.cancel = true;
+        isCanceled = true;
+        return;
+    }
+    else {
         const start = new Date(e.data.Date);
         const offset = start.getTimezoneOffset();
         if (offset < 0) {
             start.setHours(12, 0, 0);
             e.data.Date = start.toLocaleDateString();
+        }
+    }
+}
+function onRowUpdatingRepurchase(e) {
+    $.ajax({
+        url: virtualDirectory + '/Repurchase/GetNoOfBoxes',
+        type: 'GET',
+        data: {
+            key: e.oldData.CultureId,
+            date: new Date(dateEditor.option("value")).toLocaleDateString()
+        },
+        key: "Id",
+        success: function (data) {
+            if (data.success) {
+                brojKutija = data.result;
+            }
+            else {
+                showInfo(data.result, "Otkup");
+            }
+        },
+    });
+    if (jQuery.isEmptyObject(e.oldData) || e.oldData.Date == undefined) {
+        showInfo("Morate izabrati datum", "Otkup");
+        e.cancel = true;
+        isCanceled = true;
+        return;
+    }
+    else if (e.newData.NoOfBoxes > brojKutija) {
+        showInfo("Uneli ste više kutija nego sto ima na odabrani datum", "Otkup");
+        e.cancel = true;
+        isCanceled = true;
+        return;
+    }
+    else {
+        const start = new Date(e.oldData.Date);
+        const offset = start.getTimezoneOffset();
+        if (offset < 0) {
+            start.setHours(12, 0, 0);
+            e.oldData.Date = start.toLocaleDateString();
         }
     }
 }

@@ -32,7 +32,7 @@
                                                  .Key("UserID")).DisplayExpr("NameSurname").ValueExpr("UserID"))
                                                  .Caption("Kontrolor").MinWidth(120).AllowEditing(false);
 
-                                                  columns.AddFor(u => u.DateGenerated).Caption("Datum").MinWidth(80).AllowEditing(false);
+                                                  columns.AddFor(u => u.DateGenerated).Caption("Datum").MinWidth(80).AllowEditing(false).Format("dd.MM.yyyy");
 
                                                   columns.AddFor(u => u.PlotListId).Lookup(lookup =>
                                                   lookup.DataSource(ds => ds.WebApi().Controller("Plot").LoadAction("GetPlotList")
@@ -56,6 +56,7 @@
                                                   columns.AddFor(u => u.Tara).Caption("Tara ambalaže(kg)").MinWidth(30).AllowEditing(false).Format(Format.FixedPoint);
                                                   columns.AddFor(u => u.Neto).Caption("Neto(kg)").MinWidth(40).AllowEditing(false).Format("#,##0.000");
                                                   columns.AddFor(u => u.Bruto).Caption("Bruto(kg)").MinWidth(40).Format("#,##0.000");
+                                                  columns.AddFor(u => u.IndikatorStorn).Caption("Storniraj").AllowEditing(true);
 
                                                   columns.Add()
                                                    .Type(GridCommandColumnType.Buttons)
@@ -73,7 +74,7 @@
                                               })
                                               .Editing(editing =>
                                               {
-                                                  editing.Mode(GridEditMode.Row);
+                                                  editing.Mode(GridEditMode.Batch);
                                                   editing.AllowAdding(false);
                                                   editing.ConfirmDelete(false);
                                                   editing.AllowUpdating(true);
@@ -109,8 +110,9 @@
                                             .FocusedRowEnabled(true)
 
                                          //  .OnFocusedRowChanged("onRowChanged")
-                                         // .OnRowInserting("onRowInsertingPlot")
+                                         .OnRowInserting("onRowInsertingRead")
                                          .OnRowUpdating("onRowUpdatingRead")
+                                         
                                          //.OnToolbarPreparing("onToolbarPreparingPlot")
                                          // .OnFocusedRowChanged("OnFocusedRowChangedPlots")
                                          // .OnEditorPreparing("OnEditorPreparingPlot")

@@ -209,7 +209,16 @@ function onRowUpdatingRead(e) {
         
         return;
     }
+    //if (e.newData.IndikatorStorn == true) {
+    //    ShowPopupYesNo("Da li ste sigurni da želite da stornirate Barcode?", "PrepareStornBarcodeRead", "BarCode");
+    //}
     $("#barcodeReaderGrid").dxDataGrid("instance").clearFilter();
+}
+function onRowInsertingRead(e) {
+    //if (e.newData.IndikatorStorn == true) {
+    //    ShowPopupYesNo("Da li ste sigurni da želite da stornirate Barcode?", "PrepareStornBarcodeRead", "BarCode");      
+    //}
+  
 }
 function Measure(e) {
 

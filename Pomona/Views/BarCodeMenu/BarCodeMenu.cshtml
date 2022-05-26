@@ -33,7 +33,7 @@
         .Caption("Kontrolor").MinWidth(120);
 
         //  columns.AddFor(u => u.DateGenerated).Caption("Datum").MinWidth(80);
-        columns.Add().DataField("DateGenerated").DataType(GridColumnDataType.Date).Caption("Datum");
+        columns.Add().DataField("DateGenerated").DataType(GridColumnDataType.Date).Caption("Datum").Format("dd.MM.yyyy");
 
         columns.AddFor(u => u.PlotListId).SetCellValue("setPlotStateValue").Lookup(lookup =>
         lookup.DataSource(ds => ds.WebApi().Controller("Plot").LoadAction("GetPlotList")

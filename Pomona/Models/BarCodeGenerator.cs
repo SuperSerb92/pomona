@@ -38,5 +38,7 @@ namespace Pomona.Models
         public int IndPrint { get; set; } //0-nije stampan 1 stampan
         public int MaxRbr { get; set; }
         public int LoggedUserID { get; set; }
+
+        public bool IndikatorStorn { get; set; }
     }
 }
