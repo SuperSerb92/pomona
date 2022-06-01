@@ -53,7 +53,7 @@
                                                   columns.AddFor(u => u.PackagingId).Lookup(lookup =>
                                                   lookup.DataSource(ds => ds.WebApi().Controller("Packaging").LoadAction("GetPackagingsStaticList")
                                                   .Key("PackagingId")).DisplayExpr("PackagingType").ValueExpr("PackagingId")).Caption("Tip ambalaže").MinWidth(100).AllowEditing(false);
-                                                  columns.AddFor(u => u.Tara).Caption("Tara ambalaže(kg)").MinWidth(30).AllowEditing(false).Format(Format.FixedPoint);
+                                                  columns.AddFor(u => u.Tara).Caption("Tara ambalaže(kg)").MinWidth(30).AllowEditing(false).Format("#,##0.000");
                                                   columns.AddFor(u => u.Neto).Caption("Neto(kg)").MinWidth(40).AllowEditing(false).Format("#,##0.000");
                                                   columns.AddFor(u => u.Bruto).Caption("Bruto(kg)").MinWidth(40).Format("#,##0.000");
                                                   columns.AddFor(u => u.IndikatorStorn).Caption("Storniraj").AllowEditing(true);
@@ -66,10 +66,10 @@
                                                        b.Add().Name(GridColumnButtonName.Edit);
                                                        b.Add().Hint("Merenje").Icon("cart")
                                                         .OnClick("Measure");
-                                                       b.Add()
+                                                     @*  b.Add()
                                                         .Hint("Storniraj")
                                                         .Icon("trash")
-                                                        .OnClick("onPrepareDeleteBarcodeRead");
+                                                        .OnClick("onPrepareDeleteBarcodeRead");*@
                                                    });
                                               })
                                               .Editing(editing =>

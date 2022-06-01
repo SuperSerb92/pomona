@@ -14,7 +14,7 @@ namespace Pomona.Models
         public int CultureTypeId { get; set; }
         public int PlotListId { get; set; }
         public int CultureId { get; set; }
-        public int Neto { get; set; }
+        public decimal Neto { get; set; }
         public int NoOfBoxes { get; set; }
         //public decimal AvgWorkEval { get; set; }
         //public int ControllerId { get; set; }

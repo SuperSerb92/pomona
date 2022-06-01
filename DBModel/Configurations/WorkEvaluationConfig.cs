@@ -15,7 +15,7 @@ namespace DBModel.Configurations
         {
             builder.ToTable("WorkEvaluations");
             builder.HasKey(x => x.Id);
-
+            builder.Property(x => x.Neto).HasPrecision(18, 3);
 
 
         }

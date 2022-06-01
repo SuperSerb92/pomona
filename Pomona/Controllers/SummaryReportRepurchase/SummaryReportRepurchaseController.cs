@@ -63,7 +63,15 @@ namespace Pomona.Controllers.SummaryReportRepurchase
             {
                // JsonConvert.PopulateObject(values, eval);
                 eval.Comment = values;
-                eval.PaidDate = datumPlacanja;
+                if (datumPlacanja.Year<=2000)
+                {
+                    eval.PaidDate = null;
+                }
+                else
+                {
+                    eval.PaidDate = datumPlacanja;
+                }
+               
                 eval.Paid = placeno;
                 if (eval.Paid == true)
                 {

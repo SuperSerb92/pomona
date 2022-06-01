@@ -23,7 +23,7 @@
                                           .Columns(columns =>
                                           {
                                               columns.AddFor(u => u.PackagingType).Option("required", true).Caption("Tip ambalaže");
-                                              columns.AddFor(u => u.Tara).Caption("Tara").Format("#0");
+                                              columns.AddFor(u => u.Tara).Caption("Tara (kg)").Format("#,##0.000");
                                               columns.Add()
                                                 .Type(GridCommandColumnType.Buttons)
                                                 .Width(120)

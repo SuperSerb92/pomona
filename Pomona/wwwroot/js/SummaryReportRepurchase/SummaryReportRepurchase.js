@@ -64,6 +64,10 @@ function onRowUpdatingSummaryRep(e) {
     if (e.newData.Comment == undefined) {
         e.newData.Comment = null;
     }
+    if (e.oldData.Comment != null && e.newData.Comment == undefined)
+    {
+        e.newData.Comment = e.oldData.Comment;
+    }
     var datum;
     var paid;
     if (e.newData.PaidDate == undefined) {

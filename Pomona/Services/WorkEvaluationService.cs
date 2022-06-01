@@ -20,11 +20,7 @@ namespace Pomona.Services
         }
         public List<WorkEvaluation> GetWorkEvaluations()
         {
-            var workEvals = workEvaluationRepository.GetWorkEvaluations();
-            foreach (var item in workEvals)
-            {
-                item.Neto = item.Neto / 1000;
-            }
+            var workEvals = workEvaluationRepository.GetWorkEvaluations();          
             var workEvalsDto = mapper.Map<IEnumerable<Models.WorkEvaluation>>(workEvals);
             return workEvalsDto.ToList();
         }

@@ -45,6 +45,7 @@ namespace DBModel
             modelBuilder.ApplyConfiguration(new WorkEvaluationConfig());
             modelBuilder.ApplyConfiguration(new RepurchaseConfig());
             modelBuilder.ApplyConfiguration(new ProfitLossReportConfig());
+            modelBuilder.ApplyConfiguration(new BarCodeConfig());
 
         }
 

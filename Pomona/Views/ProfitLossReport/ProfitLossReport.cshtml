@@ -87,7 +87,7 @@
         columns.AddFor(u => u.Trosak).Caption("Trošak (rsd)").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.NetoOtkup).Caption("Neto otkup (kg)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.ProsecnaPC).Caption("AVG dnevna prodajna cena (rsd)").AllowEditing(false).Format("#,##0.00");
-        columns.AddFor(u => u.ProsecnaCenaKost).Caption("AVG cena koštanja (rsd)").AllowEditing(false);
+        columns.AddFor(u => u.ProsecnaCenaKost).Caption("AVG cena koštanja (rsd)").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.Prihod).Caption("Prihod (rsd)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.Profit).Caption("Profit (rsd)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.TrosakProc).Caption("Trošak u odnosu na prihod (%)").AllowEditing(false);
@@ -238,8 +238,8 @@
         )
         .Series(s => {
             s.Add().ValueField("Trosak").Name("Trošak (rsd)").Label(e => { e.Visible(true); e.Format(Format.FixedPoint); });
-            s.Add().ValueField("Prihod").Name("Prihod (rsd)").Label(e => { e.Visible(true); e.Format(Format.FixedPoint); });
-            s.Add().ValueField("Profit").Name("Profit (rsd)").Label(e => { e.Visible(true); e.Format(Format.FixedPoint); });
+            s.Add().ValueField("Prihod").Name("Prihod (rsd)").Label(e => { e.Visible(true); e.Format("#,##0.00"); });
+            s.Add().ValueField("Profit").Name("Profit (rsd)").Label(e => { e.Visible(true); e.Format("#,##0.00"); });
 
         })
         .Legend(l => l

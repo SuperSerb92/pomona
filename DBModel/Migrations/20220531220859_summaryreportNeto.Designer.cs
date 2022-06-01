@@ -4,14 +4,16 @@ using DBModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DBModel.Migrations
 {
     [DbContext(typeof(DbModelContext))]
-    partial class DbModelContextModelSnapshot : ModelSnapshot
+    [Migration("20220531220859_summaryreportNeto")]
+    partial class summaryreportNeto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,8 +51,7 @@ namespace DBModel.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Bruto")
-                        .HasPrecision(18, 3)
-                        .HasColumnType("decimal(18,3)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("IndPrint")
                         .HasColumnType("int");
@@ -65,8 +66,7 @@ namespace DBModel.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Neto")
-                        .HasPrecision(18, 3)
-                        .HasColumnType("decimal(18,3)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("PlotId")
                         .HasColumnType("int");
@@ -75,8 +75,7 @@ namespace DBModel.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Tara")
-                        .HasPrecision(18, 3)
-                        .HasColumnType("decimal(18,3)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("EmployeeID", "UserID", "PlotListId", "PackagingId", "Rbr", "CultureId", "CultureTypeId", "DateGenerated");
 
@@ -526,8 +525,7 @@ namespace DBModel.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Neto")
-                        .HasPrecision(18, 3)
-                        .HasColumnType("decimal(18,3)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("NoOfBoxes")
                         .HasColumnType("int");

@@ -4,14 +4,16 @@ using DBModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DBModel.Migrations
 {
     [DbContext(typeof(DbModelContext))]
-    partial class DbModelContextModelSnapshot : ModelSnapshot
+    [Migration("20220601142902_BarcodePrecision")]
+    partial class BarcodePrecision
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -526,8 +528,7 @@ namespace DBModel.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Neto")
-                        .HasPrecision(18, 3)
-                        .HasColumnType("decimal(18,3)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("NoOfBoxes")
                         .HasColumnType("int");

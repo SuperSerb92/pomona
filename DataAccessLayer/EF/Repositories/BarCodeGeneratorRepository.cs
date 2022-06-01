@@ -120,7 +120,7 @@ namespace DataAccessLayer.EF.Repositories
                     //4. ako nije kg onda su grami - vrati u grame
                     if (indataArray[1].ToUpper() != "KG")
                     {
-                        vrednostSaVage = (Convert.ToInt32(indataArray[0]));
+                        vrednostSaVage = (Convert.ToInt32(indataArray[0]))/1000;
                         _continue = false;
                         
                     }

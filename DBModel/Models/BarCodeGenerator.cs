@@ -29,9 +29,9 @@ namespace DBModel.Models
         public int IndStorn { get; set; }
         
         public int Status { get; set;}//0-aktivan 1 storniran
-        public int Tara { get; set; }
-        public int Neto { get; set; }
-        public int Bruto { get; set; }
+        public decimal Tara { get; set; }
+        public decimal Neto { get; set; }
+        public decimal Bruto { get; set; }
         public PlotList PlotList { get; set; }
         public int PlotListId { get; set; }
         public int IndPrint { get; set; } //0-nije stampan 1 stampan

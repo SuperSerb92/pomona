@@ -30,10 +30,10 @@ namespace Pomona.Services
             var profitLossReportDto = mapper.Map<IEnumerable<Models.ProfitLossReport>>(sum);
             foreach (var item in profitLossReportDto)
             {
-                item.DatumBezVremena = item.Datum.ToShortDateString();
+                item.DatumBezVremena = item.Datum.ToString("dd.MM.yyyy.");
                 item.TrosakS = item.Trosak.ToString("n0");
-                item.PrihodS = item.Prihod.ToString("n0");
-                item.ProfitS = item.Profit.ToString("n0");
+                item.PrihodS = item.Prihod.ToString("n2");
+                item.ProfitS = item.Profit.ToString("n2");
             }
             return profitLossReportDto.ToList();
         }

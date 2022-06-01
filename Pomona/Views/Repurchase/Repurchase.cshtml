@@ -78,7 +78,7 @@
        .Key("BuyerId")).DisplayExpr("BuyerName").ValueExpr("BuyerId")).SetCellValue("setStateValueNeto").Caption("Otkupljivač").MinWidth(100);
         columns.AddFor(u => u.NoOfBoxes).Caption("Broj kutija");
         columns.AddFor(u => u.Neto).Caption("Neto (kg)").Format("#,##0.00");//.ValidationRules(r=> r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
-        columns.AddFor(u => u.NetoShipped).Caption("Neto otkup (kg)").Format("#,##0.00").ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
+        columns.AddFor(u => u.NetoShipped).Caption("Neto otkup (kg)").Format("#,##0.00");//.ValidationRules(r => r.AddPattern().Pattern("^[0-9]+$").Message("Unesite ceo broj."));
         columns.AddFor(u => u.Difference).Caption("Razlika").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.Price).Caption("Cena (rsd)").Format("#,##0.00");
         columns.AddFor(u => u.Income).Caption("Prihod (rsd)").AllowEditing(false).Format(Format.FixedPoint);
