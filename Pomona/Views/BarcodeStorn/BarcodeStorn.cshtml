@@ -5,29 +5,19 @@
 @{ await Html.RenderPartialAsync("PopupMessage"); }
 @{ await Html.RenderPartialAsync("PopupMessageYesNo"); }
 
-   <div class="dx-field">
-         <div style="padding-top:20px;padding-right:20px;padding-left:20px;">Barcode: </div>
-            <div style="padding-top:10px;padding-right:20px;">
-                @(Html.DevExtreme().TextBox()
-                    .ID("BarcodeString").OnValueChanged("ReadBarcode")
-                )
-            </div>
-    </div>
 
 @(Html.DevExtreme().DataGrid<Pomona.Models.BarCodeGenerator>()
-                                              .ID("barcodeReaderGrid")
+                                              .ID("barcodeStornGrid")
                                               .ShowBorders(true)
                                                .ElementAttr("overflow", "auto")
                                               .ShowColumnHeaders(true)
                                               .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
                                               .ColumnMinWidth(50)
                                               .ColumnResizingMode(ColumnResizingMode.Widget)
-                                              .DataSource(d => d.Mvc().Controller("BarCodeReader")
-                                              .LoadAction("GetBarCodes")
-                                              .UpdateAction("UpdateBarcode")
-                                              .DeleteAction("DeleteBarcode")
-                                              .Key("BarCode")).KeyExpr("BarCode")
-                                              
+                                              .DataSource(d => d.Mvc().Controller("BarcodeStorn")
+                                              .LoadAction("GetBarCodesStorn")
+                                              .UpdateAction("UpdateBarcodeStorn")                                           
+                                              .Key("BarCode")).KeyExpr("BarCode")                                                             
                                               .Columns(columns =>
                                               {
                                                   columns.AddFor(u => u.BarCode).Caption("Barkod").MinWidth(100).AllowEditing(false).SelectedFilterOperation(FilterOperations.StartsWith);
@@ -62,11 +52,13 @@
 
                                                   columns.AddFor(u => u.PackagingId).Lookup(lookup =>
                                                   lookup.DataSource(ds => ds.WebApi().Controller("Packaging").LoadAction("GetPackagingsStaticList")
-                                                  .Key("PackagingId")).DisplayExpr("PackagingType").ValueExpr("PackagingId")).Caption("Tip ambalaže").MinWidth(100).AllowEditing(false);
-                                                  columns.AddFor(u => u.Tara).Caption("Tara ambalaže(kg)").MinWidth(30).AllowEditing(false).Format("#,##0.000");
-                                                  columns.AddFor(u => u.Neto).Caption("Neto(kg)").MinWidth(40).AllowEditing(false).Format("#,##0.000");
-                                                  columns.AddFor(u => u.Bruto).Caption("Bruto(kg)").MinWidth(40).Format("#,##0.000");
-                                              //    columns.AddFor(u => u.IndikatorStorn).Caption("Storniraj").AllowEditing(true);
+                                                  .Key("PackagingId")).DisplayExpr("PackagingType").ValueExpr("PackagingId")).Caption("Tip ambalaže").MinWidth(100).AllowEditing(false);               
+                                                  columns.AddFor(u => u.Bruto).Caption("Bruto(kg)").MinWidth(40).Format("#,##0.000").AllowEditing(false);
+                                                  columns.AddFor(u => u.StatusDisplay).Caption("Status").MinWidth(40).AllowEditing(false);
+                                                  columns.AddFor(u => u.IndikatorStorn).Caption("Storniraj").AllowEditing(true).AllowSearch(false)
+                                                .HeaderCellTemplate(@<text>
+                                                    @(Html.DevExtreme().CheckBox().OnValueChanged("toggleSelection").Hint("Select All"))
+                                                                   </text>);;
 
                                                   columns.Add()
                                                    .Type(GridCommandColumnType.Buttons)
@@ -74,17 +66,12 @@
                                                    .Buttons(b =>
                                                    {
                                                        b.Add().Name(GridColumnButtonName.Edit);
-                                                       b.Add().Hint("Merenje").Icon("cart")
-                                                        .OnClick("Measure");
-                                                       b.Add()
-                                                        .Hint("Storniraj")
-                                                        .Icon("trash")
-                                                        .OnClick("onPrepareDeleteBarcodeRead");
+                                                    
                                                    });
                                               })
                                               .Editing(editing =>
                                               {
-                                                  editing.Mode(GridEditMode.Row);
+                                                  editing.Mode(GridEditMode.Batch);
                                                   editing.AllowAdding(false);
                                                   editing.ConfirmDelete(false);
                                                   editing.AllowUpdating(true);
@@ -95,36 +82,9 @@
                                                 pager.ShowPageSizeSelector(true);
                                                 pager.AllowedPageSizes(new[] { 25,50,100,200 });
                                                
-                                            })
-                                            .Summary(s => s
-                                            .TotalItems(totalItems =>
-                                            {
-                                                totalItems.Add()
-                                                       .Column("BarCode")
-                                                       .Name("Barcode")
-                                                       .SummaryType(SummaryType.Count).DisplayFormat("Broj redova: " + " {0}");
-
-                                                totalItems.Add()
-                                                     .Column("Neto")
-                                                     .Name("Neto")
-                                                     .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.000");
-
-                                                totalItems.Add()
-                                                   .Column("Bruto")
-                                                   .Name("Bruto")
-                                                   .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.000");
-                                            })
-                                            )
+                                            })                                           
                                             .FilterRow(f => f.Visible(true))
                                             .HeaderFilter(f => f.Visible(true))
                                             .FocusedRowEnabled(true)
 
-                                         //  .OnFocusedRowChanged("onRowChanged")
-                                        // .OnRowInserting("onRowInsertingRead")
-                                         .OnRowUpdating("onRowUpdatingRead")
-                                         .OnRowUpdated("onRowUpdatedRead")
-                                         .OnRowPrepared("RowPrepared")
-                                         //.OnToolbarPreparing("onToolbarPreparingPlot")
-                                         // .OnFocusedRowChanged("OnFocusedRowChangedPlots")
-                                         // .OnEditorPreparing("OnEditorPreparingPlot")
                                          )

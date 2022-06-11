@@ -13,6 +13,6 @@ namespace Pomona.Interfaces
         void DeleteBarCode(Models.BarCodeGenerator barCode);
         void UpdateBarCode(Models.BarCodeGenerator barCode);
         void SaveChanges();
-        void Measure(ref int vrednostSaVage,string port);
+        void Measure(ref decimal vrednostSaVage,string port);
     }
 }

@@ -461,7 +461,6 @@ C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DataAccess
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DBModel.pdb
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\Session.pdb
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.csproj.AssemblyReference.cache
-C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.AssemblyInfoInputs.cache
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.AssemblyInfo.cs
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.csproj.CoreCompileInputs.cache
@@ -531,3 +530,5 @@ C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DevExpress
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DevExpress.Xpo.v21.2.dll
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DevExpress.AspNetCore.Common.v21.2.dll
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\DevExpress.AspNetCore.Core.v21.2.dll
+C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\obj\Debug\netcoreapp3.1\Razor\Views\BarcodeStorn\BarcodeStorn.cshtml.g.cs

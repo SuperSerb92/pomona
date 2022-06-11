@@ -62,7 +62,7 @@ namespace Pomona.Services
             return barcodeDto.ToList();
         }
 
-        public void Measure(ref int vrednostSaVage,string port)
+        public void Measure(ref decimal vrednostSaVage,string port)
         {
             barCodeRepository.Measure(ref vrednostSaVage,port);
         }
@@ -74,7 +74,7 @@ namespace Pomona.Services
 
         public void UpdateBarCode(BarCodeGenerator barCode)
         {
-            var barcodeDB = mapper.Map<DBModel.Models.BarCodeGenerator>(barCode);
+            var barcodeDB =  mapper.Map<DBModel.Models.BarCodeGenerator>(barCode);
             barCodeRepository.Update(barcodeDB);
         }
     }

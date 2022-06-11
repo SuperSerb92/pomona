@@ -48,7 +48,7 @@ namespace Pomona.Controllers.WorkEvaluation
                 }
                 if (eval.ExpenseKg>0 && eval.PayPerDay==0)
                 {
-                    eval.Total = (eval.Neto * eval.ExpenseKg) / 1000;
+                    eval.Total = Math.Round((eval.Neto * eval.ExpenseKg),0) ;
                 }
                 if (eval.ExpenseKg == 0 && eval.PayPerDay == 0)
                 {

@@ -142,7 +142,7 @@ namespace Pomona.Controllers.BarCodeMenu
             {
                 PrintToolBase tool = new PrintToolBase(report.PrintingSystem);
                 tool.Print();
-                report.Print(printerName);
+              //  report.Print(printerName);
             }
             barCode.IndPrint = 1;
             service.AddBarCode(barCode);

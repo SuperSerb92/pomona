@@ -40,5 +40,6 @@ namespace Pomona.Models
         public int LoggedUserID { get; set; }
 
         public bool IndikatorStorn { get; set; }
+        public int NoOfPrint { get; set; }
     }
 }

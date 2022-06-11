@@ -47,6 +47,7 @@ namespace DataAccessLayer.EF.Repositories
         public void Update(BarCodeGenerator barCode)
         {
             _context.Update(barCode);
+          
         }
         //public  void Read()
         //{
@@ -60,7 +61,7 @@ namespace DataAccessLayer.EF.Repositories
         //        catch (TimeoutException) { }
         //    }
         //}
-        public void Measure(ref int vrednostSaVage,string port)
+        public void Measure(ref decimal vrednostSaVage,string port)
         {
             try
             {
@@ -82,8 +83,10 @@ namespace DataAccessLayer.EF.Repositories
                 _serialPort.ReadTimeout = 2000;
 
 
-
-                _serialPort.Open();
+                while (!_serialPort.IsOpen)
+                {
+                    _serialPort.Open();
+                }
                 _continue = true;
                 //     readThread.Start();
 
@@ -120,13 +123,13 @@ namespace DataAccessLayer.EF.Repositories
                     //4. ako nije kg onda su grami - vrati u grame
                     if (indataArray[1].ToUpper() != "KG")
                     {
-                        vrednostSaVage = (Convert.ToInt32(indataArray[0]))/1000;
+                        vrednostSaVage = (Convert.ToDecimal(indataArray[0]))/1000;
                         _continue = false;
                         
                     }
                     else
                     {
-                        vrednostSaVage = (Convert.ToInt32(indataArray[0])) * 1000;
+                        vrednostSaVage = (Convert.ToDecimal(indataArray[0])) * 1000;
                         _continue = false;
                     }
                 }
@@ -135,7 +138,7 @@ namespace DataAccessLayer.EF.Repositories
             catch (Exception ex)
             {
                 _serialPort.Close();
-                throw ex;
+               // throw ex;
             }
             finally
             {

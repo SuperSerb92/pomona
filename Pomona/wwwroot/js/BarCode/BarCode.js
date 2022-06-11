@@ -214,7 +214,7 @@ function onRowUpdatingRead(e) {
     //}
     $("#barcodeReaderGrid").dxDataGrid("instance").clearFilter();
 }
-function onRowInsertingRead(e) {
+function onRowUpdatedRead(e) {
     //if (e.newData.IndikatorStorn == true) {
     //    ShowPopupYesNo("Da li ste sigurni da želite da stornirate Barcode?", "PrepareStornBarcodeRead", "BarCode");      
     //}
@@ -263,5 +263,50 @@ function cellValueWorker(rowData, value) {
         },
     });
 }
+var BarcodeTemp = null;
+var Barcode = null;
+function ReadBarcode(e) {
 
+    BarcodeTemp = Barcode;
+    Barcode = e.value;
+   
+    $.ajax({
+        url: virtualDirectory + '/BarCodeReader/Measure',
+        type: 'GET',
+        data: { key: Barcode },
+        key: "BarCode",
+        success: function (data) {
+            if (data.success) {
+                var dataSource = $("#barcodeReaderGrid").dxDataGrid("instance");
+                dataSource.option("dataSource", data.result);
+              //  dataSource.clearFilter();
+            }
+            else {
+                showInfo(data.result, "Merenje");
+            }
+        },
+    });
+    
+    $("#BarcodeString").dxTextBox('instance').option('value', '');
+}
+function RowPrepared(e) {
+    if (e.rowType === 'data') {
+        var enumid = e.data.BarCode;
+       
+
+        if (enumid === BarcodeTemp) {
+            e.rowElement[0].style.backgroundColor = 'lightgreen';
+            
+        }
+    }
+}
+function toggleSelection(e) {
+    var dgInstance = $("#barcodeStornGrid").dxDataGrid("instance"); //my custom function which returns data grid instance
+    var visibleRows = dgInstance.getVisibleRows();
+    if (visibleRows.length > 0) {
+        for (var i = 0; i < visibleRows.length; i++) {
+            dgInstance.cellValue(visibleRows[i].rowIndex, "IndikatorStorn", e.value);
+        }
+    }
+}
 

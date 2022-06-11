@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.EF.Repositories
 {
@@ -29,5 +31,33 @@ namespace DataAccessLayer.EF.Repositories
         {
             _context.Update(workEvaluation);
         }
+        //public IEnumerable<ProfitLossReport> SetWorkEvaluation(DateTime datum, int EmployeeID)
+        //{
+        //    try
+        //    {
+        //        var param = new SqlParameter[] {
+        //                new SqlParameter() {
+        //                    ParameterName = "@datumOd",
+        //                    SqlDbType =  System.Data.SqlDbType.DateTime,
+        //                    Direction = System.Data.ParameterDirection.Input,
+        //                    Value = datumOd
+        //                },
+        //                new SqlParameter() {
+        //                    ParameterName = "@datumDo",
+        //                    SqlDbType =  System.Data.SqlDbType.DateTime,
+        //                    Direction = System.Data.ParameterDirection.Input,
+        //                    Value = datumDo
+        //                }};
+
+        //        return _context.ProfitLossReports.FromSqlRaw("EXECUTE dbo.InsertWorkEvaluation @datumOd,@datumDo", param).ToList();
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        return null;
+        //    }
+
+        //}
     }
 }

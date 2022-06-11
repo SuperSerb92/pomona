@@ -7,8 +7,11 @@ using Newtonsoft.Json;
 using Pomona.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace Pomona.Controllers.BarCodeReader
 {
@@ -16,16 +19,19 @@ namespace Pomona.Controllers.BarCodeReader
     {
         private readonly IBarCodeGeneratorService service;
         private readonly IConfiguration _config;
+        private readonly IWorkEvaluationService workService;
         string port; 
         private static List<Pomona.Models.BarCodeGenerator> barcodes
         {
             get; set;
         }
-        public BarCodeReaderController(IBarCodeGeneratorService service, IConfiguration config)
+        public BarCodeReaderController(IBarCodeGeneratorService service, IConfiguration config, IWorkEvaluationService workService)
         {
             this.service = service;
+            this.workService = workService;
             _config = config;
             port = _config.GetValue<string>("Logging:Port");
+
         }
   
         public IActionResult BarCodeReader()
@@ -87,6 +93,7 @@ namespace Pomona.Controllers.BarCodeReader
                     service.UpdateBarCode(barc);
                     service.SaveChanges();
                 }
+      
             }
 
             RefreshSources();
@@ -111,12 +118,13 @@ namespace Pomona.Controllers.BarCodeReader
         {
             barcodes = service.GetBarCodeActive().Where(x => x.DateGenerated >= DateTime.Now.AddDays(-4)).OrderByDescending(a => a.MaxRbr).ToList();
         }
-        int vrednostSaVage = 0;
+        decimal vrednostSaVage = 0;
         [HttpGet]
         public object Measure(string key)
         {
-          
+
             service.Measure(ref vrednostSaVage,port);
+           // vrednostSaVage =Convert.ToDecimal(2.56);
             var barc = barcodes.FirstOrDefault(a => a.BarCode == key);
             if (barc != null)
             {
@@ -137,8 +145,11 @@ namespace Pomona.Controllers.BarCodeReader
 
             RefreshSources();
               return Json(new { success = true, result = barcodes });
-            // return Ok();
+           
             
         }
+
+      
+
     }
 }

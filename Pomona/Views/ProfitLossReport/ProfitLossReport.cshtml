@@ -166,12 +166,12 @@
         totalItems.Add()
    .Column("Prihod")
    .Name("Prihod")
-   .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+   .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()
    .Column("Profit")
    .Name("Profit")
-   .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
+   .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()
               .Column("TrosakProc")

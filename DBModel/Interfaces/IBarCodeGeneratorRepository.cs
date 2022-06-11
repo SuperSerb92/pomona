@@ -12,6 +12,6 @@ namespace DBModel.Interfaces
         void Delete(DBModel.Models.BarCodeGenerator barCode);
         void Update(DBModel.Models.BarCodeGenerator barCode);
         void SaveChanges();
-        void Measure(ref int vrednostSaVage,string port);
+        void Measure(ref decimal vrednostSaVage,string port);
     }
 }

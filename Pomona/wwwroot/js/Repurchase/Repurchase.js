@@ -89,11 +89,13 @@ function onRowUpdatingRepurchase(e) {
         isCanceled = true;
         return;
     }
-    else if (e.newData.NoOfBoxes > brojKutija) {
-        showInfo("Uneli ste više kutija nego sto ima na odabrani datum", "Otkup");
-        e.cancel = true;
-        isCanceled = true;
-        return;
+    else if (e.newData.NoOfBoxes > e.oldData.NoOfBoxes) {
+        if (e.newData.NoOfBoxes - e.oldData.NoOfBoxes > brojKutija) {
+            showInfo("Uneli ste više kutija nego sto ima na odabrani datum", "Otkup");
+            e.cancel = true;
+            isCanceled = true;
+            return;
+        }
     }
     else {
         const start = new Date(e.oldData.Date);

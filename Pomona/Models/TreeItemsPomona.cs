@@ -88,30 +88,37 @@ namespace Pomona.Models
                 Text ="Očitavanje barcode-a",
                 Expanded = true
             },
-                  new TreeItemPomona {
+               new TreeItemPomona {
                 ID = 12,
+                ParentId = 9,
+                ImageUrl = "../../images/Pomona/Diskovi.png",
+                Text ="Storniranje barcode-a",
+                Expanded = true
+            },
+                  new TreeItemPomona {
+                ID = 13,
                 ParentId = 0,
                 ImageUrl = "../../images/Pomona/Diskovi.png",
                 Text ="Izveštaji",
                 Expanded = true
             },
-                       new TreeItemPomona {
-                ID = 13,
-                ParentId = 12,
+                  new TreeItemPomona {
+                ID = 14,
+                ParentId = 13,
                 ImageUrl = "../../images/Pomona/Diskovi.png",
                 Text ="Evidentiranje radnika",
                 Expanded = true
             },  
                 new TreeItemPomona {
-                ID = 14,
-                ParentId = 12,
+                ID = 15,
+                ParentId = 13,
                 ImageUrl = "../../images/Pomona/Diskovi.png",
                 Text ="Sumarni izveštaj - Radnici",
                 Expanded = true
             },
                  new TreeItemPomona {
-                ID = 15,
-                ParentId = 12,
+                ID = 16,
+                ParentId = 13,
                 ImageUrl = "../../images/Pomona/Diskovi.png",
                 Text ="Otkup",
                 Expanded = true
@@ -119,16 +126,16 @@ namespace Pomona.Models
                     
             
                   new TreeItemPomona {
-                ID = 16,
-                ParentId = 12,
+                ID = 17,
+                ParentId = 13,
                 ImageUrl = "../../images/Pomona/Diskovi.png",
                 Text ="Sumarni izveštaj - Otkup",
                 Expanded = true
             },
                
                   new TreeItemPomona {
-                ID = 17,
-                ParentId = 12,
+                ID = 18,
+                ParentId = 13,
                 ImageUrl = "../../images/Pomona/Diskovi.png",
                 Text ="Profit/Gubitak",
                 Expanded = true

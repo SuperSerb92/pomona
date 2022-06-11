@@ -65,7 +65,7 @@ namespace Pomona.Controllers.Repurchase
             rep.Date = rep.Date.Date;
 
             int brKutija = 0;
-            int brojKutijaRep = 0;
+         //  int brojKutijaRep = 0;
             var repu = repurchases.Sum(x=> x.NoOfBoxes);
 
             barcodes = barCodeGeneratorService.GetBarCodeActive().Where(x => x.DateGenerated.Date == rep.Date).ToList();
@@ -142,7 +142,7 @@ namespace Pomona.Controllers.Repurchase
                  neto = barcodes.Sum(x=>x.Neto);
                 if (rep.Count() > 0)
                 {
-                    netoRep = rep.Sum(a => a.Neto);
+                    netoRep = rep.Sum(a => a.NetoShipped);
                 }
                 neto -= netoRep;
             }
@@ -151,7 +151,7 @@ namespace Pomona.Controllers.Repurchase
                 return Json(new { success = false, result = "Ne postoji težina za odabrani datum i vrstu voća" });
             }
 
-            return Json(new { success = true, result = neto });
+            return Json(new { success = true, result = Math.Round(neto,2) });
             // return Ok();
 
         }
