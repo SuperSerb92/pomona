@@ -36,3 +36,13 @@ C:\Users\urke1\OneDrive\Desktop\Pomona\Session\obj\Debug\netstandard2.0\Session.
 C:\Users\urke1\OneDrive\Desktop\Pomona\Session\obj\Debug\netstandard2.0\Session.csproj.CoreCompileInputs.cache
 C:\Users\urke1\OneDrive\Desktop\Pomona\Session\obj\Debug\netstandard2.0\Session.dll
 C:\Users\urke1\OneDrive\Desktop\Pomona\Session\obj\Debug\netstandard2.0\Session.pdb
+C:\pomona\Session\bin\Debug\netstandard2.0\Session.deps.json
+C:\pomona\Session\bin\Debug\netstandard2.0\Session.dll
+C:\pomona\Session\bin\Debug\netstandard2.0\Session.pdb
+C:\pomona\Session\obj\Debug\netstandard2.0\Session.csproj.AssemblyReference.cache
+C:\pomona\Session\obj\Debug\netstandard2.0\Session.GeneratedMSBuildEditorConfig.editorconfig
+C:\pomona\Session\obj\Debug\netstandard2.0\Session.AssemblyInfoInputs.cache
+C:\pomona\Session\obj\Debug\netstandard2.0\Session.AssemblyInfo.cs
+C:\pomona\Session\obj\Debug\netstandard2.0\Session.csproj.CoreCompileInputs.cache
+C:\pomona\Session\obj\Debug\netstandard2.0\Session.dll
+C:\pomona\Session\obj\Debug\netstandard2.0\Session.pdb

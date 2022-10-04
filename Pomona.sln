@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30225.117
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pomona", "Pomona\Pomona.csproj", "{1E966A35-CDF6-4098-85AB-3D651F35E864}"
 EndProject
@@ -15,8 +15,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Session", "Session\Session.csproj", "{03735E44-F687-4D90-A7D1-7DF165C670E9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{94B36C77-C63A-4340-8C14-BFA26E7ED407}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PomonaSetup", "PomonaSetup\PomonaSetup.vdproj", "{069044D9-A76B-42EE-99CD-DE49BA65FFE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,8 +38,6 @@ Global
 		{94B36C77-C63A-4340-8C14-BFA26E7ED407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94B36C77-C63A-4340-8C14-BFA26E7ED407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94B36C77-C63A-4340-8C14-BFA26E7ED407}.Release|Any CPU.Build.0 = Release|Any CPU
-		{069044D9-A76B-42EE-99CD-DE49BA65FFE1}.Debug|Any CPU.ActiveCfg = Debug
-		{069044D9-A76B-42EE-99CD-DE49BA65FFE1}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

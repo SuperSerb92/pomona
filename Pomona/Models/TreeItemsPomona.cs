@@ -139,7 +139,7 @@ namespace Pomona.Models
                 ImageUrl = "../../images/Pomona/Diskovi.png",
                 Text ="Profit/Gubitak",
                 Expanded = true
-            } 
+            } ,
                   //,
             //      new TreeItemPomona {
             //    ID = 17,
@@ -147,15 +147,15 @@ namespace Pomona.Models
             //    ImageUrl = "../../images/Pomona/Diskovi.png",
             //    Text ="Kalendar",
             //    Expanded = true
-            //},
-            //      new TreeItemPomona {
-            //    ID = 18,
-            //    ParentId = 17,
-            //    ImageUrl = "../../images/Pomona/Diskovi.png",
-            //    Text ="Kalendar",
-            //    Expanded = true
-            //}
-                 
-        };
+          //  },
+                  new TreeItemPomona {
+                ID = 18,
+                ParentId = 13,
+                ImageUrl = "../../images/Pomona/Diskovi.png",
+                Text ="Kalendar",
+                Expanded = true
+            }
+
+};
     }
 }

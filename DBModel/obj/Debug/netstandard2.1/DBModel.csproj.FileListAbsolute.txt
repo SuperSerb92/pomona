@@ -36,3 +36,13 @@ C:\Users\urke1\OneDrive\Desktop\Pomona\DBModel\obj\Debug\netstandard2.1\DBModel.
 C:\Users\urke1\OneDrive\Desktop\Pomona\DBModel\obj\Debug\netstandard2.1\DBModel.csproj.CoreCompileInputs.cache
 C:\Users\urke1\OneDrive\Desktop\Pomona\DBModel\obj\Debug\netstandard2.1\DBModel.dll
 C:\Users\urke1\OneDrive\Desktop\Pomona\DBModel\obj\Debug\netstandard2.1\DBModel.pdb
+C:\pomona\DBModel\bin\Debug\netstandard2.1\DBModel.deps.json
+C:\pomona\DBModel\bin\Debug\netstandard2.1\DBModel.dll
+C:\pomona\DBModel\bin\Debug\netstandard2.1\DBModel.pdb
+C:\pomona\DBModel\obj\Debug\netstandard2.1\DBModel.csproj.AssemblyReference.cache
+C:\pomona\DBModel\obj\Debug\netstandard2.1\DBModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\pomona\DBModel\obj\Debug\netstandard2.1\DBModel.AssemblyInfoInputs.cache
+C:\pomona\DBModel\obj\Debug\netstandard2.1\DBModel.AssemblyInfo.cs
+C:\pomona\DBModel\obj\Debug\netstandard2.1\DBModel.csproj.CoreCompileInputs.cache
+C:\pomona\DBModel\obj\Debug\netstandard2.1\DBModel.dll
+C:\pomona\DBModel\obj\Debug\netstandard2.1\DBModel.pdb
