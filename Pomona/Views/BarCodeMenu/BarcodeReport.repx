@@ -1,80 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="20.1.4.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="BarcodeReport" Margins="0, 0, 13, 9" PaperKind="Custom" PageWidth="507" PageHeight="200" Version="20.1">
+<XtraReportsLayoutSerializer SerializerVersion="21.2.5.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="BarcodeReport" Margins="0, 0, 13, 9" PaperKind="Custom" PageWidth="507" PageHeight="200" Version="21.2">
+  <Extensions>
+    <Item1 Ref="1" Key="VSReportExtInfo" Value=".repx" />
+  </Extensions>
   <Parameters>
-    <Item1 Ref="2" Description="Radnik" Name="Radnik" />
-    <Item2 Ref="3" Visible="false" Description="Parameter1" Name="Origin" />
-    <Item3 Ref="4" Description="Parameter1" Name="Variety" />
-    <Item4 Ref="5" Visible="false" Description="Parameter1" Name="GlobalGap" />
-    <Item5 Ref="6" Visible="false" Description="Parameter1" Name="Grower" />
-    <Item6 Ref="7" Description="Parameter1" Name="Lotcode" />
-    <Item7 Ref="8" Description="Parameter1" Name="Supervisor" />
+    <Item1 Ref="3" Description="Radnik" Name="Radnik" />
+    <Item2 Ref="4" Visible="false" Description="Parameter1" Name="Origin" />
+    <Item3 Ref="5" Description="Parameter1" Name="Variety" />
+    <Item4 Ref="6" Visible="false" Description="Parameter1" Name="GlobalGap" />
+    <Item5 Ref="7" Visible="false" Description="Parameter1" Name="Grower" />
+    <Item6 Ref="8" Description="Parameter1" Name="Lotcode" />
+    <Item7 Ref="9" Description="Parameter1" Name="Supervisor" />
   </Parameters>
   <Bands>
-    <Item1 Ref="9" ControlType="TopMarginBand" Name="topMarginBand1" HeightF="13.4583311" />
-    <Item2 Ref="10" ControlType="DetailBand" Name="detailBand1" HeightF="0" />
-    <Item3 Ref="11" ControlType="BottomMarginBand" Name="bottomMarginBand1" HeightF="9.208107" />
-    <Item4 Ref="12" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="163.875122">
+    <Item1 Ref="10" ControlType="TopMarginBand" Name="topMarginBand1" HeightF="13.4583311" />
+    <Item2 Ref="11" ControlType="DetailBand" Name="detailBand1" HeightF="0" />
+    <Item3 Ref="12" ControlType="BottomMarginBand" Name="bottomMarginBand1" HeightF="9.208107" />
+    <Item4 Ref="13" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="163.875122">
       <Controls>
-        <Item1 Ref="13" ControlType="XRLabel" Name="label14" Multiline="true" Text="11000 Belgrade, Serbia" TextAlignment="MiddleLeft" SizeF="137.125015,23" LocationFloat="70.70834,138.3334" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
-          <StylePriority Ref="14" UseFont="false" UseTextAlignment="false" />
+        <Item1 Ref="14" ControlType="XRLabel" Name="label14" Multiline="true" Text="11000 Belgrade, Serbia" TextAlignment="MiddleLeft" SizeF="137.125015,23" LocationFloat="70.70834,138.3334" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="15" UseFont="false" UseTextAlignment="false" />
         </Item1>
-        <Item2 Ref="15" ControlType="XRShape" Name="shape1" SizeF="228.25,108.666641" LocationFloat="193.958344,6.333351">
-          <Shape Ref="16" ShapeName="Rectangle" />
+        <Item2 Ref="16" ControlType="XRShape" Name="shape1" SizeF="239.500015,108.666634" LocationFloat="182.708328,6.333351">
+          <Shape Ref="17" ShapeName="Rectangle" />
         </Item2>
-        <Item3 Ref="17" ControlType="XRLabel" Name="label13" Multiline="true" TextAlignment="MiddleLeft" SizeF="133.750031,22.9999924" LocationFloat="83.70834,91.99999" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+        <Item3 Ref="18" ControlType="XRLabel" Name="label13" Multiline="true" TextAlignment="MiddleLeft" SizeF="133.750031,22.9999924" LocationFloat="83.70834,91.99999" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
           <ExpressionBindings>
-            <Item1 Ref="18" EventName="BeforePrint" PropertyName="Text" Expression="?Supervisor" />
+            <Item1 Ref="19" EventName="BeforePrint" PropertyName="Text" Expression="?Supervisor" />
           </ExpressionBindings>
-          <StylePriority Ref="19" UseFont="false" UseTextAlignment="false" />
+          <StylePriority Ref="20" UseFont="false" UseTextAlignment="false" />
         </Item3>
-        <Item4 Ref="20" ControlType="XRLabel" Name="label12" Multiline="true" TextAlignment="MiddleLeft" SizeF="103.124992,22.9999962" LocationFloat="72.70834,69.00004" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+        <Item4 Ref="21" ControlType="XRLabel" Name="label12" Multiline="true" TextAlignment="MiddleLeft" SizeF="103.124992,22.9999962" LocationFloat="72.70834,69.00004" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
           <ExpressionBindings>
-            <Item1 Ref="21" EventName="BeforePrint" PropertyName="Text" Expression="?Lotcode" />
+            <Item1 Ref="22" EventName="BeforePrint" PropertyName="Text" Expression="?Lotcode" />
           </ExpressionBindings>
-          <StylePriority Ref="22" UseFont="false" UseTextAlignment="false" />
+          <StylePriority Ref="23" UseFont="false" UseTextAlignment="false" />
         </Item4>
-        <Item5 Ref="23" ControlType="XRLabel" Name="label11" Multiline="true" Text="Extra Berry Blue, Cerski venac 19," TextAlignment="MiddleLeft" SizeF="192.83342,22.9999924" LocationFloat="70.70834,115.333412" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
-          <StylePriority Ref="24" UseFont="false" UseTextAlignment="false" />
+        <Item5 Ref="24" ControlType="XRLabel" Name="label11" Multiline="true" Text="Extra Berry Blue, Cerski venac 19," TextAlignment="MiddleLeft" SizeF="192.83342,22.9999924" LocationFloat="70.70834,115.333412" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="25" UseFont="false" UseTextAlignment="false" />
         </Item5>
-        <Item6 Ref="25" ControlType="XRLabel" Name="label10" Multiline="true" Text="4063061015846" TextAlignment="MiddleLeft" SizeF="81,22.9999962" LocationFloat="101.708351,46.0000038" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
-          <StylePriority Ref="26" UseFont="false" UseTextAlignment="false" />
+        <Item6 Ref="26" ControlType="XRLabel" Name="label10" Multiline="true" Text="4063061015846" TextAlignment="MiddleLeft" SizeF="81,22.9999962" LocationFloat="101.708351,46.0000038" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="27" UseFont="false" UseTextAlignment="false" />
         </Item6>
-        <Item7 Ref="27" ControlType="XRLabel" Name="label9" Multiline="true" TextAlignment="MiddleLeft" SizeF="60.4166679,23" LocationFloat="67.70834,23.0000019" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+        <Item7 Ref="28" ControlType="XRLabel" Name="label9" Multiline="true" TextAlignment="MiddleLeft" SizeF="60.4166679,23" LocationFloat="67.70834,23.0000019" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
           <ExpressionBindings>
-            <Item1 Ref="28" EventName="BeforePrint" PropertyName="Text" Expression="?Variety" />
+            <Item1 Ref="29" EventName="BeforePrint" PropertyName="Text" Expression="?Variety" />
           </ExpressionBindings>
-          <StylePriority Ref="29" UseFont="false" UseTextAlignment="false" />
+          <StylePriority Ref="30" UseFont="false" UseTextAlignment="false" />
         </Item7>
-        <Item8 Ref="30" ControlType="XRLabel" Name="label8" Multiline="true" Text="Serbia" TextAlignment="MiddleLeft" SizeF="60.4166679,23" LocationFloat="66.25001,0" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
-          <StylePriority Ref="31" UseFont="false" UseTextAlignment="false" />
+        <Item8 Ref="31" ControlType="XRLabel" Name="label8" Multiline="true" Text="Serbia" TextAlignment="MiddleLeft" SizeF="60.4166679,23" LocationFloat="66.25001,0" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="32" UseFont="false" UseTextAlignment="false" />
         </Item8>
-        <Item9 Ref="32" ControlType="XRLabel" Name="label7" Multiline="true" Text="Supervisor:" TextAlignment="MiddleLeft" SizeF="56,22.9999924" LocationFloat="27.70834,91.99999" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
-          <StylePriority Ref="33" UseFont="false" UseTextAlignment="false" />
+        <Item9 Ref="33" ControlType="XRLabel" Name="label7" Multiline="true" Text="Supervisor:" TextAlignment="MiddleLeft" SizeF="56,22.9999924" LocationFloat="27.70834,91.99999" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="34" UseFont="false" UseTextAlignment="false" />
         </Item9>
-        <Item10 Ref="34" ControlType="XRLabel" Name="label6" Multiline="true" Text="Lotcode:" TextAlignment="MiddleLeft" SizeF="45,23" LocationFloat="27.70834,69.00001" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
-          <StylePriority Ref="35" UseFont="false" UseTextAlignment="false" />
+        <Item10 Ref="35" ControlType="XRLabel" Name="label6" Multiline="true" Text="Lotcode:" TextAlignment="MiddleLeft" SizeF="45,23" LocationFloat="27.70834,69.00001" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="36" UseFont="false" UseTextAlignment="false" />
         </Item10>
-        <Item11 Ref="36" ControlType="XRLabel" Name="label5" Multiline="true" Text="Grower:" TextAlignment="MiddleLeft" SizeF="43,23.0000076" LocationFloat="27.70834,114.999977" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
-          <StylePriority Ref="37" UseFont="false" UseTextAlignment="false" />
+        <Item11 Ref="37" ControlType="XRLabel" Name="label5" Multiline="true" Text="Grower:" TextAlignment="MiddleLeft" SizeF="43,23.0000076" LocationFloat="27.70834,114.999977" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="38" UseFont="false" UseTextAlignment="false" />
         </Item11>
-        <Item12 Ref="38" ControlType="XRLabel" Name="label4" Multiline="true" Text="Global Gap no:" TextAlignment="MiddleLeft" SizeF="74,22.9999962" LocationFloat="27.70834,46.0000038" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
-          <StylePriority Ref="39" UseFont="false" UseTextAlignment="false" />
+        <Item12 Ref="39" ControlType="XRLabel" Name="label4" Multiline="true" Text="Global Gap no:" TextAlignment="MiddleLeft" SizeF="74,22.9999962" LocationFloat="27.70834,46.0000038" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="40" UseFont="false" UseTextAlignment="false" />
         </Item12>
-        <Item13 Ref="40" ControlType="XRLabel" Name="label3" Multiline="true" Text="Variety:" TextAlignment="MiddleLeft" SizeF="40,22.9999981" LocationFloat="27.70834,23.0000019" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
-          <StylePriority Ref="41" UseFont="false" UseTextAlignment="false" />
+        <Item13 Ref="41" ControlType="XRLabel" Name="label3" Multiline="true" Text="Variety:" TextAlignment="MiddleLeft" SizeF="40,22.9999981" LocationFloat="27.70834,23.0000019" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="42" UseFont="false" UseTextAlignment="false" />
         </Item13>
-        <Item14 Ref="42" ControlType="XRLabel" Name="label2" Multiline="true" Text="Origin:" TextAlignment="MiddleLeft" SizeF="38.5416679,23" LocationFloat="27.70834,0" Font="Times New Roman, 8pt" Padding="2,2,0,0,96">
-          <StylePriority Ref="43" UseFont="false" UseTextAlignment="false" />
+        <Item14 Ref="43" ControlType="XRLabel" Name="label2" Multiline="true" Text="Origin:" TextAlignment="MiddleLeft" SizeF="38.5416679,23" LocationFloat="27.70834,0" Font="Times New Roman, 8pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="44" UseFont="false" UseTextAlignment="false" />
         </Item14>
-        <Item15 Ref="44" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" TextAlignment="TopCenter" SizeF="189.583344,20.29171" LocationFloat="212.416611,95.04177" Padding="2,2,0,0,100">
+        <Item15 Ref="45" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" TextAlignment="TopCenter" SizeF="189.583344,20.29171" LocationFloat="212.416611,95.04177" Padding="2,2,0,0,100">
           <ExpressionBindings>
-            <Item1 Ref="45" EventName="BeforePrint" PropertyName="Text" Expression="?Radnik" />
+            <Item1 Ref="46" EventName="BeforePrint" PropertyName="Text" Expression="?Radnik" />
           </ExpressionBindings>
-          <StylePriority Ref="46" UseTextAlignment="false" />
+          <StylePriority Ref="47" UseTextAlignment="false" />
         </Item15>
-        <Item16 Ref="47" ControlType="XRBarCode" Name="barCode1" Module="1" Alignment="MiddleRight" TextAlignment="BottomCenter" SizeF="229.708282,72.0416946" LocationFloat="172.291672,23.0000172" Padding="10,10,0,0,100">
-          <Symbology Ref="48" Name="EAN128" />
-          <StylePriority Ref="49" UseTextAlignment="false" />
+        <Item16 Ref="48" ControlType="XRBarCode" Name="barCode1" Module="1" Alignment="MiddleRight" TextAlignment="BottomCenter" SizeF="229.708282,72.0416946" LocationFloat="172.291672,23.0000172" Padding="10,10,0,0,100">
+          <Symbology Ref="49" Name="EAN128" />
+          <StylePriority Ref="50" UseTextAlignment="false" />
         </Item16>
       </Controls>
     </Item4>

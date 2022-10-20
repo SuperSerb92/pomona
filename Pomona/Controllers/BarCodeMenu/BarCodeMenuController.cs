@@ -109,46 +109,57 @@ namespace Pomona.Controllers.BarCodeMenu
             var RbrBarcode = barcodes.Where(x => x.EmployeeID == barCode.EmployeeID && x.DateGenerated.Date == barCode.DateGenerated.Date)
                 .OrderByDescending(a=>a.Rbr)
                 .FirstOrDefault();
-            if (RbrBarcode==null)
+            for (int i = 0; i < barCode.NoOfPrint; i++)
             {
-                barCode.Rbr++;  //rbr dobija svaki radnik zasebno na taj dan  
+               // barCode
+                if (RbrBarcode == null)
+                {
+                    barCode.Rbr++;  //rbr dobija svaki radnik zasebno na taj dan  
+                }
+                else
+                {
+                    barCode.Rbr = RbrBarcode.Rbr + 1;
+                }
+                if (barCode.PlotId == null)
+                {
+                    barCode.PlotId = 0;
+                }
+                barCode.BarCode = barCode.EmployeeID.ToString() + barCode.DateGenerated.Day.ToString() + barCode.DateGenerated.Month.ToString()
+                    + barCode.DateGenerated.Year.ToString().Substring(2, 2) + barCode.Rbr + barCode.PlotListId.ToString() + barCode.PlotId.ToString()
+                    + barCode.CultureId.ToString() + barCode.CultureTypeId.ToString();
+                var pack = packagings.Where(a => a.PackagingId == barCode.PackagingId).ToList();
+                var employee = employees.Where(a => a.EmployeeID == barCode.EmployeeID).ToList();
+                barCode.Tara = pack[0].Tara;
+                var cultureType = CultureTypes.Where(a => a.CultureTypeId == barCode.CultureTypeId).ToList();
+                var user = users.Where(a => a.UserID == barCode.UserID).ToList();
+                if (barCode.MaxRbr==0)
+                {
+                    barCode.MaxRbr = barcodesTotal.Max(x => x.MaxRbr) + 1;
+                }
+                else
+                {
+                    barCode.MaxRbr++;
+                }
+                barCode.RbrRead = 0;
+                //Stampa barkoda
+                Views.BarCodeMenu.BarcodeReport report = new Views.BarCodeMenu.BarcodeReport();
+                report.barCode1.Text = barCode.BarCode;
+                report.Radnik.Value = employee[0].Name + " " + employee[0].MiddleName + " " + employee[0].Surname;
+                report.Lotcode.Value = barCode.DateGenerated.Day.ToString() + barCode.DateGenerated.Month.ToString() + barCode.DateGenerated.Year.ToString();
+                report.Variety.Value = cultureType[0].CultureTypeName;
+                report.Supervisor.Value = user[0].NameSurname;
+                report.CreateDocument();
+                if (hasPrinter == true)
+                {
+                    // PrintToolBase tool = new PrintToolBase(report.PrintingSystem);
+                    //tool.Print();
+                    report.Print(printerName);
+                }
+                barCode.IndPrint = 1;
+                service.AddBarCode(barCode);
+                service.SaveChanges();
+                // service.SaveChanges();
             }
-            else
-            {
-                barCode.Rbr = RbrBarcode.Rbr + 1;
-            }
-            if (barCode.PlotId == null)
-            {
-                barCode.PlotId = 0;
-            }
-            barCode.BarCode = barCode.EmployeeID.ToString() + barCode.DateGenerated.Day.ToString() + barCode.DateGenerated.Month.ToString()
-                + barCode.DateGenerated.Year.ToString().Substring(2, 2) + barCode.Rbr + barCode.PlotListId.ToString() + barCode.PlotId.ToString()
-                + barCode.CultureId.ToString() + barCode.CultureTypeId.ToString();
-            var pack = packagings.Where(a => a.PackagingId == barCode.PackagingId).ToList();
-            var employee = employees.Where(a => a.EmployeeID == barCode.EmployeeID).ToList();
-            barCode.Tara = pack[0].Tara;
-            var cultureType = CultureTypes.Where(a => a.CultureTypeId == barCode.CultureTypeId).ToList();
-            var user = users.Where(a => a.UserID == barCode.UserID).ToList();
-            barCode.MaxRbr = barcodesTotal.Max(x => x.MaxRbr)+1;
-            //Stampa barkoda
-            Views.BarCodeMenu.BarcodeReport report = new Views.BarCodeMenu.BarcodeReport();
-            report.barCode1.Text = barCode.BarCode;
-            report.Radnik.Value = employee[0].Name+" "+employee[0].MiddleName+" "+employee[0].Surname;
-            report.Lotcode.Value = barCode.DateGenerated.Day.ToString() + barCode.DateGenerated.Month.ToString() + barCode.DateGenerated.Year.ToString();
-            report.Variety.Value = cultureType[0].CultureTypeName;
-            report.Supervisor.Value = user[0].NameSurname;
-            report.CreateDocument();
-            if (hasPrinter==true)
-            {
-                PrintToolBase tool = new PrintToolBase(report.PrintingSystem);
-                tool.Print();
-              //  report.Print(printerName);
-            }
-            barCode.IndPrint = 1;
-            service.AddBarCode(barCode);
-            service.SaveChanges();
-           // service.SaveChanges();
-          
 
             RefreshSources();
 

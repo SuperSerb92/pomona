@@ -37,5 +37,6 @@ namespace DBModel.Models
         public int IndPrint { get; set; } //0-nije stampan 1 stampan
         public int LoggedUserID { get; set; }
         public int MaxRbr { get; set; }
+        public int RbrRead { get; set; }
     }
 }

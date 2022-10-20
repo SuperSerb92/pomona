@@ -41,5 +41,6 @@ namespace Pomona.Models
 
         public bool IndikatorStorn { get; set; }
         public int NoOfPrint { get; set; }
+        public int RbrRead { get; set; }
     }
 }

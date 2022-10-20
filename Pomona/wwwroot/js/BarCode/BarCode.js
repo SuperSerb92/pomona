@@ -200,6 +200,20 @@ function onRowInsertingBarCode(e) {
         isCanceled = true;
         return;
     }
+    let brojBarkodova = prompt("Koliko barkodova je potrebno za štampu:", "");
+    if (brojBarkodova == null) {
+        e.cancel = true;
+        isCanceled = true;
+        return;
+    }
+    if (brojBarkodova == "" || brojBarkodova == "0") {
+        showInfo("Morate uneti broj barkodova. Minimalni broj je 1.", "Barcode");
+        e.cancel = true;
+        isCanceled = true;
+        return;
+    } else {
+        e.data.NoOfPrint = brojBarkodova;
+    }
 } 
 function onRowUpdatingRead(e) {
     if (e.newData.Bruto <= e.oldData.Tara) {

@@ -11,7 +11,9 @@ namespace Pomona.Controllers.Scheduler
     {
         public ActionResult Scheduler()
         {
-            return View(SchedulerItems.Appointments);
+          
+                return View(SchedulerItems.Appointments);
+          
         }
     }
 }

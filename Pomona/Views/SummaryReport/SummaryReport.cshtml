@@ -113,7 +113,7 @@
           totalItems.Add()
          .Column("Total")
          .Name("Total")
-         .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}");
+         .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
 
           totalItems.Add()
          .Column("BrRadnihDana")
