@@ -75,9 +75,9 @@ function TreeViewPomonaItemClick(e) {
         case 18:
             Redirect("/ProfitLossReport/ProfitLossReport", e.node.text);
             break;
-        case 19:
-            Redirect("/Scheduler/Scheduler", e.node.text);
-            break;
+        //case 19:
+        //    Redirect("/Scheduler/Scheduler", e.node.text);
+        //    break;
        
     }
     // }

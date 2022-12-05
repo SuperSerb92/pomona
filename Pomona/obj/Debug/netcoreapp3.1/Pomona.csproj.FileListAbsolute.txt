@@ -447,8 +447,6 @@ C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\runtimes\w
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\runtimes\linux\lib\netstandard2.0\System.IO.Ports.dll
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\runtimes\osx\lib\netstandard2.0\System.IO.Ports.dll
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.IO.Ports.dll
-C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netstandard2.0\System.Private.ServiceModel.dll
-C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Private.ServiceModel.dll
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
 C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
@@ -713,3 +711,6 @@ C:\pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.csproj.CopyComplete
 C:\pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.dll
 C:\pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.pdb
 C:\pomona\Pomona\obj\Debug\netcoreapp3.1\Pomona.genruntimeconfig.cache
+C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\Connected Services\CurrentExchangeRate\ConnectedService.json
+C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\System.Private.ServiceModel.dll
+C:\Users\urke1\OneDrive\Desktop\Pomona\Pomona\bin\Debug\netcoreapp3.1\System.ServiceModel.Duplex.dll

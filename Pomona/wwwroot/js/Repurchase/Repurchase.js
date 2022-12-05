@@ -1,11 +1,14 @@
 ﻿var dateEditor;
+var RadioGroup;
 var millisecondsInDay = 24 * 60 * 60 * 1000;
 
 
 function dateOnInitializedR(e) {
     dateEditor = e.component;
 }
-
+function RadioGroupInitialized(e) {
+    RadioGroup = e.component;
+}
 function todayR() {
     dateEditor.option("value", new Date().getTime());
 }
@@ -57,12 +60,14 @@ function onRowInsertingRepurchase(e) {
         return;
     }
     else {
+        var radioValue = RadioGroup.option("value");
         const start = new Date(e.data.Date);
         const offset = start.getTimezoneOffset();
         if (offset < 0) {
             start.setHours(12, 0, 0);
             e.data.Date = start.toLocaleDateString();
         }
+        e.data.Kurs = radioValue;
     }
 }
 function onRowUpdatingRepurchase(e) {

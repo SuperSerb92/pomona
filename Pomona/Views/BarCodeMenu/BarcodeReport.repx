@@ -75,7 +75,7 @@
           </ExpressionBindings>
           <StylePriority Ref="47" UseTextAlignment="false" />
         </Item15>
-        <Item16 Ref="48" ControlType="XRBarCode" Name="barCode1" Module="1" Alignment="MiddleRight" TextAlignment="BottomCenter" SizeF="229.708282,72.0416946" LocationFloat="172.291672,23.0000172" Padding="10,10,0,0,100">
+        <Item16 Ref="48" ControlType="XRBarCode" Name="barCode1" Module="1" Alignment="MiddleRight" TextAlignment="BottomCenter" SizeF="237.208237,72.0416946" LocationFloat="175.833344,23.0000172" Padding="10,10,0,0,100">
           <Symbology Ref="49" Name="EAN128" />
           <StylePriority Ref="50" UseTextAlignment="false" />
         </Item16>

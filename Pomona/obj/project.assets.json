@@ -2584,25 +2584,18 @@
           "lib/netstandard1.3/System.Private.DataContractSerialization.dll": {}
         }
       },
-      "System.Private.ServiceModel/4.5.3": {
+      "System.Private.ServiceModel/4.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.0",
           "System.Reflection.DispatchProxy": "4.5.0",
+          "System.Security.Cryptography.Xml": "4.5.0",
           "System.Security.Principal.Windows": "4.5.0"
         },
         "compile": {
-          "ref/netstandard/_._": {}
+          "ref/netstandard2.0/_._": {}
         },
-        "runtimeTargets": {
-          "runtimes/unix/lib/netstandard2.0/System.Private.ServiceModel.dll": {
-            "assetType": "runtime",
-            "rid": "unix"
-          },
-          "runtimes/win/lib/netstandard2.0/System.Private.ServiceModel.dll": {
-            "assetType": "runtime",
-            "rid": "win"
-          }
+        "runtime": {
+          "lib/netstandard2.0/System.Private.ServiceModel.dll": {}
         }
       },
       "System.Private.Uri/4.3.2": {
@@ -2631,7 +2624,7 @@
       "System.Reflection.DispatchProxy/4.5.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/System.Reflection.DispatchProxy.dll": {}
         },
         "runtime": {
           "lib/netcoreapp2.0/System.Reflection.DispatchProxy.dll": {}
@@ -3238,11 +3231,24 @@
           }
         }
       },
-      "System.ServiceModel.Http/4.5.3": {
+      "System.ServiceModel.Duplex/4.7.0": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.5.3",
-          "System.ServiceModel.Primitives": "4.5.3"
+          "System.Private.ServiceModel": "4.7.0",
+          "System.ServiceModel.Primitives": "4.7.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.Duplex.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.Duplex.dll": {}
+        }
+      },
+      "System.ServiceModel.Http/4.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Private.ServiceModel": "4.7.0",
+          "System.ServiceModel.Primitives": "4.7.0"
         },
         "compile": {
           "ref/netstandard2.0/System.ServiceModel.Http.dll": {}
@@ -3251,11 +3257,11 @@
           "lib/netstandard2.0/System.ServiceModel.Http.dll": {}
         }
       },
-      "System.ServiceModel.NetTcp/4.4.4": {
+      "System.ServiceModel.NetTcp/4.7.0": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.4.4",
-          "System.ServiceModel.Primitives": "4.4.4"
+          "System.Private.ServiceModel": "4.7.0",
+          "System.ServiceModel.Primitives": "4.7.0"
         },
         "compile": {
           "ref/netstandard2.0/System.ServiceModel.NetTcp.dll": {}
@@ -3264,25 +3270,25 @@
           "lib/netstandard2.0/System.ServiceModel.NetTcp.dll": {}
         }
       },
-      "System.ServiceModel.Primitives/4.5.3": {
+      "System.ServiceModel.Primitives/4.7.0": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.5.3"
+          "System.Private.ServiceModel": "4.7.0"
         },
         "compile": {
-          "ref/netstandard2.0/System.ServiceModel.Primitives.dll": {},
-          "ref/netstandard2.0/System.ServiceModel.dll": {}
+          "ref/netcoreapp2.1/System.ServiceModel.Primitives.dll": {},
+          "ref/netcoreapp2.1/System.ServiceModel.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.ServiceModel.Primitives.dll": {},
-          "lib/netstandard2.0/System.ServiceModel.dll": {}
+          "lib/netcoreapp2.1/System.ServiceModel.Primitives.dll": {},
+          "lib/netcoreapp2.1/System.ServiceModel.dll": {}
         }
       },
-      "System.ServiceModel.Security/4.4.4": {
+      "System.ServiceModel.Security/4.7.0": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.4.4",
-          "System.ServiceModel.Primitives": "4.4.4"
+          "System.Private.ServiceModel": "4.7.0",
+          "System.ServiceModel.Primitives": "4.7.0"
         },
         "compile": {
           "ref/netstandard2.0/System.ServiceModel.Security.dll": {}
@@ -8073,25 +8079,20 @@
         "system.private.datacontractserialization.nuspec"
       ]
     },
-    "System.Private.ServiceModel/4.5.3": {
-      "sha512": "ancrQgJagx+yC4SZbuE+eShiEAUIF0E1d21TRSoy1C/rTwafAVcBr/fKibkq5TQzyy9uNil2tx2/iaUxsy0S9g==",
+    "System.Private.ServiceModel/4.7.0": {
+      "sha512": "BItrYCkoTV3VzVPsrew+uc34fmLb+3ncgspa7vbO3vkfY9JQCea4u34pHE+Bcv1Iy16MgRs3n2jKVRCDg0rPfg==",
       "type": "package",
-      "path": "system.private.servicemodel/4.5.3",
+      "path": "system.private.servicemodel/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-        "ref/netstandard/_._",
-        "runtimes/unix/lib/netstandard1.3/System.Private.ServiceModel.dll",
-        "runtimes/unix/lib/netstandard2.0/System.Private.ServiceModel.dll",
-        "runtimes/win/lib/netcore50/System.Private.ServiceModel.dll",
-        "runtimes/win/lib/netstandard1.3/System.Private.ServiceModel.dll",
-        "runtimes/win/lib/netstandard2.0/System.Private.ServiceModel.dll",
-        "runtimes/win/lib/uap10.0.16300/System.Private.ServiceModel.dll",
-        "system.private.servicemodel.4.5.3.nupkg.sha512",
-        "system.private.servicemodel.nuspec",
-        "version.txt"
+        "lib/netstandard2.0/System.Private.ServiceModel.dll",
+        "lib/netstandard2.0/System.Private.ServiceModel.pdb",
+        "ref/netstandard2.0/_._",
+        "system.private.servicemodel.4.7.0.nupkg.sha512",
+        "system.private.servicemodel.nuspec"
       ]
     },
     "System.Private.Uri/4.3.2": {
@@ -9796,10 +9797,51 @@
         "system.security.securestring.nuspec"
       ]
     },
-    "System.ServiceModel.Http/4.5.3": {
-      "sha512": "zxR4z6G/FFK/uAUbo7+3IJOqm0w4/lyfHSQDf+hhUHRTc7XSeReGS5iKQq95gyl1ighHEuayqOiB7iacrB6ZUg==",
+    "System.ServiceModel.Duplex/4.7.0": {
+      "sha512": "7GBKQc2QWRxnEVQ49zMKq3z3RFKaHhhWjfMWhp+DP+dgfp0X4Szln/eL+UQumOKvv+sTU5bhOXjnJg5045liCA==",
       "type": "package",
-      "path": "system.servicemodel.http/4.5.3",
+      "path": "system.servicemodel.duplex/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net461/System.ServiceModel.Duplex.dll",
+        "lib/net461/System.ServiceModel.Duplex.pdb",
+        "lib/netcore50/System.ServiceModel.Duplex.dll",
+        "lib/netstandard1.3/System.ServiceModel.Duplex.dll",
+        "lib/netstandard2.0/System.ServiceModel.Duplex.dll",
+        "lib/netstandard2.0/System.ServiceModel.Duplex.pdb",
+        "lib/portable-net45+win8/_._",
+        "lib/win8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net461/System.ServiceModel.Duplex.dll",
+        "ref/netcore50/System.ServiceModel.Duplex.dll",
+        "ref/netstandard1.1/System.ServiceModel.Duplex.dll",
+        "ref/netstandard2.0/System.ServiceModel.Duplex.dll",
+        "ref/portable-net45+win8/_._",
+        "ref/win8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.servicemodel.duplex.4.7.0.nupkg.sha512",
+        "system.servicemodel.duplex.nuspec"
+      ]
+    },
+    "System.ServiceModel.Http/4.7.0": {
+      "sha512": "+BB61ycl1cSlRbJDpABoqMa7bRE4boJfK1CfWfbNzTGeADFVmDkhylpfmC1bKloxtf95p2owj8/n7kilgRBAow==",
+      "type": "package",
+      "path": "system.servicemodel.http/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9810,11 +9852,12 @@
         "lib/net45/_._",
         "lib/net46/System.ServiceModel.Http.dll",
         "lib/net461/System.ServiceModel.Http.dll",
+        "lib/net461/System.ServiceModel.Http.pdb",
         "lib/netcore50/System.ServiceModel.Http.dll",
         "lib/netstandard1.3/System.ServiceModel.Http.dll",
         "lib/netstandard2.0/System.ServiceModel.Http.dll",
+        "lib/netstandard2.0/System.ServiceModel.Http.pdb",
         "lib/portable-net45+win8+wp8/_._",
-        "lib/uap10.0.16300/System.ServiceModel.Http.dll",
         "lib/win8/_._",
         "lib/wp8/_._",
         "lib/xamarinios10/_._",
@@ -9832,22 +9875,20 @@
         "ref/netstandard1.3/System.ServiceModel.Http.dll",
         "ref/netstandard2.0/System.ServiceModel.Http.dll",
         "ref/portable-net45+win8+wp8/_._",
-        "ref/uap10.0.16300/System.ServiceModel.Http.dll",
         "ref/win8/_._",
         "ref/wp8/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.servicemodel.http.4.5.3.nupkg.sha512",
-        "system.servicemodel.http.nuspec",
-        "version.txt"
+        "system.servicemodel.http.4.7.0.nupkg.sha512",
+        "system.servicemodel.http.nuspec"
       ]
     },
-    "System.ServiceModel.NetTcp/4.4.4": {
-      "sha512": "TZUwkBUHK+HgPVpypcnCEzenn+Hly3mQ+QDqDtHKyqVBP2Yt+DAMp3NwuW35mTSMRqna5p9hd0U0vVq5azovOQ==",
+    "System.ServiceModel.NetTcp/4.7.0": {
+      "sha512": "snQgAc7kn4721eaus8nZ52eRu1QrdEnWGbru6I263hPWcISStntwHwSrT57Iwp1Z58b3Lz0J/hbjJhGP0yExOA==",
       "type": "package",
-      "path": "system.servicemodel.nettcp/4.4.4",
+      "path": "system.servicemodel.nettcp/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9858,9 +9899,11 @@
         "lib/net45/_._",
         "lib/net46/System.ServiceModel.NetTcp.dll",
         "lib/net461/System.ServiceModel.NetTcp.dll",
+        "lib/net461/System.ServiceModel.NetTcp.pdb",
         "lib/netcore50/System.ServiceModel.NetTcp.dll",
         "lib/netstandard1.3/System.ServiceModel.NetTcp.dll",
         "lib/netstandard2.0/System.ServiceModel.NetTcp.dll",
+        "lib/netstandard2.0/System.ServiceModel.NetTcp.pdb",
         "lib/portable-net45+win8/_._",
         "lib/win8/_._",
         "lib/xamarinios10/_._",
@@ -9882,15 +9925,14 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.servicemodel.nettcp.4.4.4.nupkg.sha512",
-        "system.servicemodel.nettcp.nuspec",
-        "version.txt"
+        "system.servicemodel.nettcp.4.7.0.nupkg.sha512",
+        "system.servicemodel.nettcp.nuspec"
       ]
     },
-    "System.ServiceModel.Primitives/4.5.3": {
-      "sha512": "Wc9Hgg4Cmqi416zvEgq2sW1YYCGuhwWzspDclJWlFZqY6EGhFUPZU+kVpl5z9kAgrSOQP7/Uiik+PtSQtmq+5A==",
+    "System.ServiceModel.Primitives/4.7.0": {
+      "sha512": "YUXIMO4kL1v6dUVptJGixAx/8Ai5trQzVn3gbk0mpwxh77kGAs+MyBRoHN/5ZoxtwNn4E1dq3N4rJCAgAUaiJA==",
       "type": "package",
-      "path": "system.servicemodel.primitives/4.5.3",
+      "path": "system.servicemodel.primitives/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9901,13 +9943,16 @@
         "lib/net45/_._",
         "lib/net46/System.ServiceModel.Primitives.dll",
         "lib/net461/System.ServiceModel.Primitives.dll",
+        "lib/net461/System.ServiceModel.Primitives.pdb",
         "lib/netcore50/System.ServiceModel.Primitives.dll",
+        "lib/netcoreapp2.1/System.ServiceModel.Primitives.dll",
+        "lib/netcoreapp2.1/System.ServiceModel.Primitives.pdb",
+        "lib/netcoreapp2.1/System.ServiceModel.dll",
         "lib/netstandard1.3/System.ServiceModel.Primitives.dll",
         "lib/netstandard2.0/System.ServiceModel.Primitives.dll",
+        "lib/netstandard2.0/System.ServiceModel.Primitives.pdb",
         "lib/netstandard2.0/System.ServiceModel.dll",
         "lib/portable-net45+win8+wp8/_._",
-        "lib/uap10.0.16300/System.ServiceModel.Primitives.dll",
-        "lib/uap10.0.16300/System.ServiceModel.dll",
         "lib/win8/_._",
         "lib/wp8/_._",
         "lib/xamarinios10/_._",
@@ -9920,29 +9965,28 @@
         "ref/net46/System.ServiceModel.Primitives.dll",
         "ref/net461/System.ServiceModel.Primitives.dll",
         "ref/netcore50/System.ServiceModel.Primitives.dll",
+        "ref/netcoreapp2.1/System.ServiceModel.Primitives.dll",
+        "ref/netcoreapp2.1/System.ServiceModel.dll",
         "ref/netstandard1.0/System.ServiceModel.Primitives.dll",
         "ref/netstandard1.1/System.ServiceModel.Primitives.dll",
         "ref/netstandard1.3/System.ServiceModel.Primitives.dll",
         "ref/netstandard2.0/System.ServiceModel.Primitives.dll",
         "ref/netstandard2.0/System.ServiceModel.dll",
         "ref/portable-net45+win8+wp8/_._",
-        "ref/uap10.0.16300/System.ServiceModel.Primitives.dll",
-        "ref/uap10.0.16300/System.ServiceModel.dll",
         "ref/win8/_._",
         "ref/wp8/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.servicemodel.primitives.4.5.3.nupkg.sha512",
-        "system.servicemodel.primitives.nuspec",
-        "version.txt"
+        "system.servicemodel.primitives.4.7.0.nupkg.sha512",
+        "system.servicemodel.primitives.nuspec"
       ]
     },
-    "System.ServiceModel.Security/4.4.4": {
-      "sha512": "8mJj3lUNbBkntouQ3Eg3IF04GxiDrDK2X79+kcfq8V+W7NoYBREgWczaD60ZmW4KKRKnL0q3OnUNJlkzJJfe5w==",
+    "System.ServiceModel.Security/4.7.0": {
+      "sha512": "LjYrQRrP1rw+s/wieB+QIv3p6/oG2ucTfVpg5iWmX8/7+nfUxcqmy9l8rsbtYE8X8BEQnSq42OhWap/Dlhlh9Q==",
       "type": "package",
-      "path": "system.servicemodel.security/4.4.4",
+      "path": "system.servicemodel.security/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9951,9 +9995,12 @@
         "lib/MonoAndroid10/_._",
         "lib/MonoTouch10/_._",
         "lib/net45/_._",
+        "lib/net461/System.ServiceModel.Security.dll",
+        "lib/net461/System.ServiceModel.Security.pdb",
         "lib/netcore50/System.ServiceModel.Security.dll",
         "lib/netstandard1.3/System.ServiceModel.Security.dll",
         "lib/netstandard2.0/System.ServiceModel.Security.dll",
+        "lib/netstandard2.0/System.ServiceModel.Security.pdb",
         "lib/portable-net45+win8+wp8/_._",
         "lib/win8/_._",
         "lib/wp8/_._",
@@ -9964,6 +10011,7 @@
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
         "ref/net45/_._",
+        "ref/net461/System.ServiceModel.Security.dll",
         "ref/netcore50/System.ServiceModel.Security.dll",
         "ref/netstandard1.0/System.ServiceModel.Security.dll",
         "ref/netstandard1.1/System.ServiceModel.Security.dll",
@@ -9975,9 +10023,8 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.servicemodel.security.4.4.4.nupkg.sha512",
-        "system.servicemodel.security.nuspec",
-        "version.txt"
+        "system.servicemodel.security.4.7.0.nupkg.sha512",
+        "system.servicemodel.security.nuspec"
       ]
     },
     "System.Text.Encoding/4.3.0": {
@@ -10933,7 +10980,11 @@
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.3",
       "Microsoft.Extensions.FileProviders.Abstractions >= 5.0.0",
       "Session >= 1.0.0",
-      "System.Collections >= 4.3.0"
+      "System.Collections >= 4.3.0",
+      "System.ServiceModel.Duplex >= 4.7.*",
+      "System.ServiceModel.Http >= 4.7.*",
+      "System.ServiceModel.NetTcp >= 4.7.*",
+      "System.ServiceModel.Security >= 4.7.*"
     ]
   },
   "packageFolders": {
@@ -11056,6 +11107,22 @@
           "System.Collections": {
             "target": "Package",
             "version": "[4.3.0, )"
+          },
+          "System.ServiceModel.Duplex": {
+            "target": "Package",
+            "version": "[4.7.*, )"
+          },
+          "System.ServiceModel.Http": {
+            "target": "Package",
+            "version": "[4.7.*, )"
+          },
+          "System.ServiceModel.NetTcp": {
+            "target": "Package",
+            "version": "[4.7.*, )"
+          },
+          "System.ServiceModel.Security": {
+            "target": "Package",
+            "version": "[4.7.*, )"
           }
         },
         "imports": [

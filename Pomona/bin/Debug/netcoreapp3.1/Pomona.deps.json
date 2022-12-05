@@ -46,6 +46,10 @@
           "Microsoft.Extensions.FileProviders.Abstractions": "5.0.0",
           "Session": "1.0.0",
           "System.Collections": "4.3.0",
+          "System.ServiceModel.Duplex": "4.7.0",
+          "System.ServiceModel.Http": "4.7.0",
+          "System.ServiceModel.NetTcp": "4.7.0",
+          "System.ServiceModel.Security": "4.7.0",
           "Microsoft.AspNetCore.Antiforgery.Reference": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -597,7 +601,7 @@
           "System.ComponentModel.Annotations": "5.0.0",
           "System.Drawing.Common": "4.7.0",
           "System.Security.Cryptography.Pkcs": "4.5.2",
-          "System.ServiceModel.Http": "4.5.3",
+          "System.ServiceModel.Http": "4.7.0",
           "System.Text.Encoding.CodePages": "4.7.0"
         },
         "runtime": {
@@ -709,9 +713,9 @@
           "System.Data.SqlClient": "4.8.3",
           "System.Drawing.Common": "4.7.0",
           "System.Security.Principal.Windows": "5.0.0",
-          "System.ServiceModel.Http": "4.5.3",
-          "System.ServiceModel.NetTcp": "4.4.4",
-          "System.ServiceModel.Security": "4.4.4",
+          "System.ServiceModel.Http": "4.7.0",
+          "System.ServiceModel.NetTcp": "4.7.0",
+          "System.ServiceModel.Security": "4.7.0",
           "System.Text.Json": "4.6.0"
         },
         "runtime": {
@@ -2319,24 +2323,16 @@
           "System.Xml.XmlSerializer": "4.3.0"
         }
       },
-      "System.Private.ServiceModel/4.5.3": {
+      "System.Private.ServiceModel/4.7.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "5.0.0",
           "System.Reflection.DispatchProxy": "4.5.0",
+          "System.Security.Cryptography.Xml": "4.5.0",
           "System.Security.Principal.Windows": "5.0.0"
         },
-        "runtimeTargets": {
-          "runtimes/unix/lib/netstandard2.0/System.Private.ServiceModel.dll": {
-            "rid": "unix",
-            "assetType": "runtime",
-            "assemblyVersion": "4.5.0.3",
-            "fileVersion": "4.6.26720.1"
-          },
-          "runtimes/win/lib/netstandard2.0/System.Private.ServiceModel.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "4.5.0.3",
-            "fileVersion": "4.6.26720.1"
+        "runtime": {
+          "lib/netstandard2.0/System.Private.ServiceModel.dll": {
+            "assemblyVersion": "4.7.0.0",
+            "fileVersion": "4.700.19.56502"
           }
         }
       },
@@ -2724,64 +2720,79 @@
           "System.Threading": "4.3.0"
         }
       },
-      "System.ServiceModel.Http/4.5.3": {
+      "System.ServiceModel.Duplex/4.7.0": {
         "dependencies": {
-          "System.Private.ServiceModel": "4.5.3",
-          "System.ServiceModel.Primitives": "4.5.3"
+          "System.Private.ServiceModel": "4.7.0",
+          "System.ServiceModel.Primitives": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.Duplex.dll": {
+            "assemblyVersion": "4.7.0.0",
+            "fileVersion": "4.700.19.56502"
+          }
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.Duplex.dll": {}
+        }
+      },
+      "System.ServiceModel.Http/4.7.0": {
+        "dependencies": {
+          "System.Private.ServiceModel": "4.7.0",
+          "System.ServiceModel.Primitives": "4.7.0"
         },
         "runtime": {
           "lib/netstandard2.0/System.ServiceModel.Http.dll": {
-            "assemblyVersion": "4.5.0.3",
-            "fileVersion": "4.6.26720.1"
+            "assemblyVersion": "4.7.0.0",
+            "fileVersion": "4.700.19.56502"
           }
         },
         "compile": {
           "ref/netstandard2.0/System.ServiceModel.Http.dll": {}
         }
       },
-      "System.ServiceModel.NetTcp/4.4.4": {
+      "System.ServiceModel.NetTcp/4.7.0": {
         "dependencies": {
-          "System.Private.ServiceModel": "4.5.3",
-          "System.ServiceModel.Primitives": "4.5.3"
+          "System.Private.ServiceModel": "4.7.0",
+          "System.ServiceModel.Primitives": "4.7.0"
         },
         "runtime": {
           "lib/netstandard2.0/System.ServiceModel.NetTcp.dll": {
-            "assemblyVersion": "4.1.2.3",
-            "fileVersion": "4.6.26720.1"
+            "assemblyVersion": "4.7.0.0",
+            "fileVersion": "4.700.19.56502"
           }
         },
         "compile": {
           "ref/netstandard2.0/System.ServiceModel.NetTcp.dll": {}
         }
       },
-      "System.ServiceModel.Primitives/4.5.3": {
+      "System.ServiceModel.Primitives/4.7.0": {
         "dependencies": {
-          "System.Private.ServiceModel": "4.5.3"
+          "System.Private.ServiceModel": "4.7.0"
         },
         "runtime": {
-          "lib/netstandard2.0/System.ServiceModel.Primitives.dll": {
-            "assemblyVersion": "4.5.0.3",
-            "fileVersion": "4.6.26720.1"
+          "lib/netcoreapp2.1/System.ServiceModel.Primitives.dll": {
+            "assemblyVersion": "4.7.0.0",
+            "fileVersion": "4.700.19.56502"
           },
-          "lib/netstandard2.0/System.ServiceModel.dll": {
+          "lib/netcoreapp2.1/System.ServiceModel.dll": {
             "assemblyVersion": "4.0.0.0",
-            "fileVersion": "4.6.26720.1"
+            "fileVersion": "4.700.19.56502"
           }
         },
         "compile": {
-          "ref/netstandard2.0/System.ServiceModel.Primitives.dll": {},
-          "ref/netstandard2.0/System.ServiceModel.dll": {}
+          "ref/netcoreapp2.1/System.ServiceModel.Primitives.dll": {},
+          "ref/netcoreapp2.1/System.ServiceModel.dll": {}
         }
       },
-      "System.ServiceModel.Security/4.4.4": {
+      "System.ServiceModel.Security/4.7.0": {
         "dependencies": {
-          "System.Private.ServiceModel": "4.5.3",
-          "System.ServiceModel.Primitives": "4.5.3"
+          "System.Private.ServiceModel": "4.7.0",
+          "System.ServiceModel.Primitives": "4.7.0"
         },
         "runtime": {
           "lib/netstandard2.0/System.ServiceModel.Security.dll": {
-            "assemblyVersion": "4.0.3.3",
-            "fileVersion": "4.6.26720.1"
+            "assemblyVersion": "4.7.0.0",
+            "fileVersion": "4.700.19.56502"
           }
         },
         "compile": {
@@ -5832,12 +5843,12 @@
       "path": "system.private.datacontractserialization/4.3.0",
       "hashPath": "system.private.datacontractserialization.4.3.0.nupkg.sha512"
     },
-    "System.Private.ServiceModel/4.5.3": {
+    "System.Private.ServiceModel/4.7.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ancrQgJagx+yC4SZbuE+eShiEAUIF0E1d21TRSoy1C/rTwafAVcBr/fKibkq5TQzyy9uNil2tx2/iaUxsy0S9g==",
-      "path": "system.private.servicemodel/4.5.3",
-      "hashPath": "system.private.servicemodel.4.5.3.nupkg.sha512"
+      "sha512": "sha512-BItrYCkoTV3VzVPsrew+uc34fmLb+3ncgspa7vbO3vkfY9JQCea4u34pHE+Bcv1Iy16MgRs3n2jKVRCDg0rPfg==",
+      "path": "system.private.servicemodel/4.7.0",
+      "hashPath": "system.private.servicemodel.4.7.0.nupkg.sha512"
     },
     "System.Private.Uri/4.3.2": {
       "type": "package",
@@ -6091,33 +6102,40 @@
       "path": "system.security.securestring/4.3.0",
       "hashPath": "system.security.securestring.4.3.0.nupkg.sha512"
     },
-    "System.ServiceModel.Http/4.5.3": {
+    "System.ServiceModel.Duplex/4.7.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zxR4z6G/FFK/uAUbo7+3IJOqm0w4/lyfHSQDf+hhUHRTc7XSeReGS5iKQq95gyl1ighHEuayqOiB7iacrB6ZUg==",
-      "path": "system.servicemodel.http/4.5.3",
-      "hashPath": "system.servicemodel.http.4.5.3.nupkg.sha512"
+      "sha512": "sha512-7GBKQc2QWRxnEVQ49zMKq3z3RFKaHhhWjfMWhp+DP+dgfp0X4Szln/eL+UQumOKvv+sTU5bhOXjnJg5045liCA==",
+      "path": "system.servicemodel.duplex/4.7.0",
+      "hashPath": "system.servicemodel.duplex.4.7.0.nupkg.sha512"
     },
-    "System.ServiceModel.NetTcp/4.4.4": {
+    "System.ServiceModel.Http/4.7.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-TZUwkBUHK+HgPVpypcnCEzenn+Hly3mQ+QDqDtHKyqVBP2Yt+DAMp3NwuW35mTSMRqna5p9hd0U0vVq5azovOQ==",
-      "path": "system.servicemodel.nettcp/4.4.4",
-      "hashPath": "system.servicemodel.nettcp.4.4.4.nupkg.sha512"
+      "sha512": "sha512-+BB61ycl1cSlRbJDpABoqMa7bRE4boJfK1CfWfbNzTGeADFVmDkhylpfmC1bKloxtf95p2owj8/n7kilgRBAow==",
+      "path": "system.servicemodel.http/4.7.0",
+      "hashPath": "system.servicemodel.http.4.7.0.nupkg.sha512"
     },
-    "System.ServiceModel.Primitives/4.5.3": {
+    "System.ServiceModel.NetTcp/4.7.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Wc9Hgg4Cmqi416zvEgq2sW1YYCGuhwWzspDclJWlFZqY6EGhFUPZU+kVpl5z9kAgrSOQP7/Uiik+PtSQtmq+5A==",
-      "path": "system.servicemodel.primitives/4.5.3",
-      "hashPath": "system.servicemodel.primitives.4.5.3.nupkg.sha512"
+      "sha512": "sha512-snQgAc7kn4721eaus8nZ52eRu1QrdEnWGbru6I263hPWcISStntwHwSrT57Iwp1Z58b3Lz0J/hbjJhGP0yExOA==",
+      "path": "system.servicemodel.nettcp/4.7.0",
+      "hashPath": "system.servicemodel.nettcp.4.7.0.nupkg.sha512"
     },
-    "System.ServiceModel.Security/4.4.4": {
+    "System.ServiceModel.Primitives/4.7.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-8mJj3lUNbBkntouQ3Eg3IF04GxiDrDK2X79+kcfq8V+W7NoYBREgWczaD60ZmW4KKRKnL0q3OnUNJlkzJJfe5w==",
-      "path": "system.servicemodel.security/4.4.4",
-      "hashPath": "system.servicemodel.security.4.4.4.nupkg.sha512"
+      "sha512": "sha512-YUXIMO4kL1v6dUVptJGixAx/8Ai5trQzVn3gbk0mpwxh77kGAs+MyBRoHN/5ZoxtwNn4E1dq3N4rJCAgAUaiJA==",
+      "path": "system.servicemodel.primitives/4.7.0",
+      "hashPath": "system.servicemodel.primitives.4.7.0.nupkg.sha512"
+    },
+    "System.ServiceModel.Security/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LjYrQRrP1rw+s/wieB+QIv3p6/oG2ucTfVpg5iWmX8/7+nfUxcqmy9l8rsbtYE8X8BEQnSq42OhWap/Dlhlh9Q==",
+      "path": "system.servicemodel.security/4.7.0",
+      "hashPath": "system.servicemodel.security.4.7.0.nupkg.sha512"
     },
     "System.Text.Encoding/4.3.0": {
       "type": "package",

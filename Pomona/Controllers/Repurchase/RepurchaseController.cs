@@ -1,6 +1,7 @@
 ﻿using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Pomona.Interfaces;
 using System;
@@ -14,6 +15,12 @@ namespace Pomona.Controllers.Repurchase
     {
         private readonly IRepurchaseService service;
         private readonly IBarCodeGeneratorService barCodeGeneratorService;
+        IConfiguration config;
+        string Username { get; }
+        string Password { get; }
+        string LiscenceID { get; }
+        decimal SrednjiKurs { get; set; }
+        decimal ProdajniKurs { get; set; }
         private static List<Models.Repurchase> repurchases
         {
             get; set;
@@ -22,10 +29,35 @@ namespace Pomona.Controllers.Repurchase
         {
             get; set;
         }
-        public RepurchaseController(IRepurchaseService service, IBarCodeGeneratorService barCodeGeneratorService)
+        public RepurchaseController(IRepurchaseService service, IBarCodeGeneratorService barCodeGeneratorService, IConfiguration config)
         {
             this.barCodeGeneratorService = barCodeGeneratorService;
             this.service = service;
+            this.config = config;
+            Username = config.GetValue<string>("ExchangeRateUserName");
+            Password = config.GetValue<string>("ExchangeRatePassword");
+            LiscenceID = config.GetValue<string>("ExchangeRateLiscenseID");
+            GetExchange();
+          
+        }
+        public async Task GetExchange()
+        {
+            CurrentExchangeRate.CurrentExchangeRateServiceSoapClient client =
+             new CurrentExchangeRate.CurrentExchangeRateServiceSoapClient(CurrentExchangeRate.CurrentExchangeRateServiceSoapClient.EndpointConfiguration.CurrentExchangeRateServiceSoap);
+
+            CurrentExchangeRate.AuthenticationHeader authenticationHeader = new CurrentExchangeRate.AuthenticationHeader();
+
+            authenticationHeader.UserName = Username;
+            authenticationHeader.Password = Password;
+            authenticationHeader.LicenceID = Guid.Parse(LiscenceID);
+
+            CurrentExchangeRate.GetCurrentExchangeRateByRateTypeResponse response =
+                   await client.GetCurrentExchangeRateByRateTypeAsync(authenticationHeader, 978, 2, 2);
+
+            CurrentExchangeRate.GetCurrentExchangeRateByRateTypeResponse responseProd =
+               await client.GetCurrentExchangeRateByRateTypeAsync(authenticationHeader, 978, 1, 3);
+            SrednjiKurs = response.GetCurrentExchangeRateByRateTypeResult;
+            ProdajniKurs = responseProd.GetCurrentExchangeRateByRateTypeResult;
         }
         public IActionResult Repurchase()
         {
@@ -61,6 +93,30 @@ namespace Pomona.Controllers.Repurchase
             {
                 rep.Income = rep.Price * rep.NetoShipped;
             }
+            if (rep.Price==0)
+            {
+                if (rep.Kurs == "Srednji kurs")
+                {
+                    rep.Price = rep.PriceEur * SrednjiKurs;
+                }
+                else
+                {
+                    rep.Price = rep.PriceEur * ProdajniKurs;
+                }
+               
+            }
+            else
+            {
+                if (rep.Kurs == "Srednji kurs")
+                {
+                    rep.PriceEur = rep.Price / SrednjiKurs;
+                }
+                else
+                {
+                    rep.PriceEur = rep.Price / ProdajniKurs;
+                }
+            }
+            rep.IncomeEur = rep.PriceEur * rep.NetoShipped;
             rep.Difference = rep.NetoShipped - rep.Neto;
             rep.Date = rep.Date.Date;
 

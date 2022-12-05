@@ -69,7 +69,7 @@ namespace Pomona.Views.BarCodeMenu {
         public DevExpress.XtraReports.Parameters.Parameter Origin;
         public DevExpress.XtraReports.Parameters.Parameter Variety;
         public DevExpress.XtraReports.Parameters.Parameter GlobalGap;
-        private DevExpress.XtraReports.Parameters.Parameter Grower;
+        public DevExpress.XtraReports.Parameters.Parameter Grower;
         public DevExpress.XtraReports.Parameters.Parameter Lotcode;
         public DevExpress.XtraReports.Parameters.Parameter Supervisor;
     }

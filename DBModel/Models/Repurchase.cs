@@ -14,7 +14,9 @@ namespace DBModel.Models
         public decimal NetoShipped { get; set; }
         public decimal Difference { get; set; }
         public decimal Price { get; set; }
+        public decimal PriceEur { get; set; }
         public decimal Income { get; set; }
+        public decimal IncomeEur { get; set; }
         public int NoOfBoxes { get; set; }
     }
 }
