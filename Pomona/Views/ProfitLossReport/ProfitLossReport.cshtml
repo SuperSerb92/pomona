@@ -89,6 +89,7 @@
         columns.AddFor(u => u.ProsecnaPC).Caption("AVG dnevna prodajna cena (rsd)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.ProsecnaCenaKost).Caption("AVG cena koštanja (rsd)").AllowEditing(false).Format(Format.FixedPoint);
         columns.AddFor(u => u.Prihod).Caption("Prihod (rsd)").AllowEditing(false).Format("#,##0.00");
+        columns.AddFor(u => u.PrihodEur).Caption("Prihod (eur)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.Profit).Caption("Profit (rsd)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.TrosakProc).Caption("Trošak u odnosu na prihod (%)").AllowEditing(false);
 

@@ -16,6 +16,7 @@ namespace Pomona.Models
         decimal prosecnaPC;
         int prosecnaCenaKost;
         decimal prihod;
+        decimal prihodEur;
         decimal profit;
         int trosakProc;
         string datumBezVremena;
@@ -32,6 +33,7 @@ namespace Pomona.Models
         public decimal ProsecnaPC { get => prosecnaPC; set => prosecnaPC = value; }
         public int ProsecnaCenaKost { get => prosecnaCenaKost; set => prosecnaCenaKost = value; }
         public decimal Prihod { get => prihod; set => prihod = value; }
+        public decimal PrihodEur { get => prihodEur; set => prihodEur = value; }
         public decimal Profit { get => profit; set => profit = value; }
         public int TrosakProc { get => trosakProc; set => trosakProc = value; }
         public string DatumBezVremena { get => datumBezVremena; set => datumBezVremena = value; }

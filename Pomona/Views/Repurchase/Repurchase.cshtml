@@ -94,8 +94,8 @@
         columns.AddFor(u => u.Neto).Caption("Neto (kg)").Format("#,##0.00");
         columns.AddFor(u => u.NetoShipped).Caption("Neto otkup (kg)").Format("#,##0.00");
         columns.AddFor(u => u.Difference).Caption("Razlika").AllowEditing(false).Format("#,##0.00");
-        columns.AddFor(u => u.Price).Caption("Cena (rsd)").Format("#,##0.00");
-        columns.AddFor(u => u.PriceEur).Caption("Cena (eur)").Format("#,##0.00");
+        columns.AddFor(u => u.Price).Caption("Cena (rsd)").Format("#,##0.00").SetCellValue("setStateValuePrice");
+        columns.AddFor(u => u.PriceEur).Caption("Cena (eur)").Format("#,##0.00").SetCellValue("setStateValuePriceEur");
         columns.AddFor(u => u.Income).Caption("Prihod (rsd)").AllowEditing(false).Format("#,##0.00");
          columns.AddFor(u => u.IncomeEur).Caption("Prihod (eur)").AllowEditing(false).Format("#,##0.00");
         columns.Add()

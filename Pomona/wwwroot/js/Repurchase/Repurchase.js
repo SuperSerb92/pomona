@@ -33,18 +33,28 @@ function dateChangedR(data) {
 } 
 function onInitNewRowR(args) {
 
-    args.data.Date = dateEditor.option("value"); //new Date(); 
-   
+    args.data.Date = dateEditor.option("value");   
  
 }
 function setStateValueNeto(rowData, value) {
-    rowData.BuyerId = value;
-    
-    //if (rowData.CultureId != undefined) {
-       
+    rowData.BuyerId = value;           
     rowData.Neto = neto;
     rowData.NoOfBoxes = brojKutija;
- //   }
+  
+  
+
+}
+function setStateValuePrice(rowData, value) {
+   
+    rowData.Price = value;
+    rowData.PriceEur = Math.round(((value / cena) + Number.EPSILON) * 100) / 100;
+
+}
+function setStateValuePriceEur(rowData, value) {
+
+        rowData.PriceEur = value;
+        rowData.Price = Math.round(((value * cena) + Number.EPSILON) * 100) / 100;
+
 }
 function onRowInsertingRepurchase(e) {
     if (jQuery.isEmptyObject(e.data) || e.data.Date == undefined) {
@@ -140,6 +150,7 @@ function OnDeleteRepurchase() {
 }
 var neto = 0;
 var brojKutija = 0;
+var cena = 0;
 function cellChanged(e) {
     if (e.row.data.CultureId != undefined) {
         $.ajax({
@@ -170,6 +181,23 @@ function cellChanged(e) {
             success: function (data) {
                 if (data.success) {
                     brojKutija = data.result;
+                }
+                else {
+                    showInfo(data.result, "Otkup");
+                }
+            },
+        });
+        $.ajax({
+            url: virtualDirectory + '/Repurchase/GetPriceEur',
+            type: 'GET',
+            data: {
+                key: RadioGroup.option("value"),
+                price: e.row.data.Price
+            },
+            key: "Id",
+            success: function (data) {
+                if (data.success) {
+                    cena = data.result;
                 }
                 else {
                     showInfo(data.result, "Otkup");

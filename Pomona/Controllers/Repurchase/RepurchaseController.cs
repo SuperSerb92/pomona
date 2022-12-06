@@ -19,8 +19,10 @@ namespace Pomona.Controllers.Repurchase
         string Username { get; }
         string Password { get; }
         string LiscenceID { get; }
-        decimal SrednjiKurs { get; set; }
-        decimal ProdajniKurs { get; set; }
+       public static decimal SrednjiKurs { get; set; }
+       public static decimal ProdajniKurs { get; set; }
+       
+       
         private static List<Models.Repurchase> repurchases
         {
             get; set;
@@ -39,23 +41,25 @@ namespace Pomona.Controllers.Repurchase
             LiscenceID = config.GetValue<string>("ExchangeRateLiscenseID");
             GetExchange();
           
+           
+
         }
         public async Task GetExchange()
         {
             CurrentExchangeRate.CurrentExchangeRateServiceSoapClient client =
              new CurrentExchangeRate.CurrentExchangeRateServiceSoapClient(CurrentExchangeRate.CurrentExchangeRateServiceSoapClient.EndpointConfiguration.CurrentExchangeRateServiceSoap);
-
             CurrentExchangeRate.AuthenticationHeader authenticationHeader = new CurrentExchangeRate.AuthenticationHeader();
 
             authenticationHeader.UserName = Username;
             authenticationHeader.Password = Password;
             authenticationHeader.LicenceID = Guid.Parse(LiscenceID);
 
-            CurrentExchangeRate.GetCurrentExchangeRateByRateTypeResponse response =
-                   await client.GetCurrentExchangeRateByRateTypeAsync(authenticationHeader, 978, 2, 2);
+            CurrentExchangeRate.GetCurrentExchangeRateByRateTypeResponse response = 
+                await client.GetCurrentExchangeRateByRateTypeAsync(authenticationHeader, 978, 2, 2).ConfigureAwait(false);
 
             CurrentExchangeRate.GetCurrentExchangeRateByRateTypeResponse responseProd =
-               await client.GetCurrentExchangeRateByRateTypeAsync(authenticationHeader, 978, 1, 3);
+               await client.GetCurrentExchangeRateByRateTypeAsync(authenticationHeader, 978, 1, 3).ConfigureAwait(false);
+
             SrednjiKurs = response.GetCurrentExchangeRateByRateTypeResult;
             ProdajniKurs = responseProd.GetCurrentExchangeRateByRateTypeResult;
         }
@@ -92,36 +96,14 @@ namespace Pomona.Controllers.Repurchase
             else
             {
                 rep.Income = rep.Price * rep.NetoShipped;
-            }
-            if (rep.Price==0)
-            {
-                if (rep.Kurs == "Srednji kurs")
-                {
-                    rep.Price = rep.PriceEur * SrednjiKurs;
-                }
-                else
-                {
-                    rep.Price = rep.PriceEur * ProdajniKurs;
-                }
-               
-            }
-            else
-            {
-                if (rep.Kurs == "Srednji kurs")
-                {
-                    rep.PriceEur = rep.Price / SrednjiKurs;
-                }
-                else
-                {
-                    rep.PriceEur = rep.Price / ProdajniKurs;
-                }
-            }
+            }        
+     
             rep.IncomeEur = rep.PriceEur * rep.NetoShipped;
             rep.Difference = rep.NetoShipped - rep.Neto;
             rep.Date = rep.Date.Date;
 
             int brKutija = 0;
-         //  int brojKutijaRep = 0;
+        
             var repu = repurchases.Sum(x=> x.NoOfBoxes);
 
             barcodes = barCodeGeneratorService.GetBarCodeActive().Where(x => x.DateGenerated.Date == rep.Date).ToList();
@@ -238,5 +220,26 @@ namespace Pomona.Controllers.Repurchase
             // return Ok();
 
         }
+
+        [HttpGet]
+        public object GetPriceEur(string key, decimal price)
+        {
+           
+            if (key == "Srednji kurs")
+                {
+                  
+                return Json(new { success = true, result = Math.Round(SrednjiKurs, 2) });
+                }
+                else
+                {
+                
+                return Json(new { success = true, result = Math.Round(ProdajniKurs, 2) });
+                 }
+               
+              
+         
+         
+        }
+           
     }
 }
