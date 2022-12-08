@@ -117,27 +117,27 @@
         totalItems.Add()
              .Column("NameSurname")
              .Name("WorkerCount")
-             .SummaryType(SummaryType.Count).DisplayFormat("Ukupno: " + " {0}");
+             .SummaryType(SummaryType.Count).DisplayFormat("SUM: " + " {0}");
 
         totalItems.Add()
                .Column("Neto")
                .Name("NetSummary")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.000");
+               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.000");
 
         totalItems.Add()
          .Column("NoOfBoxes")
          .Name("NoOfBoxes")
-         .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+         .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
 
         totalItems.Add()
        .Column("PayPerDay")
        .Name("Dnevnica")
-       .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+       .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
 
         totalItems.Add()
       .Column("Total")
       .Name("Ukupno")
-      .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat(Format.FixedPoint);
+      .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat(Format.FixedPoint);
 
     })
     )

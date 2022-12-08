@@ -12,6 +12,7 @@ namespace Pomona.Models
         public decimal NetDifference { get; set; }
         public decimal Price { get; set; }
         public decimal Income { get; set; }
+        public decimal IncomeEur { get; set; }
         public int NoOfBoxes { get; set; }
         public bool? Paid { get; set; }
         public string PaidS { get; set; }

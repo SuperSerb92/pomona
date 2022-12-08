@@ -70,6 +70,7 @@
         columns.AddFor(u => u.NetDifference).Caption("Razlika (kg)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.Price).Caption("Cena (rsd)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.Income).Caption("Prihod (rsd)").AllowEditing(false).Format("#,##0.00");
+        columns.AddFor(u => u.IncomeEur).Caption("Prihod (eur)").AllowEditing(false).Format("#,##0.00");
         columns.AddFor(u => u.NoOfBoxes).Caption("Broj kutija").AllowEditing(false);
         columns.AddFor(u => u.PaidDate).Caption("Datum naplate").AllowEditing(true).Format("dd.MM.yyyy");
         columns.AddFor(u => u.Comment).Caption("Napomena").AllowEditing(true);
@@ -124,6 +125,11 @@
         totalItems.Add()
                .Column("Income")
                .Name("IncomeSummary")
+               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
+      
+        totalItems.Add()
+               .Column("IncomeEur")
+               .Name("IncomeSummaryEur")
                .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()

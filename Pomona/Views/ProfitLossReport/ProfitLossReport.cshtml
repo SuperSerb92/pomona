@@ -168,6 +168,10 @@
    .Column("Prihod")
    .Name("Prihod")
    .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
+    totalItems.Add()
+   .Column("PrihodEur")
+   .Name("PrihodEur")
+   .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
 
         totalItems.Add()
    .Column("Profit")

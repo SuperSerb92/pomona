@@ -137,6 +137,7 @@ namespace Pomona.Controllers.Repurchase
                 {
                     rep.Income = rep.Price * rep.NetoShipped;
                 }
+                rep.IncomeEur = rep.PriceEur * rep.NetoShipped;
                 rep.Difference = rep.NetoShipped - rep.Neto;
 
                 service.UpdateRepurchase(rep);

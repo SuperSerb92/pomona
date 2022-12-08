@@ -55,8 +55,8 @@
          </div>
          </div>
            <div class="dx-field">
-            <div   style="padding-left:17px;padding-top:10px;">Odaberite kurs (eur):</div>
-            <div >
+            <div   style="padding-left:20px;padding-top:10px;padding-right:5px; border-left:1px solid black;border-top:1px solid black;border-bottom:1px solid black;" >Odaberite kurs (eur):</div>
+            <div style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;padding-right:10px;">
                 @(Html.DevExtreme().RadioGroup()
                     .Items(priorities)
                     .Value("Srednji kurs")
@@ -135,20 +135,24 @@
         totalItems.Add()
                .Column("Neto")
                .Name("Neto")
-               .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
+               .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
         // .CustomizeText("EmployeeCountPerPage");
         totalItems.Add()
        .Column("Difference")
        .Name("Razlika")
-       .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
+       .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
         totalItems.Add()
              .Column("NetoShipped")
              .Name("NetoOtkup")
-             .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
+             .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
         totalItems.Add()
              .Column("Income")
-             .Name("Prihod")
-             .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.00");
+             .Name("Prihod (rsd)")
+             .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
+        totalItems.Add()
+             .Column("IncomeEur")
+             .Name("Prihod (eur)")
+             .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.00");
     })
     )
     .FilterRow(f => f.Visible(true))

@@ -107,12 +107,12 @@
                                                 totalItems.Add()
                                                      .Column("Neto")
                                                      .Name("Neto")
-                                                     .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.000");
+                                                     .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.000");
 
                                                 totalItems.Add()
                                                    .Column("Bruto")
                                                    .Name("Bruto")
-                                                   .SummaryType(SummaryType.Sum).DisplayFormat("Ukupno: " + " {0}").ValueFormat("#,##0.000");
+                                                   .SummaryType(SummaryType.Sum).DisplayFormat("SUM: " + " {0}").ValueFormat("#,##0.000");
                                             })
                                             )
                                             .FilterRow(f => f.Visible(true))

@@ -14,6 +14,7 @@ namespace DBModel.Models
         public decimal NetDifference { get; set; }
         public decimal Price { get; set; }
         public decimal Income { get; set; }
+        public decimal IncomeEur { get; set; }
         public int NoOfBoxes { get; set; }
         public bool? Paid { get; set; }
         public DateTime? PaidDate { get; set; }
