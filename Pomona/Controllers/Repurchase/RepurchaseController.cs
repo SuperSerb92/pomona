@@ -16,9 +16,9 @@ namespace Pomona.Controllers.Repurchase
         private readonly IRepurchaseService service;
         private readonly IBarCodeGeneratorService barCodeGeneratorService;
         IConfiguration config;
-        string Username { get; }
-        string Password { get; }
-        string LiscenceID { get; }
+       string Username { get; set; }
+       string Password { get; set; }
+       string LiscenceID { get; set; }
        public static decimal SrednjiKurs { get; set; }
        public static decimal ProdajniKurs { get; set; }
        
@@ -225,7 +225,7 @@ namespace Pomona.Controllers.Repurchase
         [HttpGet]
         public object GetPriceEur(string key, decimal price)
         {
-           
+      
             if (key == "Srednji kurs")
                 {
                   

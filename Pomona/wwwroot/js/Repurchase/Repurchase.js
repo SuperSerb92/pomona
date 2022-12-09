@@ -8,6 +8,26 @@ function dateOnInitializedR(e) {
 }
 function RadioGroupInitialized(e) {
     RadioGroup = e.component;
+    $.ajax({
+        url: virtualDirectory + '/Repurchase/GetPriceEur',
+        type: 'GET',
+        data: {
+            key: RadioGroup.option("value"),
+            price: 0
+        },
+        key: "Id",
+        success: function (data) {
+            if (data.success) {
+               
+                $("#Kurs")
+                    .dxTextBox("instance")
+                    .option("value", data.result + " RSD");
+            }
+            else {
+                showInfo(data.result, "Otkup");
+            }
+        },
+    });
 }
 function todayR() {
     dateEditor.option("value", new Date().getTime());
@@ -197,7 +217,7 @@ function cellChanged(e) {
             key: "Id",
             success: function (data) {
                 if (data.success) {
-                    cena = data.result;
+                    cena = data.result;                   
                 }
                 else {
                     showInfo(data.result, "Otkup");
@@ -231,4 +251,28 @@ function printRepurchase() {
     }).then(function () {
         pdfDoc.save("Otkup.pdf");
     });
+}
+
+function changeValueInTextbox(e) {
+       
+        $.ajax({
+            url: virtualDirectory + '/Repurchase/GetPriceEur',
+            type: 'GET',
+            data: {
+                key: RadioGroup.option("value"),
+                price: 0
+            },
+            key: "Id",
+            success: function (data) {
+                if (data.success) {
+                    $("#Kurs")
+                        .dxTextBox("instance")
+                        .option("value", data.result + " RSD");
+                }
+                else {
+                    showInfo(data.result, "Otkup");
+                }
+            },
+        });
+    
 }

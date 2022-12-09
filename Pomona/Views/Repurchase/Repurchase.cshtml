@@ -62,6 +62,12 @@
                     .Value("Srednji kurs")
                     .Layout(Orientation.Horizontal)
                     .OnInitialized("RadioGroupInitialized")
+                    .OnValueChanged("changeValueInTextbox")
+                )
+            </div>             
+            <div style="padding-top:10px;padding-left:20px;">
+                @(Html.DevExtreme().TextBox()
+                    .ID("Kurs").ReadOnly(true)
                 )
             </div>
         </div>

@@ -102,8 +102,7 @@ namespace Pomona.Controllers.BarCodeMenu
         {
 
             var barCode = new Models.BarCodeGenerator();
-            //var plot = new Models.Plot();
-                        
+ 
             JsonConvert.PopulateObject(values, barCode);
           
             var RbrBarcode = barcodes.Where(x => x.EmployeeID == barCode.EmployeeID && x.DateGenerated.Date == barCode.DateGenerated.Date)
@@ -156,6 +155,11 @@ namespace Pomona.Controllers.BarCodeMenu
                     report.Print(printerName);
                 }
                 barCode.IndPrint = 1;
+                if (RbrBarcode != null)
+                {
+                    RbrBarcode.Rbr++;
+                }
+                
                 service.AddBarCode(barCode);
                 service.SaveChanges();
                 // service.SaveChanges();
